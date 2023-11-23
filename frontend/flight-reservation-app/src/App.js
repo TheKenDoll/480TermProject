@@ -1,9 +1,12 @@
-import './App.css';
+import React from 'react';
+import Login from './components/login/Login';
 
-function App() {
+const App = () => {
   return (
-   <h1>Hello World</h1>
+    <div>
+      <Login />
+    </div>
   );
-}
+};
 
 export default App;
