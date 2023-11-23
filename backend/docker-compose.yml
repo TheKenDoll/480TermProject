@@ -1,25 +1,14 @@
 version: "3"
+
 services:
-  ensf480-spring-boot-app:
-    build: .
+  ensf480-mysql-db:
+    image: mysql
+    env_file:
+      - .env
     ports:
-      - "8080:8080"
+      - 3306:3306
     volumes:
-      - .:/app
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://ensf480-postgres-db:5432/ensf480
-      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
-    depends_on:
-      - ensf480-postgres-db
-  ensf480-postgres-db:
-    image: postgres:16
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ensf480
-      PGDATA: /var/lib/postgresql/data
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+      - mysql:/var/lib/mysql
+
 volumes:
-  pgdata:
+  mysql:
