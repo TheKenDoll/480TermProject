@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './Layout.js';
 import Landing from './components/Login/Landing.js';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Router>
@@ -15,6 +15,6 @@ function App() {
       </Router>
     </div>
   );
-}
+};
 
 export default App;
