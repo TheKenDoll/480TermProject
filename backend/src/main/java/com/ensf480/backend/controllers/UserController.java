@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ensf480.backend.models.Person;
-import com.ensf480.backend.services.PersonService;
+import com.ensf480.backend.models.User;
+import com.ensf480.backend.services.UserService;
 
 @RestController
-@RequestMapping("/api/v1/person")
-public class PersonController {
+@RequestMapping("/api/v1/user")
+public class UserController {
 
   @Autowired
-  private PersonService personService;
+  private UserService userService;
 
   @GetMapping
-  public List<Person> getPersons() {
-    return personService.getPersons();
+  public List<User> getPersons() {
+    return userService.getAllUsers();
   }
 
   @PostMapping
-  public Person postPerson() {
-    return personService.postPerson();
+  public User postPerson() {
+    return userService.createNewUser();
   }
 }

@@ -26,7 +26,17 @@
 
   ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
   ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F.svg?style=for-the-badge&logo=Spring-Boot&logoColor=white)
+  ![Docker](https://img.shields.io/badge/Docker-2496ED.svg?style=for-the-badge&logo=Docker&logoColor=white)
+
+- Database
+
+  ![Hibernate](https://img.shields.io/badge/Hibernate-59666C.svg?style=for-the-badge&logo=Hibernate&logoColor=white)
   ![MySQL](https://img.shields.io/badge/MySQL-3e6e93.svg?style=for-the-badge&logo=MySQL&logoColor=white)
+
+- Testing
+
+  ![JUnit](https://img.shields.io/badge/JUnit5-25A162.svg?style=for-the-badge&logo=JUnit5&logoColor=white)
+  ![Mockito](https://img.shields.io/badge/Mockito-C5D9C8?style=for-the-badge&logo=Mockito&logoColor=white)
 
 ## 🚀 Backend Documentation
 
@@ -46,19 +56,21 @@ git clone git@github.com:TheKenDoll/480TermProject.git
 cd backend
 ```
 
-6. Run `docker-compose up -d` to start the database.
+6. Ask the repository owner for the `.env` file and place it in the `backend` directory. Otherwise, you will not be able to run the server.
+
+7. Run `docker-compose up -d` to start the database.
 
 ```bash
 docker-compose up -d
 ```
 
-7. Run `./mvnw spring-boot:run` to start the server.
+8. Run `./mvnw spring-boot:run` to start the server.
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-8. Open your browser and navigate to `http://localhost:8080` to see the server running.
+9. Open your browser and navigate to `http://localhost:8080` to see the server running.
 
 ```bash
 http://localhost:8080
