@@ -5,15 +5,7 @@ import Landing from './components/Login/Landing.js';
 
 const App = () => {
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Landing />} />
-          </Route>
-        </Routes>
-      </Router>
-    </div>
+   <h1>Hello World</h1>
   );
 };
 

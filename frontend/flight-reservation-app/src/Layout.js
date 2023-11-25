@@ -8,6 +8,9 @@ function Layout () {
                 <li>
                     <Link to="/">Home</Link>
                 </li>
+                <li>
+                    <Link to="/">Login</Link>
+                </li>
                 </ul>
             </nav>
 
