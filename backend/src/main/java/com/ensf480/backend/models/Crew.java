@@ -1,13 +1,16 @@
 package com.ensf480.backend.models;
 
-import java.util.List;
+import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -21,39 +24,31 @@ public class Crew {
   private long id;
 
   @OneToOne
-  @JoinColumn(name = "pilot_id")
+  @JoinColumn(name = "pilot_id", referencedColumnName = "id")
   private Pilot pilot;
 
   @OneToOne
-  @JoinColumn(name = "copilot_id")
+  @JoinColumn(name = "copilot_id", referencedColumnName = "id")
   private Copilot copilot;
 
-  @ManyToOne
-  @JoinColumn(name = "airline_id")
-  private Airline airline;
+  @OneToMany(fetch = FetchType.EAGER)
+  @JoinColumn(name = "crew_id", referencedColumnName = "id")
+  private ArrayList<FlightAttendant> flightAttendants = new ArrayList<>();
 
-  @OneToMany(mappedBy = "crew")
-  private List<FlightAttendant> flightAttendants;
+  @Column(name = "airline_id")
+  private long airlineId;
 
+  @JsonIgnore
   @OneToOne(mappedBy = "crew")
   private Flight flight;
 
-  public Crew() {
-  }
-
-  public Crew(Pilot pilot, Copilot copilot, Airline airline) {
-    this.pilot = pilot;
-    this.copilot = copilot;
-    this.airline = airline;
-  }
-
-  public Crew(long id, Pilot pilot, Copilot copilot, Airline airline, List<FlightAttendant> flightAttendants,
+  public Crew(long id, Pilot pilot, Copilot copilot, ArrayList<FlightAttendant> flightAttendants, long airlineId,
       Flight flight) {
     this.id = id;
     this.pilot = pilot;
     this.copilot = copilot;
-    this.airline = airline;
     this.flightAttendants = flightAttendants;
+    this.airlineId = airlineId;
     this.flight = flight;
   }
 
@@ -81,20 +76,20 @@ public class Crew {
     this.copilot = copilot;
   }
 
-  public Airline getAirline() {
-    return airline;
-  }
-
-  public void setAirline(Airline airline) {
-    this.airline = airline;
-  }
-
-  public List<FlightAttendant> getFlightAttendants() {
+  public ArrayList<FlightAttendant> getFlightAttendants() {
     return flightAttendants;
   }
 
-  public void setFlightAttendants(List<FlightAttendant> flightAttendants) {
+  public void setFlightAttendants(ArrayList<FlightAttendant> flightAttendants) {
     this.flightAttendants = flightAttendants;
+  }
+
+  public long getAirlineId() {
+    return airlineId;
+  }
+
+  public void setAirlineId(long airlineId) {
+    this.airlineId = airlineId;
   }
 
   public Flight getFlight() {
@@ -112,8 +107,8 @@ public class Crew {
     result = prime * result + (int) (id ^ (id >>> 32));
     result = prime * result + ((pilot == null) ? 0 : pilot.hashCode());
     result = prime * result + ((copilot == null) ? 0 : copilot.hashCode());
-    result = prime * result + ((airline == null) ? 0 : airline.hashCode());
     result = prime * result + ((flightAttendants == null) ? 0 : flightAttendants.hashCode());
+    result = prime * result + (int) (airlineId ^ (airlineId >>> 32));
     result = prime * result + ((flight == null) ? 0 : flight.hashCode());
     return result;
   }
@@ -139,15 +134,12 @@ public class Crew {
         return false;
     } else if (!copilot.equals(other.copilot))
       return false;
-    if (airline == null) {
-      if (other.airline != null)
-        return false;
-    } else if (!airline.equals(other.airline))
-      return false;
     if (flightAttendants == null) {
       if (other.flightAttendants != null)
         return false;
     } else if (!flightAttendants.equals(other.flightAttendants))
+      return false;
+    if (airlineId != other.airlineId)
       return false;
     if (flight == null) {
       if (other.flight != null)
@@ -159,8 +151,8 @@ public class Crew {
 
   @Override
   public String toString() {
-    return "Crew [id=" + id + ", pilot=" + pilot + ", copilot=" + copilot + ", airline=" + airline
-        + ", flightAttendants=" + flightAttendants + ", flight=" + flight + "]";
+    return "Crew [id=" + id + ", pilot=" + pilot + ", copilot=" + copilot + ", flightAttendants=" + flightAttendants
+        + ", airlineId=" + airlineId + ", flight=" + flight + "]";
   }
 
 }

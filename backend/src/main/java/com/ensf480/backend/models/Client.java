@@ -9,28 +9,29 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class User extends Person {
+public class Client extends Person {
   private String email;
   private String password;
   private String role;
 
-  public User(String email, String password, String role) {
+  public Client(String email, String password, String role) {
     this.email = email;
     this.password = password;
     this.role = role;
   }
 
-  public User() {
+  public Client() {
   }
 
-  public User(String firstName, String lastName, String address, String email, String password, String role) {
+  public Client(String firstName, String lastName, String address, String email, String password, String role) {
     super(firstName, lastName, address);
     this.email = email;
     this.password = password;
     this.role = role;
   }
 
-  public User(long id, String firstName, String lastName, String address, String email, String password, String role) {
+  public Client(long id, String firstName, String lastName, String address, String email, String password,
+      String role) {
     super(id, firstName, lastName, address);
     this.email = email;
     this.password = password;
@@ -72,9 +73,9 @@ public class User extends Person {
       return true;
     if (!super.equals(obj))
       return false;
-    if (!(obj instanceof User))
+    if (!(obj instanceof Client))
       return false;
-    User other = (User) obj;
+    Client other = (Client) obj;
     return Objects.equals(email, other.email)
         && Objects.equals(password, other.password)
         && Objects.equals(role, other.role);

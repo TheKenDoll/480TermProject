@@ -1,6 +1,7 @@
 package com.ensf480.backend.models;
 
 import com.ensf480.backend.abstracts.Person;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
 
@@ -13,6 +14,7 @@ import jakarta.persistence.Table;
 public class Pilot extends Person {
   private int serviceYears;
 
+  @JsonIgnore
   @OneToOne(mappedBy = "pilot")
   private Crew crew;
 
@@ -24,9 +26,10 @@ public class Pilot extends Person {
     this.serviceYears = serviceYears;
   }
 
-  public Pilot(long id, String firstName, String lastName, String address, int serviceYears) {
+  public Pilot(long id, String firstName, String lastName, String address, int serviceYears, Crew crew) {
     super(id, firstName, lastName, address);
     this.serviceYears = serviceYears;
+    this.crew = crew;
   }
 
   public int getServiceYears() {

@@ -4,9 +4,8 @@ import com.ensf480.backend.abstracts.Person;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,21 +14,22 @@ public class FlightAttendant extends Person {
 
   private int serviceYears;
 
-  @ManyToOne
-  @JoinColumn(name = "crew_id")
-  private Crew crew;
+  @Column(name = "crew_id")
+  private long crewId;
 
   public FlightAttendant() {
   }
 
-  public FlightAttendant(String firstName, String lastName, String address, int serviceYears) {
+  public FlightAttendant(String firstName, String lastName, String address, int serviceYears, long crewId) {
     super(firstName, lastName, address);
     this.serviceYears = serviceYears;
+    this.crewId = crewId;
   }
 
-  public FlightAttendant(long id, String firstName, String lastName, String address, int serviceYears) {
+  public FlightAttendant(long id, String firstName, String lastName, String address, int serviceYears, long crewId) {
     super(id, firstName, lastName, address);
     this.serviceYears = serviceYears;
+    this.crewId = crewId;
   }
 
   public int getServiceYears() {
@@ -40,12 +40,12 @@ public class FlightAttendant extends Person {
     this.serviceYears = serviceYears;
   }
 
-  public Crew getCrew() {
-    return crew;
+  public long getCrew() {
+    return crewId;
   }
 
-  public void setCrew(Crew crew) {
-    this.crew = crew;
+  public void setCrew(long crewId) {
+    this.crewId = crewId;
   }
 
   @Override
@@ -68,7 +68,7 @@ public class FlightAttendant extends Person {
   @Override
   public String toString() {
     return "FlightAttendant [id = " + id + ", firstName = " + firstName + ", lastName = " + lastName + ", address = "
-        + address + ", serviceYears = " + serviceYears + ", crew = " + crew + "]";
+        + address + ", serviceYears = " + serviceYears + ", crew = " + crewId + "]";
   }
 
 }
