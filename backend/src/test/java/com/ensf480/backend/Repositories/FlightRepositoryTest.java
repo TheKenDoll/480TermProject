@@ -25,8 +25,7 @@ public class FlightRepositoryTest {
     Flight newFlight = new Flight("123", "destination", "origin", "departureTime", "arrivalTime",
         createdAirline.getId());
     Flight createdFlight = flightRepository.save(newFlight);
-    Flight anotherFlight = flightRepository.findById(1L).get();
-    System.out.println(airlineRepository.findById(2L).get());
+    Flight anotherFlight = flightRepository.findById(createdFlight.getId()).get();
     assert (anotherFlight.getId() == createdFlight.getId());
     assert (anotherFlight.getDestination().equals(createdFlight.getDestination()));
     assert (anotherFlight.getOrigin().equals(createdFlight.getOrigin()));
