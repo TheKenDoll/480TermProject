@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ensf480.backend.models.Airline;
 import com.ensf480.backend.models.Flight;
 import com.ensf480.backend.repositories.AirlineRepository;
 import com.ensf480.backend.repositories.FlightRepository;
@@ -24,9 +23,8 @@ public class FlightService {
 
   public Flight createNewFlight(Flight newFlight) {
     long airlineId = newFlight.getAirlineId();
-    Airline airline = airlineRepository.findById(airlineId).get();
-    if (airline == null) {
-      throw new RuntimeException("Airline not found");
+    if (!airlineRepository.existsById(airlineId)) {
+      throw new RuntimeException("Airline with id " + airlineId + " does not exist");
     }
     return flightRepository.save(newFlight);
   }

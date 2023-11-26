@@ -40,11 +40,11 @@ public class FlightAttendant extends Person {
     this.serviceYears = serviceYears;
   }
 
-  public long getCrew() {
+  public long getCrewId() {
     return crewId;
   }
 
-  public void setCrew(long crewId) {
+  public void setCrewId(long crewId) {
     this.crewId = crewId;
   }
 
