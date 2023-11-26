@@ -18,7 +18,7 @@ public class Aircraft {
   private long id;
 
   private String model;
-  private int year;
+  private int manufactureYear;
   private int capacity;
 
   @Column(name = "airline_id")
@@ -31,17 +31,17 @@ public class Aircraft {
   public Aircraft() {
   }
 
-  public Aircraft(String model, int year, int capacity, long airlineId) {
+  public Aircraft(String model, int manufactureYear, int capacity, long airlineId) {
     this.model = model;
-    this.year = year;
+    this.manufactureYear = manufactureYear;
     this.capacity = capacity;
     this.airlineId = airlineId;
   }
 
-  public Aircraft(long id, String model, int year, int capacity, long airlineId, Flight flight) {
+  public Aircraft(long id, String model, int manufactureYear, int capacity, long airlineId, Flight flight) {
     this.id = id;
     this.model = model;
-    this.year = year;
+    this.manufactureYear = manufactureYear;
     this.capacity = capacity;
     this.airlineId = airlineId;
     this.flight = flight;
@@ -63,12 +63,12 @@ public class Aircraft {
     this.model = model;
   }
 
-  public int getYear() {
-    return year;
+  public int getManufactureYear() {
+    return manufactureYear;
   }
 
-  public void setYear(int year) {
-    this.year = year;
+  public void setManufactureYear(int manufactureYear) {
+    this.manufactureYear = manufactureYear;
   }
 
   public int getCapacity() {
@@ -101,7 +101,7 @@ public class Aircraft {
     int result = 1;
     result = prime * result + (int) (id ^ (id >>> 32));
     result = prime * result + ((model == null) ? 0 : model.hashCode());
-    result = prime * result + year;
+    result = prime * result + manufactureYear;
     result = prime * result + capacity;
     result = prime * result + (int) (airlineId ^ (airlineId >>> 32));
     result = prime * result + ((flight == null) ? 0 : flight.hashCode());
@@ -124,7 +124,7 @@ public class Aircraft {
         return false;
     } else if (!model.equals(other.model))
       return false;
-    if (year != other.year)
+    if (manufactureYear != other.manufactureYear)
       return false;
     if (capacity != other.capacity)
       return false;
@@ -140,7 +140,8 @@ public class Aircraft {
 
   @Override
   public String toString() {
-    return "Aircraft [id=" + id + ", model=" + model + ", year=" + year + ", capacity=" + capacity + ", airlineId="
+    return "Aircraft [id=" + id + ", model=" + model + ", year=" + manufactureYear + ", capacity=" + capacity
+        + ", airlineId="
         + airlineId + ", flight=" + flight + "]";
   }
 }
