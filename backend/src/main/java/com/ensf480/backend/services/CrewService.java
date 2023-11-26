@@ -5,29 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ensf480.backend.models.Aircraft;
-import com.ensf480.backend.repositories.AircraftRepository;
+import com.ensf480.backend.models.Crew;
 import com.ensf480.backend.repositories.AirlineRepository;
+import com.ensf480.backend.repositories.CrewRepository;
 
 @Service
-public class AircraftService {
-
+public class CrewService {
   @Autowired
-  private AircraftRepository aircraftRepository;
+  private CrewRepository crewRepository;
 
   @Autowired
   private AirlineRepository airlineRepository;
 
-  public List<Aircraft> getAllAircrafts() {
-    return aircraftRepository.findAll();
+  public List<Crew> getAllCrew() {
+    return crewRepository.findAll();
   }
 
-  public Aircraft createNewAircraft(Aircraft newAircraft) {
-    long airlineId = newAircraft.getAirlineId();
+  public Crew createNewCrew(Crew newCrew) {
+    long airlineId = newCrew.getAirlineId();
     if (!airlineRepository.existsById(airlineId)) {
       throw new RuntimeException("Airline with id " + airlineId + " does not exist");
     }
-    return aircraftRepository.save(newAircraft);
+    return crewRepository.save(newCrew);
   }
-
 }
