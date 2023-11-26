@@ -1,4 +1,4 @@
-# Airline Reservation Web Application
+# 🛩️ Airline Reservation Web Application
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/TheKenDoll/480TermProject?logo=github&color=blue)
 ![Github tag](https://img.shields.io/github/v/tag/TheKenDoll/480TermProject?logo=github&color=red)
@@ -8,11 +8,16 @@
 
 ## 📖 Table of Contents
 
+- [🔎 Overview](#-overview)
 - [📝 Contributors](#-contributors)
 - [👨‍💻 Teck Stack](#-teck-stack)
 - [🚀 Backend Documentation](#-backend-documentation)
   - [🏃 Quickstart](#-quickstart)
   - [🛠️ Installation](#️-installation)
+
+## 🔎 Overview
+
+The Airline Reservation Web Application is a sophisticated online application designed to serve various users including tourist agents, airline operators and program managers. This application offers a wide range of features aimed at improving experience.
 
 ## 📝 Contributors
 
