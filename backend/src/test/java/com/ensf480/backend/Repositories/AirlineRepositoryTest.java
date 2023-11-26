@@ -17,7 +17,7 @@ public class AirlineRepositoryTest {
   public void postAirlineTest() {
     Airline newAirline = new Airline("Aeromexico", "Mexico");
     Airline createdAirline = airlineRepository.save(newAirline);
-    Airline anotherAirline = airlineRepository.findById(1L).get();
+    Airline anotherAirline = airlineRepository.findById(createdAirline.getId()).get();
     assert (anotherAirline.getId() == createdAirline.getId());
     assert (anotherAirline.getName().equals(createdAirline.getName()));
     assert (anotherAirline.getCountry().equals(createdAirline.getCountry()));
