@@ -1,6 +1,7 @@
 package com.ensf480.backend.models;
 
 import com.ensf480.backend.abstracts.Person;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ public class Copilot extends Person {
 
   private int serviceYears;
 
+  @JsonIgnore
   @OneToOne(mappedBy = "copilot")
   private Crew crew;
 
@@ -25,9 +27,10 @@ public class Copilot extends Person {
     this.serviceYears = serviceYears;
   }
 
-  public Copilot(long id, String firstName, String lastName, String address, int serviceYears) {
+  public Copilot(long id, String firstName, String lastName, String address, int serviceYears, Crew crew) {
     super(id, firstName, lastName, address);
     this.serviceYears = serviceYears;
+    this.crew = crew;
   }
 
   public int getServiceYears() {
