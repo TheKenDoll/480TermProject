@@ -1,5 +1,6 @@
 # 🛩️ Airline Reservation Web Application
 
+[![Continuous Integration](https://github.com/TheKenDoll/480TermProject/actions/workflows/maven.yml/badge.svg)](https://github.com/TheKenDoll/480TermProject/actions/workflows/maven.yml)
 ![GitHub repo size](https://img.shields.io/github/repo-size/TheKenDoll/480TermProject?logo=github&color=blue)
 ![Github tag](https://img.shields.io/github/v/tag/TheKenDoll/480TermProject?logo=github&color=red)
 ![GitHub contributors](https://img.shields.io/github/contributors/TheKenDoll/480TermProject?logo=github&color=yellow)
