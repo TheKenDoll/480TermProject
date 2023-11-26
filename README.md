@@ -1,4 +1,10 @@
-# 480TermProject
+# Airline Reservation Web Application
+
+![GitHub repo size](https://img.shields.io/github/repo-size/TheKenDoll/480TermProject?logo=github&color=blue)
+![Github tag](https://img.shields.io/github/v/tag/TheKenDoll/480TermProject?logo=github&color=red)
+![GitHub contributors](https://img.shields.io/github/contributors/TheKenDoll/480TermProject?logo=github&color=yellow)
+![Github pull requests](https://img.shields.io/github/issues-pr/TheKenDoll/480TermProject?logo=github)
+![Github license](https://img.shields.io/github/license/TheKenDoll/480TermProject?logo=github&color=orange)
 
 ## 📖 Table of Contents
 
