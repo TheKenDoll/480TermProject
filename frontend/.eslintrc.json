@@ -13,8 +13,11 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks",
+        "react-router-dom"
     ],
     "rules": {
+        "react-router-dom/no-undef": "error"
     }
 }

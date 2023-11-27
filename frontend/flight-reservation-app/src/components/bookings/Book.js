@@ -1,12 +1,16 @@
+// Book.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Book.css';
 
-const Book = () => {
+const Book = ({ setLoggedIn }) => {
   const [origin, setOrigin] = useState('YYC');
   const [destination, setDestination] = useState('');
   const [tripType, setTripType] = useState('round-trip');
   const [departureDate, setDepartureDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
+  const [flights, setFlights] = useState([]);
+  const navigate = useNavigate();
 
   const handleOriginChange = (e) => {
     setOrigin(e.target.value);
@@ -18,7 +22,6 @@ const Book = () => {
 
   const handleTripTypeChange = (e) => {
     setTripType(e.target.value);
-
     setReturnDate('');
   };
 
@@ -31,14 +34,20 @@ const Book = () => {
   };
 
   const handleBookFlight = () => {
-    // Implement logic to book the flight based on user input
-    console.log('Flight booked:', {
-      origin,
-      destination,
-      tripType,
-      departureDate,
-      returnDate,
-    });
+    // Simulate fetching flight data based on user input
+    const fakeFlightData = [
+      { id: 1, origin, destination, departureDate, returnDate: tripType === 'round-trip' ? returnDate : null },
+      // Add more fake flight data as needed
+    ];
+
+    // Update the flights state with the fetched data
+    setFlights(fakeFlightData);
+
+    // Update the login status
+    setLoggedIn(true);
+
+    // Navigate to the /flights route
+    navigate('/flights');
   };
 
   return (

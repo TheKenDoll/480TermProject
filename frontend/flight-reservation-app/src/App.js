@@ -1,4 +1,6 @@
-import './App.css';
+// App.js
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './Layout.js';
 import Login from './components/login/Login.js';
 import Landing from './components/login/Landing.js';
@@ -9,8 +11,7 @@ import AdminEdit from './components/flights/EditFlight.js';
 import CrewEdit from './components/employee/EditCrew.js';
 import AircraftEdit from './components/flights/EditAircraft.js';
 import AgentLanding from './components/agent/AgentLanding.js';
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import FlightList from './components/flights/FlightList.js';
 
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -32,18 +33,14 @@ const App = () => {
               )
             }
           />
-
           <Route path="/login" element={<Login />} />
-          <Route path="/book" element={<Book />} />
-            <Route index element={<Landing />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/book" element={<Book />} />
-            <Route path="/admin" element={<AdminLanding />} />
-            <Route path="/edit" element={<AdminEdit />} />
-            <Route path="/crewedit" element={<CrewEdit />} />
-            <Route path="/aircraftedit" element={<AircraftEdit />} />
-            <Route path="/agent" element={<AgentLanding />} />
+          <Route path="/book" element={<Book setLoggedIn={setLoggedIn} />} />
+          <Route path="/flights" element={<FlightList />} />
+          <Route path="/admin" element={<AdminLanding />} />
+          <Route path="/edit" element={<AdminEdit />} />
+          <Route path="/crewedit" element={<CrewEdit />} />
+          <Route path="/aircraftedit" element={<AircraftEdit />} />
+          <Route path="/agent" element={<AgentLanding />} />
         </Routes>
       </Router>
     </div>
