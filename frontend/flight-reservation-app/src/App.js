@@ -1,6 +1,4 @@
 import './App.css';
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './Layout.js';
 import Login from './components/login/Login.js';
 import Landing from './components/login/Landing.js';
@@ -11,12 +9,32 @@ import AdminEdit from './components/flights/EditFlight.js';
 import CrewEdit from './components/employee/EditCrew.js';
 import AircraftEdit from './components/flights/EditAircraft.js';
 import AgentLanding from './components/agent/AgentLanding.js';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 const App = () => {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
   return (
     <div className="App">
       <Router>
+        <Layout />
+
         <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route
+            path="/account"
+            element={
+              isLoggedIn ? (
+                <Account />
+              ) : (
+                <Navigate to="/login" replace={true} />
+              )
+            }
+          />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/book" element={<Book />} />
           <Route path="/" element={<Layout />}>
             <Route index element={<Landing />} />
             <Route path="/login" element={<Login />} />
