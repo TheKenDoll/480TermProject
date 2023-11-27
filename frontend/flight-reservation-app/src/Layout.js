@@ -18,6 +18,12 @@ function Layout() {
           <li className="nav-item">
             <Link to="/book">Book</Link>
           </li>
+          <li className="nav-item">
+            <Link to="/admin">AdminLanding</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/agent">AgentLanding</Link>
+          </li>
         </ul>
       </nav>
 
