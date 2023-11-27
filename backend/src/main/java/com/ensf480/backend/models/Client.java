@@ -16,10 +16,14 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
+<<<<<<< HEAD:backend/src/main/java/com/ensf480/backend/models/User.java
 public class User extends Person {
 
   @Column(unique = true)
   private String username;
+=======
+public class Client extends Person {
+>>>>>>> e2ad682ec90fd7b3d50f3c8514d962be7746d4f9:backend/src/main/java/com/ensf480/backend/models/Client.java
   private String email;
   private String password;
 
@@ -36,17 +40,21 @@ public class User extends Person {
     this.roles = roles;
   }
 
-  public User(String email, String password, String role) {
+  public Client(String email, String password, String role) {
     this.email = email;
     this.password = password;
     //this.roles = roles;
 
   }
 
-  public User() {
+  public Client() {
   }
 
+<<<<<<< HEAD:backend/src/main/java/com/ensf480/backend/models/User.java
   public User(String firstName, String lastName, String address, String email, String password, Set<Role> roles) {
+=======
+  public Client(String firstName, String lastName, String address, String email, String password, String role) {
+>>>>>>> e2ad682ec90fd7b3d50f3c8514d962be7746d4f9:backend/src/main/java/com/ensf480/backend/models/Client.java
     super(firstName, lastName, address);
     this.email = email;
     this.password = password;
@@ -55,7 +63,12 @@ public class User extends Person {
 
   }
 
+<<<<<<< HEAD:backend/src/main/java/com/ensf480/backend/models/User.java
   public User(long id, String firstName, String lastName, String address, String email, String password, Set<Role> roles) {
+=======
+  public Client(long id, String firstName, String lastName, String address, String email, String password,
+      String role) {
+>>>>>>> e2ad682ec90fd7b3d50f3c8514d962be7746d4f9:backend/src/main/java/com/ensf480/backend/models/Client.java
     super(id, firstName, lastName, address);
     this.email = email;
     this.password = password;
@@ -93,9 +106,9 @@ public class User extends Person {
       return true;
     if (!super.equals(obj))
       return false;
-    if (!(obj instanceof User))
+    if (!(obj instanceof Client))
       return false;
-    User other = (User) obj;
+    Client other = (Client) obj;
     return Objects.equals(email, other.email)
         && Objects.equals(password, other.password)
         && Objects.equals(roles, other.roles);

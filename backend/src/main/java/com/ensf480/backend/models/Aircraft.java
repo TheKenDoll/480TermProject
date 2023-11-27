@@ -1,11 +1,12 @@
 package com.ensf480.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -17,32 +18,32 @@ public class Aircraft {
   private long id;
 
   private String model;
-  private int year;
+  private int manufactureYear;
   private int capacity;
 
-  @ManyToOne
-  @JoinColumn(name = "airline_id")
-  private Airline airline;
+  @Column(name = "airline_id")
+  private long airlineId;
 
+  @JsonIgnore
   @OneToOne(mappedBy = "aircraft")
   private Flight flight;
 
   public Aircraft() {
   }
 
-  public Aircraft(String model, int year, int capacity, Airline airline) {
+  public Aircraft(String model, int manufactureYear, int capacity, long airlineId) {
     this.model = model;
-    this.year = year;
+    this.manufactureYear = manufactureYear;
     this.capacity = capacity;
-    this.airline = airline;
+    this.airlineId = airlineId;
   }
 
-  public Aircraft(long id, String model, int year, int capacity, Airline airline, Flight flight) {
+  public Aircraft(long id, String model, int manufactureYear, int capacity, long airlineId, Flight flight) {
     this.id = id;
     this.model = model;
-    this.year = year;
+    this.manufactureYear = manufactureYear;
     this.capacity = capacity;
-    this.airline = airline;
+    this.airlineId = airlineId;
     this.flight = flight;
   }
 
@@ -62,12 +63,12 @@ public class Aircraft {
     this.model = model;
   }
 
-  public int getYear() {
-    return year;
+  public int getManufactureYear() {
+    return manufactureYear;
   }
 
-  public void setYear(int year) {
-    this.year = year;
+  public void setManufactureYear(int manufactureYear) {
+    this.manufactureYear = manufactureYear;
   }
 
   public int getCapacity() {
@@ -78,12 +79,12 @@ public class Aircraft {
     this.capacity = capacity;
   }
 
-  public Airline getAirline() {
-    return airline;
+  public long getAirlineId() {
+    return airlineId;
   }
 
-  public void setAirline(Airline airline) {
-    this.airline = airline;
+  public void setAirlineId(long airlineId) {
+    this.airlineId = airlineId;
   }
 
   public Flight getFlight() {
@@ -100,9 +101,9 @@ public class Aircraft {
     int result = 1;
     result = prime * result + (int) (id ^ (id >>> 32));
     result = prime * result + ((model == null) ? 0 : model.hashCode());
-    result = prime * result + year;
+    result = prime * result + manufactureYear;
     result = prime * result + capacity;
-    result = prime * result + ((airline == null) ? 0 : airline.hashCode());
+    result = prime * result + (int) (airlineId ^ (airlineId >>> 32));
     result = prime * result + ((flight == null) ? 0 : flight.hashCode());
     return result;
   }
@@ -123,14 +124,11 @@ public class Aircraft {
         return false;
     } else if (!model.equals(other.model))
       return false;
-    if (year != other.year)
+    if (manufactureYear != other.manufactureYear)
       return false;
     if (capacity != other.capacity)
       return false;
-    if (airline == null) {
-      if (other.airline != null)
-        return false;
-    } else if (!airline.equals(other.airline))
+    if (airlineId != other.airlineId)
       return false;
     if (flight == null) {
       if (other.flight != null)
@@ -142,7 +140,8 @@ public class Aircraft {
 
   @Override
   public String toString() {
-    return "Aircraft [id=" + id + ", model=" + model + ", year=" + year + ", capacity=" + capacity + ", airline="
-        + airline + ", flight=" + flight + "]";
+    return "Aircraft [id=" + id + ", model=" + model + ", year=" + manufactureYear + ", capacity=" + capacity
+        + ", airlineId="
+        + airlineId + ", flight=" + flight + "]";
   }
 }

@@ -1,11 +1,15 @@
 package com.ensf480.backend.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -19,14 +23,17 @@ public class Airline {
   private String name;
   private String country;
 
-  @OneToMany(mappedBy = "airline")
-  private List<Crew> crews;
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "airline_id", referencedColumnName = "id")
+  private List<Crew> crews = new ArrayList<>();
 
-  @OneToMany(mappedBy = "airline")
-  private List<Aircraft> aircrafts;
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "airline_id", referencedColumnName = "id")
+  private List<Aircraft> aircrafts = new ArrayList<>();
 
-  @OneToMany(mappedBy = "airline")
-  private List<Flight> flights;
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "airline_id", referencedColumnName = "id")
+  private List<Flight> flights = new ArrayList<>();
 
   public Airline() {
   }
@@ -74,7 +81,7 @@ public class Airline {
     return crews;
   }
 
-  public void setCrews(List<Crew> crews) {
+  public void setCrews(ArrayList<Crew> crews) {
     this.crews = crews;
   }
 
@@ -151,4 +158,5 @@ public class Airline {
     return "Airline [id=" + id + ", name=" + name + ", country=" + country + ", crews=" + crews + ", aircrafts="
         + aircrafts + ", flights=" + flights + "]";
   }
+
 }

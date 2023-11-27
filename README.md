@@ -1,12 +1,24 @@
-# 480TermProject
+# 🛩️ Airline Reservation Web Application
+
+[![Continuous Integration](https://github.com/TheKenDoll/480TermProject/actions/workflows/maven.yml/badge.svg)](https://github.com/TheKenDoll/480TermProject/actions/workflows/maven.yml)
+![GitHub repo size](https://img.shields.io/github/repo-size/TheKenDoll/480TermProject?logo=github&color=blue)
+![Github tag](https://img.shields.io/github/v/tag/TheKenDoll/480TermProject?logo=github&color=red)
+![GitHub contributors](https://img.shields.io/github/contributors/TheKenDoll/480TermProject?logo=github&color=yellow)
+![Github pull requests](https://img.shields.io/github/issues-pr/TheKenDoll/480TermProject?logo=github)
+![Github license](https://img.shields.io/github/license/TheKenDoll/480TermProject?logo=github&color=orange)
 
 ## 📖 Table of Contents
 
+- [🔎 Overview](#-overview)
 - [📝 Contributors](#-contributors)
 - [👨‍💻 Teck Stack](#-teck-stack)
 - [🚀 Backend Documentation](#-backend-documentation)
   - [🏃 Quickstart](#-quickstart)
   - [🛠️ Installation](#️-installation)
+
+## 🔎 Overview
+
+The Airline Reservation Web Application is a sophisticated online application designed to serve various users including tourist agents, airline operators and program managers. This application offers a wide range of features aimed at improving experience.
 
 ## 📝 Contributors
 

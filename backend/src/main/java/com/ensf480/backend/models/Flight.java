@@ -1,13 +1,11 @@
 package com.ensf480.backend.models;
 
-import java.util.Date;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -18,41 +16,38 @@ public class Flight {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  private int number;
+  private String number;
   private String destination;
   private String origin;
-  private Date departureTime;
-  private Date arrivalTime;
+  private String departureTime;
+  private String arrivalTime;
 
   @OneToOne
-  @JoinColumn(name = "aircraft_id")
+  @JoinColumn(name = "aircraft_id", referencedColumnName = "id")
   private Aircraft aircraft;
 
   @OneToOne
-  @JoinColumn(name = "crew_id")
+  @JoinColumn(name = "crew_id", referencedColumnName = "id")
   private Crew crew;
 
-  @ManyToOne
-  @JoinColumn(name = "airline_id")
-  private Airline airline;
+  @Column(name = "airline_id")
+  private long airlineId;
 
   public Flight() {
   }
 
-  public Flight(int number, String destination, String origin, Date departureTime, Date arrivalTime, Aircraft aircraft,
-      Crew crew, Airline airline) {
+  public Flight(String number, String destination, String origin, String departureTime, String arrivalTime,
+      long airlineId) {
     this.number = number;
     this.destination = destination;
     this.origin = origin;
     this.departureTime = departureTime;
     this.arrivalTime = arrivalTime;
-    this.aircraft = aircraft;
-    this.crew = crew;
-    this.airline = airline;
+    this.airlineId = airlineId;
   }
 
-  public Flight(long id, int number, String destination, String origin, Date departureTime, Date arrivalTime,
-      Aircraft aircraft, Crew crew, Airline airline) {
+  public Flight(long id, String number, String destination, String origin, String departureTime, String arrivalTime,
+      Aircraft aircraft, Crew crew, long airlineId) {
     this.id = id;
     this.number = number;
     this.destination = destination;
@@ -61,7 +56,7 @@ public class Flight {
     this.arrivalTime = arrivalTime;
     this.aircraft = aircraft;
     this.crew = crew;
-    this.airline = airline;
+    this.airlineId = airlineId;
   }
 
   public long getId() {
@@ -72,11 +67,11 @@ public class Flight {
     this.id = id;
   }
 
-  public int getNumber() {
+  public String getNumber() {
     return number;
   }
 
-  public void setNumber(int number) {
+  public void setNumber(String number) {
     this.number = number;
   }
 
@@ -96,19 +91,19 @@ public class Flight {
     this.origin = origin;
   }
 
-  public Date getDepartureTime() {
+  public String getDepartureTime() {
     return departureTime;
   }
 
-  public void setDepartureTime(Date departureTime) {
+  public void setDepartureTime(String departureTime) {
     this.departureTime = departureTime;
   }
 
-  public Date getArrivalTime() {
+  public String getArrivalTime() {
     return arrivalTime;
   }
 
-  public void setArrivalTime(Date arrivalTime) {
+  public void setArrivalTime(String arrivalTime) {
     this.arrivalTime = arrivalTime;
   }
 
@@ -128,12 +123,12 @@ public class Flight {
     this.crew = crew;
   }
 
-  public Airline getAirline() {
-    return airline;
+  public long getAirlineId() {
+    return airlineId;
   }
 
-  public void setAirline(Airline airline) {
-    this.airline = airline;
+  public void setAirlineId(long airlineId) {
+    this.airlineId = airlineId;
   }
 
   @Override
@@ -141,14 +136,14 @@ public class Flight {
     final int prime = 31;
     int result = 1;
     result = prime * result + (int) (id ^ (id >>> 32));
-    result = prime * result + number;
+    result = prime * result + number.hashCode();
     result = prime * result + ((destination == null) ? 0 : destination.hashCode());
     result = prime * result + ((origin == null) ? 0 : origin.hashCode());
     result = prime * result + ((departureTime == null) ? 0 : departureTime.hashCode());
     result = prime * result + ((arrivalTime == null) ? 0 : arrivalTime.hashCode());
     result = prime * result + ((aircraft == null) ? 0 : aircraft.hashCode());
     result = prime * result + ((crew == null) ? 0 : crew.hashCode());
-    result = prime * result + ((airline == null) ? 0 : airline.hashCode());
+    result = prime * result + (int) (airlineId ^ (airlineId >>> 32));
     return result;
   }
 
@@ -195,10 +190,7 @@ public class Flight {
         return false;
     } else if (!crew.equals(other.crew))
       return false;
-    if (airline == null) {
-      if (other.airline != null)
-        return false;
-    } else if (!airline.equals(other.airline))
+    if (airlineId != other.airlineId)
       return false;
     return true;
   }
@@ -207,6 +199,7 @@ public class Flight {
   public String toString() {
     return "Flight [id=" + id + ", number=" + number + ", destination=" + destination + ", origin=" + origin
         + ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", aircraft=" + aircraft + ", crew="
-        + crew + ", airline=" + airline + "]";
+        + crew + ", airlineId=" + airlineId + "]";
   }
+
 }
