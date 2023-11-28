@@ -3,6 +3,10 @@ package com.ensf480.backend.models;
 import com.ensf480.backend.abstracts.Person;
 
 import java.util.Objects;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,6 +21,12 @@ public class FlightAttendant extends Person {
   @Column(name = "crew_id")
   private long crewId;
 
+  @CreationTimestamp
+  private LocalDateTime createdAt;
+
+  @UpdateTimestamp
+  private LocalDateTime updatedAt;
+
   public FlightAttendant() {
   }
 
@@ -26,10 +36,14 @@ public class FlightAttendant extends Person {
     this.crewId = crewId;
   }
 
-  public FlightAttendant(long id, String firstName, String lastName, String address, int serviceYears, long crewId) {
+  public FlightAttendant(long id, String firstName, String lastName, String address, int serviceYears, long crewId,
+      LocalDateTime createdAt,
+      LocalDateTime updatedAt) {
     super(id, firstName, lastName, address);
     this.serviceYears = serviceYears;
     this.crewId = crewId;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   public int getServiceYears() {
@@ -46,6 +60,22 @@ public class FlightAttendant extends Person {
 
   public void setCrewId(long crewId) {
     this.crewId = crewId;
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
   }
 
   @Override
@@ -68,7 +98,8 @@ public class FlightAttendant extends Person {
   @Override
   public String toString() {
     return "FlightAttendant [id = " + id + ", firstName = " + firstName + ", lastName = " + lastName + ", address = "
-        + address + ", serviceYears = " + serviceYears + ", crew = " + crewId + "]";
+        + address + ", serviceYears = " + serviceYears + ", crew = " + crewId + ", createdAt = " + createdAt
+        + ", updatedAt = " + updatedAt + "]";
   }
 
 }

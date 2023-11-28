@@ -23,8 +23,9 @@ public class CrewService {
 
   public Crew createNewCrew(Crew newCrew) {
     long airlineId = newCrew.getAirlineId();
+
     if (!airlineRepository.existsById(airlineId)) {
-      throw new RuntimeException("Airline with id " + airlineId + " does not exist");
+      throw new IllegalArgumentException("Airline with id " + airlineId + " does not exist");
     }
     return crewRepository.save(newCrew);
   }

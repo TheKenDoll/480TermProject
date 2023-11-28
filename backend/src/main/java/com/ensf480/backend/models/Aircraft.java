@@ -1,13 +1,20 @@
 package com.ensf480.backend.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
+import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,30 +28,40 @@ public class Aircraft {
   private int manufactureYear;
   private int capacity;
 
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "aircraft_id", referencedColumnName = "id")
+  private List<Seat> seats;
+
   @Column(name = "airline_id")
   private long airlineId;
 
-  @JsonIgnore
-  @OneToOne(mappedBy = "aircraft")
-  private Flight flight;
+  @CreationTimestamp
+  private LocalDateTime createdAt;
+
+  @UpdateTimestamp
+  private LocalDateTime updatedAt;
 
   public Aircraft() {
   }
 
-  public Aircraft(String model, int manufactureYear, int capacity, long airlineId) {
+  public Aircraft(String model, int manufactureYear, int capacity, List<Seat> seats, long airlineId) {
     this.model = model;
     this.manufactureYear = manufactureYear;
     this.capacity = capacity;
+    this.seats = seats;
     this.airlineId = airlineId;
   }
 
-  public Aircraft(long id, String model, int manufactureYear, int capacity, long airlineId, Flight flight) {
+  public Aircraft(long id, String model, int manufactureYear, int capacity, List<Seat> seats, long airlineId,
+      LocalDateTime createdAt, LocalDateTime updatedAt) {
     this.id = id;
     this.model = model;
     this.manufactureYear = manufactureYear;
     this.capacity = capacity;
+    this.seats = seats;
     this.airlineId = airlineId;
-    this.flight = flight;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   public long getId() {
@@ -79,6 +96,14 @@ public class Aircraft {
     this.capacity = capacity;
   }
 
+  public List<Seat> getSeats() {
+    return seats;
+  }
+
+  public void setSeats(List<Seat> seats) {
+    this.seats = seats;
+  }
+
   public long getAirlineId() {
     return airlineId;
   }
@@ -87,12 +112,20 @@ public class Aircraft {
     this.airlineId = airlineId;
   }
 
-  public Flight getFlight() {
-    return flight;
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
   }
 
-  public void setFlight(Flight flight) {
-    this.flight = flight;
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
   }
 
   @Override
@@ -103,8 +136,10 @@ public class Aircraft {
     result = prime * result + ((model == null) ? 0 : model.hashCode());
     result = prime * result + manufactureYear;
     result = prime * result + capacity;
+    result = prime * result + ((seats == null) ? 0 : seats.hashCode());
     result = prime * result + (int) (airlineId ^ (airlineId >>> 32));
-    result = prime * result + ((flight == null) ? 0 : flight.hashCode());
+    result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+    result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
     return result;
   }
 
@@ -128,20 +163,31 @@ public class Aircraft {
       return false;
     if (capacity != other.capacity)
       return false;
+    if (seats == null) {
+      if (other.seats != null)
+        return false;
+    } else if (!seats.equals(other.seats))
+      return false;
     if (airlineId != other.airlineId)
       return false;
-    if (flight == null) {
-      if (other.flight != null)
+    if (createdAt == null) {
+      if (other.createdAt != null)
         return false;
-    } else if (!flight.equals(other.flight))
+    } else if (!createdAt.equals(other.createdAt))
+      return false;
+    if (updatedAt == null) {
+      if (other.updatedAt != null)
+        return false;
+    } else if (!updatedAt.equals(other.updatedAt))
       return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "Aircraft [id=" + id + ", model=" + model + ", year=" + manufactureYear + ", capacity=" + capacity
-        + ", airlineId="
-        + airlineId + ", flight=" + flight + "]";
+    return "Aircraft [id=" + id + ", model=" + model + ", manufactureYear=" + manufactureYear + ", capacity=" + capacity
+        + ", seats=" + seats + ", airlineId=" + airlineId + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+        + "]";
   }
+
 }
