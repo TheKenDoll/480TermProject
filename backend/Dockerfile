@@ -1,12 +1,13 @@
-FROM eclipse-temurin:17-jdk-focal as package
+FROM eclipse-temurin:17-jdk-jammy as build
 WORKDIR /app
-COPY . .
-RUN mvn package
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:go-offline
+COPY ./src ./src
+RUN ./mvnw clean install
 
-FROM eclipse-temurin:17-jdk-focal as production
+FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
-COPY --from=package /app/target/*.jar .
-CMD ["java", "-jar", "app.jar"]
-
-
+COPY --from=build /app/target/*.jar /app/*.jar
 EXPOSE 8080
+CMD ["java", "-jar", "/app/*.jar" ]
