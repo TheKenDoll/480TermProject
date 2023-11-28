@@ -15,6 +15,7 @@
 - [🚀 Backend Documentation](#-backend-documentation)
   - [🏃 Quickstart](#-quickstart)
   - [🛠️ Installation](#️-installation)
+  - [🌐 Endpoints](#-endpoints)
 
 ## 🔎 Overview
 
@@ -49,6 +50,10 @@ The Airline Reservation Web Application is a sophisticated online application de
 
   ![JUnit](https://img.shields.io/badge/JUnit5-25A162.svg?style=for-the-badge&logo=JUnit5&logoColor=white)
   ![Mockito](https://img.shields.io/badge/Mockito-C5D9C8?style=for-the-badge&logo=Mockito&logoColor=white)
+
+- Continuous Integration
+
+  ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-000000.svg?style=for-the-badge&logo=GitHub-Actions&logoColor=white)
 
 ## 🚀 Backend Documentation
 
