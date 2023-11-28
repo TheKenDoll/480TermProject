@@ -145,9 +145,13 @@ mvn -v
 
 ### Airline Endpoints
 
-#### GET `/api/v1/airline`
+#### - GET `/api/v1/airline`
 
 Return all airlines.
+
+Sample Response Status Code:
+
+`Ok 200`
 
 Sample Response Body:
 
@@ -166,7 +170,7 @@ Sample Response Body:
 ]
 ```
 
-#### POST `/api/v1/airline`
+#### - POST `/api/v1/airline`
 
 Create a new airline.
 
@@ -179,26 +183,27 @@ Sample Request Body:
 }
 ```
 
-Sample Response Body:
+Sample Response Status Code:
 
-```json
-{
-  "id": 1,
-  "name": "Air Canada",
-  "country": "Canada",
-  "crews": [],
-  "aircrafts": [],
-  "flights": [],
-  "createdAt": "2023-11-27T17:39:24.881032",
-  "updatedAt": "2023-11-27T17:39:24.881088"
-}
-```
+`Created 201`
+
+#### - DELETE `/api/v1/airline/{id}`
+
+Delete an airline by id.
+
+Sample Response Status Code:
+
+`No Content 204`
 
 ### Flight Endpoints
 
-#### GET `/api/v1/flight`
+#### - GET `/api/v1/flight`
 
 Return all flights.
+
+Sample Response Status Code:
+
+`Ok 200`
 
 Sample Response Body:
 
@@ -328,108 +333,14 @@ Sample Request Body:
 }
 ```
 
-Sample Response Body:
+Sample Response Status Code:
 
-```json
-{
-  "id": 1,
-  "number": "AC101",
-  "destination": "Toronto",
-  "origin": "Calgary",
-  "departureTime": "2023-11-29",
-  "arrivalTime": "2023-11-29",
-  "aircraft": {
-    "id": 1,
-    "model": "Boeing 737",
-    "manufactureYear": 2010,
-    "capacity": 200,
-    "seats": [
-      {
-        "id": 0,
-        "seatNumber": "1A",
-        "price": 200.0,
-        "aircraftId": 1,
-        "createdAt": null,
-        "updatedAt": null,
-        "available": false
-      },
-      {
-        "id": 0,
-        "seatNumber": "1B",
-        "price": 200.0,
-        "aircraftId": 1,
-        "createdAt": null,
-        "updatedAt": null,
-        "available": false
-      },
-      {
-        "id": 0,
-        "seatNumber": "1C",
-        "price": 200.0,
-        "aircraftId": 1,
-        "createdAt": null,
-        "updatedAt": null,
-        "available": false
-      },
-      {
-        "id": 0,
-        "seatNumber": "1D",
-        "price": 200.0,
-        "aircraftId": 1,
-        "createdAt": null,
-        "updatedAt": null,
-        "available": false
-      },
-      {
-        "id": 0,
-        "seatNumber": "1E",
-        "price": 200.0,
-        "aircraftId": 1,
-        "createdAt": null,
-        "updatedAt": null,
-        "available": false
-      },
-      {
-        "id": 0,
-        "seatNumber": "1F",
-        "price": 200.0,
-        "aircraftId": 1,
-        "createdAt": null,
-        "updatedAt": null,
-        "available": false
-      }
-    ],
-    "airlineId": 1,
-    "createdAt": "2023-11-27T16:47:12.16947",
-    "updatedAt": "2023-11-27T16:47:12.169527"
-  },
-  "crew": {
-    "id": 1,
-    "pilot": {
-      "id": 1,
-      "firstName": "Axel",
-      "lastName": "Sanchez",
-      "address": "3500 24 Ave NW",
-      "serviceYears": 12,
-      "createdAt": "2023-11-27T16:47:12.186001",
-      "updatedAt": "2023-11-27T16:47:12.186026"
-    },
-    "copilot": {
-      "id": 1,
-      "firstName": "Anahita",
-      "lastName": "Akbari",
-      "address": "3500 24 Ave NW",
-      "serviceYears": 12,
-      "createdAt": "2023-11-27T16:47:12.182618",
-      "updatedAt": "2023-11-27T16:47:12.182637"
-    },
-    "flightAttendants": [],
-    "airlineId": 1,
-    "createdAt": "2023-11-27T16:47:12.188495",
-    "updatedAt": "2023-11-27T16:47:12.188518"
-  },
-  "airlineId": 1,
-  "createdAt": "2023-11-27T16:47:12.194624",
-  "updatedAt": "2023-11-27T16:47:12.194653"
-}
-```
+`Created 201`
+
+#### - DELETE `/api/v1/flight/{id}`
+
+Delete a flight by id.
+
+Sample Response Status Code:
+
+`No Content 204`

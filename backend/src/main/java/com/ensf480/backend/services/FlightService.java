@@ -21,11 +21,18 @@ public class FlightService {
     return flightRepository.findAll();
   }
 
-  public Flight createNewFlight(Flight newFlight) {
+  public void createNewFlight(Flight newFlight) {
     long airlineId = newFlight.getAirlineId();
     if (!airlineRepository.existsById(airlineId)) {
       throw new RuntimeException("Airline with id " + airlineId + " does not exist");
     }
-    return flightRepository.save(newFlight);
+    flightRepository.save(newFlight);
+  }
+
+  public void deleteFlightById(long flightId) {
+    if (!flightRepository.existsById(flightId)) {
+      throw new RuntimeException("Flight with id " + flightId + " does not exist");
+    }
+    flightRepository.deleteById(flightId);
   }
 }
