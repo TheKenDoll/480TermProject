@@ -8,7 +8,7 @@ import jakarta.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class Person {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.UUID)
   protected long id;
 
   protected String firstName;

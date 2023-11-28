@@ -24,7 +24,7 @@ import jakarta.persistence.Table;
 public class Crew {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.UUID)
   private long id;
 
   @OneToOne(cascade = CascadeType.ALL)

@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @Table
 public class Airline {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.UUID)
   private long id;
 
   private String name;
