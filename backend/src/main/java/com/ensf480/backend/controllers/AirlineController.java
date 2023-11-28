@@ -43,6 +43,16 @@ public class AirlineController {
     }
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<Airline> getAirlineByName(@PathVariable("id") long id) {
+    try {
+      Airline airline = airlineService.getAirlineById(id);
+      return new ResponseEntity<>(airline, HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
   @DeleteMapping("/{id}")
   public ResponseEntity<HttpStatus> deleteAirline(@PathVariable("id") long airlineId) {
     try {
