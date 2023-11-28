@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ensf480.backend.models.Flight;
 import com.ensf480.backend.services.FlightService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/flight")
 public class FlightController {
@@ -58,6 +60,17 @@ public class FlightController {
   public ResponseEntity<List<Flight>> getFlightByDestination(@PathVariable("destination") String destination) {
     try {
       List<Flight> flights = flightService.getFlightByDestination(destination);
+      return new ResponseEntity<>(flights, HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @GetMapping("/origin/{origin}/destination/{destination}/date/{date}")
+  public ResponseEntity<List<Flight>> getFlightByOriginDestinationDate(@PathVariable("origin") String origin,
+      @PathVariable("destination") String destination, @PathVariable("date") String date) {
+    try {
+      List<Flight> flights = flightService.getFlightByOriginDestinationDate(destination, origin, date);
       return new ResponseEntity<>(flights, HttpStatus.OK);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

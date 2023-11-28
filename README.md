@@ -682,3 +682,54 @@ Sample Response Body
   }
 ]
 ```
+
+#### - GET `/api/v1/flight/origin/{origin}/destination/{destination}/date/{date}`
+
+Return all flights by origin, destination and date.
+
+Sample Response Status Code:
+
+`Ok 200`
+
+```json
+[
+    {
+        "id": 1,
+        "number": "AC101",
+        "destination": "Vancouver",
+        "origin": "Calgary",
+        "departureTime": "2023-11-29",
+        "arrivalTime": "2023-11-29",
+        "aircraft": {
+            "id": 1,
+            "model": "Boeing 737",
+            "manufactureYear": 2010,
+            "capacity": 200,
+            "seats": [
+                {
+                    ...
+                }
+            ],
+            "airlineId": 1,
+            "createdAt": "2023-11-27T21:20:14.196198",
+            "updatedAt": "2023-11-27T21:20:14.196356"
+        },
+        "crew": {
+            "id": 1,
+            "pilot": {
+                ...
+            },
+            "copilot": {
+                ...
+            },
+            "flightAttendants": [],
+            "airlineId": 1,
+            "createdAt": "2023-11-27T21:20:14.250589",
+            "updatedAt": "2023-11-27T21:20:14.250689"
+        },
+        "airlineId": 1,
+        "createdAt": "2023-11-27T21:20:14.259514",
+        "updatedAt": "2023-11-27T21:20:14.259574"
+    }
+]
+```
