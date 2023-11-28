@@ -29,6 +29,14 @@ public class FlightService {
     flightRepository.save(newFlight);
   }
 
+  public List<Flight> getFlightByOrigin(String origin) {
+    return flightRepository.findByOrigin(origin);
+  }
+
+  public List<Flight> getFlightByDestination(String destination) {
+    return flightRepository.findByDestination(destination);
+  }
+
   public void deleteFlightById(long flightId) {
     if (!flightRepository.existsById(flightId)) {
       throw new RuntimeException("Flight with id " + flightId + " does not exist");

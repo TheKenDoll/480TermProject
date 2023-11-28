@@ -44,6 +44,26 @@ public class FlightController {
     }
   }
 
+  @GetMapping("/origin/{origin}")
+  public ResponseEntity<List<Flight>> getFlightByOrigin(@PathVariable("origin") String origin) {
+    try {
+      List<Flight> flights = flightService.getFlightByOrigin(origin);
+      return new ResponseEntity<>(flights, HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @GetMapping("/destination/{destination}")
+  public ResponseEntity<List<Flight>> getFlightByDestination(@PathVariable("destination") String destination) {
+    try {
+      List<Flight> flights = flightService.getFlightByDestination(destination);
+      return new ResponseEntity<>(flights, HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
   @DeleteMapping("/{id}")
   public ResponseEntity<HttpStatus> deleteFlight(@PathVariable("id") long flightId) {
     try {
