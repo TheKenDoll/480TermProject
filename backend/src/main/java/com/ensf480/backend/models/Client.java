@@ -4,7 +4,11 @@ import com.ensf480.backend.abstracts.Person;
 
 import java.util.Objects;
 import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Set;
+
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -47,7 +51,7 @@ public class Client extends Person {
   }
 
   public Client(long id, String firstName, String lastName, String address, String email, String password,
-      Set<Role> roles) {
+      Set<Role> roles, LocalDateTime createdAt, LocalDateTime updatedAt) {
     super(id, firstName, lastName, address);
     this.email = email;
     this.password = password;
@@ -94,6 +98,22 @@ public class Client extends Person {
     this.updatedAt = updatedAt;
   }
 
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(super.hashCode(), email, password, roles);
@@ -116,8 +136,7 @@ public class Client extends Person {
   @Override
   public String toString() {
     return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-        + ", email=" + email + ", password=" + password + ", role=" + roles + ", createdAt=" + createdAt
-        + ", updatedAt="
-        + updatedAt + "]";
+        + ", email=" + email + ", password=" + password + ", roles=" + roles + ", createdAt=" + createdAt
+        + ", updatedAt=" + updatedAt + "]";
   }
 }
