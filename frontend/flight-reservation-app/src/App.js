@@ -12,9 +12,14 @@ import CrewEdit from './components/employee/EditCrew.js';
 import AircraftEdit from './components/flights/EditAircraft.js';
 import AgentLanding from './components/agent/AgentLanding.js';
 import FlightList from './components/flights/FlightList.js';
+import FlightDetails from './components/flights/FlightDetails.js';
+import SeatSelection from './components/seats/SeatSelection.js';
+import SelectInsurance from './components/bookings/SelectInsurance.js';
+import PaymentForm from './components/payment/PaymentForm.js';
 
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [flights, setFlights] = useState([]);
 
   return (
     <div className="App">
@@ -35,7 +40,11 @@ const App = () => {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/book" element={<Book setLoggedIn={setLoggedIn} />} />
-          <Route path="/flights" element={<FlightList />} />
+          <Route path="/flights" element={<FlightList flights={flights} />} />
+          <Route path="/flight-details/:flightId" element={<FlightDetails />} />
+          <Route path="/select-seats/:flightId" element={<SeatSelection />} />
+          <Route path="/select-insurance" element={<SelectInsurance />} />
+          <Route path="/payment" element={<PaymentForm />} />
           <Route path="/admin" element={<AdminLanding />} />
           <Route path="/edit" element={<AdminEdit />} />
           <Route path="/crewedit" element={<CrewEdit />} />
