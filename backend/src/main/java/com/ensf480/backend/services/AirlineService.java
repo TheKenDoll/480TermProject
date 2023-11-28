@@ -22,6 +22,13 @@ public class AirlineService {
     airlineRepository.save(newAirline);
   }
 
+  public Airline getAirlineById(long id) {
+    if (!airlineRepository.existsById(id)) {
+      throw new RuntimeException("Airline with id " + id + " does not exist");
+    }
+    return airlineRepository.findById(id).get();
+  }
+
   public void deleteAirlineById(long airlineId) {
     if (!airlineRepository.existsById(airlineId)) {
       throw new RuntimeException("Airline with id " + airlineId + " does not exist");
