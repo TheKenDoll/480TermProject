@@ -3,7 +3,6 @@ package com.ensf480.backend.services;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.ensf480.backend.models.ChargeRequest;
@@ -15,16 +14,18 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Charge;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.annotation.PostConstruct;
 
 @Service
 public class StripeService {
 
-  @Value("${STRIPE_SECRET_KEY}")
   private String secretKey;
 
   @PostConstruct
   public void init() {
+    Dotenv dotenv = Dotenv.load();
+    secretKey = dotenv.get("STRIPE_SECRET_KEY");
     Stripe.apiKey = secretKey;
   }
 
