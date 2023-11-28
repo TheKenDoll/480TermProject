@@ -16,6 +16,8 @@
   - [🏃 Quickstart](#-quickstart)
   - [🛠️ Installation](#️-installation)
   - [🌐 Endpoints](#-endpoints)
+    - [Airline Endpoints](#airline-endpoints)
+    - [Flight Endpoints](#flight-endpoints)
 
 ## 🔎 Overview
 
