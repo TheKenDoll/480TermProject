@@ -1,9 +1,13 @@
 package com.ensf480.backend.models;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,33 +27,45 @@ public class Crew {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "pilot_id", referencedColumnName = "id")
   private Pilot pilot;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "copilot_id", referencedColumnName = "id")
   private Copilot copilot;
 
   @OneToMany(fetch = FetchType.EAGER)
   @JoinColumn(name = "crew_id", referencedColumnName = "id")
-  private ArrayList<FlightAttendant> flightAttendants = new ArrayList<>();
+  private List<FlightAttendant> flightAttendants = new ArrayList<>();
 
   @Column(name = "airline_id")
   private long airlineId;
 
-  @JsonIgnore
-  @OneToOne(mappedBy = "crew")
-  private Flight flight;
+  @CreationTimestamp
+  private LocalDateTime createdAt;
 
-  public Crew(long id, Pilot pilot, Copilot copilot, ArrayList<FlightAttendant> flightAttendants, long airlineId,
-      Flight flight) {
+  @UpdateTimestamp
+  private LocalDateTime updatedAt;
+
+  public Crew() {
+  }
+
+  public Crew(Pilot pilot, Copilot copilot, long airlineId) {
+    this.pilot = pilot;
+    this.copilot = copilot;
+    this.airlineId = airlineId;
+  }
+
+  public Crew(long id, Pilot pilot, Copilot copilot, List<FlightAttendant> flightAttendants, long airlineId,
+      LocalDateTime createdAt, LocalDateTime updatedAt) {
     this.id = id;
     this.pilot = pilot;
     this.copilot = copilot;
     this.flightAttendants = flightAttendants;
     this.airlineId = airlineId;
-    this.flight = flight;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   public long getId() {
@@ -76,11 +92,11 @@ public class Crew {
     this.copilot = copilot;
   }
 
-  public ArrayList<FlightAttendant> getFlightAttendants() {
+  public List<FlightAttendant> getFlightAttendants() {
     return flightAttendants;
   }
 
-  public void setFlightAttendants(ArrayList<FlightAttendant> flightAttendants) {
+  public void setFlightAttendants(List<FlightAttendant> flightAttendants) {
     this.flightAttendants = flightAttendants;
   }
 
@@ -92,12 +108,20 @@ public class Crew {
     this.airlineId = airlineId;
   }
 
-  public Flight getFlight() {
-    return flight;
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
   }
 
-  public void setFlight(Flight flight) {
-    this.flight = flight;
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
   }
 
   @Override
@@ -109,7 +133,8 @@ public class Crew {
     result = prime * result + ((copilot == null) ? 0 : copilot.hashCode());
     result = prime * result + ((flightAttendants == null) ? 0 : flightAttendants.hashCode());
     result = prime * result + (int) (airlineId ^ (airlineId >>> 32));
-    result = prime * result + ((flight == null) ? 0 : flight.hashCode());
+    result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+    result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
     return result;
   }
 
@@ -141,10 +166,15 @@ public class Crew {
       return false;
     if (airlineId != other.airlineId)
       return false;
-    if (flight == null) {
-      if (other.flight != null)
+    if (createdAt == null) {
+      if (other.createdAt != null)
         return false;
-    } else if (!flight.equals(other.flight))
+    } else if (!createdAt.equals(other.createdAt))
+      return false;
+    if (updatedAt == null) {
+      if (other.updatedAt != null)
+        return false;
+    } else if (!updatedAt.equals(other.updatedAt))
       return false;
     return true;
   }
@@ -152,7 +182,7 @@ public class Crew {
   @Override
   public String toString() {
     return "Crew [id=" + id + ", pilot=" + pilot + ", copilot=" + copilot + ", flightAttendants=" + flightAttendants
-        + ", airlineId=" + airlineId + ", flight=" + flight + "]";
+        + ", airlineId=" + airlineId + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
   }
 
 }

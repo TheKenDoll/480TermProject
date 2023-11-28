@@ -3,6 +3,10 @@ package com.ensf480.backend.models;
 import com.ensf480.backend.abstracts.Person;
 
 import java.util.Objects;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -13,6 +17,12 @@ public class Client extends Person {
   private String email;
   private String password;
   private String role;
+
+  @CreationTimestamp
+  private LocalDateTime createdAt;
+
+  @UpdateTimestamp
+  private LocalDateTime updatedAt;
 
   public Client(String email, String password, String role) {
     this.email = email;
@@ -31,7 +41,7 @@ public class Client extends Person {
   }
 
   public Client(long id, String firstName, String lastName, String address, String email, String password,
-      String role) {
+      String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
     super(id, firstName, lastName, address);
     this.email = email;
     this.password = password;
@@ -62,6 +72,22 @@ public class Client extends Person {
     this.role = role;
   }
 
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(super.hashCode(), email, password, role);
@@ -84,7 +110,8 @@ public class Client extends Person {
   @Override
   public String toString() {
     return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-        + ", email=" + email + ", password=" + password + ", role=" + role + "]";
+        + ", email=" + email + ", password=" + password + ", role=" + role + ", createdAt=" + createdAt + ", updatedAt="
+        + updatedAt + "]";
   }
 
 }

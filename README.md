@@ -56,33 +56,33 @@ All the code is located in the `backend` folder. The backend is a REST API built
 
 ### 🏃 Quick Start
 
-4. Open the terminal and clone this repository using HTTPS or SSH (The example below uses SSH).
+1. Open the terminal and clone this repository using HTTPS or SSH (The example below uses SSH).
 
 ```bash
 git clone git@github.com:TheKenDoll/480TermProject.git
 ```
 
-5. `cd` into the `backend` directory.
+2. `cd` into the `backend` directory.
 
 ```bash
 cd backend
 ```
 
-6. Ask the repository owner for the `.env` file and place it in the `backend` directory. Otherwise, you will not be able to run the server.
+3. Ask the repository owner for the `.env` file and place it in the `backend` directory. Otherwise, you will not be able to run the server.
 
-7. Run `docker-compose up -d` to start the database.
+4. Run `docker-compose up -d` to start the database.
 
 ```bash
 docker-compose up -d
 ```
 
-8. Run `./mvnw spring-boot:run` to start the server.
+5. Run `./mvnw spring-boot:run` to start the server.
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-9. Open your browser and navigate to `http://localhost:8080` to see the server running.
+6. Open your browser and navigate to `http://localhost:8080` to see the server running.
 
 ```bash
 http://localhost:8080
@@ -125,3 +125,255 @@ git -v
 ```
 
 10. If you see the version number of `Git` then you are good to go. If not, then try to reinstall `Git`.
+
+11. Make sure you have `Maven` installed on your machine. Click [here](https://maven.apache.org/download.cgi) to download and install Maven. Make sure you install the latest version.
+
+12. Open the terminal and run `mvn -v` to check if `Maven` is installed.
+
+```bash
+mvn -v
+```
+
+13. If you see the version number of `Maven` then you are good to go. If not, then try to reinstall `Maven`.
+
+## 🌐 Endpoints
+
+### 🛩️ Flight Endpoints
+
+#### GET `/api/v1/flight`
+
+Return all flights.
+
+Sample Response Body:
+
+```json
+[
+  {
+    "id": 1,
+    "number": "AC101",
+    "destination": "Toronto",
+    "origin": "Calgary",
+    "departureTime": "2023-11-29",
+    "arrivalTime": "2023-11-29",
+    "aircraft": {
+      "id": 1,
+      "model": "Boeing 737",
+      "manufactureYear": 2010,
+      "capacity": 200,
+      "airlineId": 1,
+      "createdAt": "2023-11-27T13:36:01.893235",
+      "updatedAt": "2023-11-27T13:36:01.893421"
+    },
+    "crew": {
+      "id": 1,
+      "pilot": {
+        "id": 1,
+        "firstName": "Axel",
+        "lastName": "Sanchez",
+        "address": "3500 24 Ave NW",
+        "serviceYears": 12,
+        "createdAt": "2023-11-27T13:36:01.904314",
+        "updatedAt": "2023-11-27T13:36:01.904319"
+      },
+      "copilot": {
+        "id": 1,
+        "firstName": "Anahita",
+        "lastName": "Akbari",
+        "address": "3500 24 Ave NW",
+        "serviceYears": 12,
+        "createdAt": "2023-11-27T13:36:01.90236",
+        "updatedAt": "2023-11-27T13:36:01.902372"
+      },
+      "flightAttendants": [],
+      "airlineId": 1,
+      "createdAt": "2023-11-27T13:36:01.906349",
+      "updatedAt": "2023-11-27T13:36:01.906354"
+    },
+    "airlineId": 1,
+    "createdAt": "2023-11-27T13:36:01.908025",
+    "updatedAt": "2023-11-27T13:36:01.90803"
+  }
+]
+```
+
+#### POST `/api/v1/flight`
+
+Create a new flight.
+
+Sample Request Body:
+
+```json
+{
+  "number": "AC101",
+  "destination": "Toronto",
+  "origin": "Calgary",
+  "departureTime": "2023-11-29",
+  "arrivalTime": "2023-11-29",
+  "aircraft": {
+    "model": "Boeing 737",
+    "manufactureYear": 2010,
+    "capacity": 200,
+    "seats": [
+      {
+        "seatNumber": "1A",
+        "price": 200.0,
+        "isAvailable": true,
+        "aircraftId": 1
+      },
+      {
+        "seatNumber": "1B",
+        "price": 200.0,
+        "isAvailable": true,
+        "aircraftId": 1
+      },
+      {
+        "seatNumber": "1C",
+        "price": 200.0,
+        "isAvailable": true,
+        "aircraftId": 1
+      },
+      {
+        "seatNumber": "1D",
+        "price": 200.0,
+        "isAvailable": true,
+        "aircraftId": 1
+      },
+      {
+        "seatNumber": "1E",
+        "price": 200.0,
+        "isAvailable": true,
+        "aircraftId": 1
+      },
+      {
+        "seatNumber": "1F",
+        "price": 200.0,
+        "isAvailable": true,
+        "aircraftId": 1
+      }
+    ],
+    "airlineId": 1
+  },
+  "crew": {
+    "pilot": {
+      "firstName": "Axel",
+      "lastName": "Sanchez",
+      "address": "3500 24 Ave NW",
+      "serviceYears": 12
+    },
+    "copilot": {
+      "firstName": "Anahita",
+      "lastName": "Akbari",
+      "address": "3500 24 Ave NW",
+      "serviceYears": 12
+    },
+    "airlineId": 1
+  },
+  "airlineId": 1
+}
+```
+
+Sample Response Body:
+
+```json
+{
+  "id": 1,
+  "number": "AC101",
+  "destination": "Toronto",
+  "origin": "Calgary",
+  "departureTime": "2023-11-29",
+  "arrivalTime": "2023-11-29",
+  "aircraft": {
+    "id": 1,
+    "model": "Boeing 737",
+    "manufactureYear": 2010,
+    "capacity": 200,
+    "seats": [
+      {
+        "id": 0,
+        "seatNumber": "1A",
+        "price": 200.0,
+        "aircraftId": 1,
+        "createdAt": null,
+        "updatedAt": null,
+        "available": false
+      },
+      {
+        "id": 0,
+        "seatNumber": "1B",
+        "price": 200.0,
+        "aircraftId": 1,
+        "createdAt": null,
+        "updatedAt": null,
+        "available": false
+      },
+      {
+        "id": 0,
+        "seatNumber": "1C",
+        "price": 200.0,
+        "aircraftId": 1,
+        "createdAt": null,
+        "updatedAt": null,
+        "available": false
+      },
+      {
+        "id": 0,
+        "seatNumber": "1D",
+        "price": 200.0,
+        "aircraftId": 1,
+        "createdAt": null,
+        "updatedAt": null,
+        "available": false
+      },
+      {
+        "id": 0,
+        "seatNumber": "1E",
+        "price": 200.0,
+        "aircraftId": 1,
+        "createdAt": null,
+        "updatedAt": null,
+        "available": false
+      },
+      {
+        "id": 0,
+        "seatNumber": "1F",
+        "price": 200.0,
+        "aircraftId": 1,
+        "createdAt": null,
+        "updatedAt": null,
+        "available": false
+      }
+    ],
+    "airlineId": 1,
+    "createdAt": "2023-11-27T16:47:12.16947",
+    "updatedAt": "2023-11-27T16:47:12.169527"
+  },
+  "crew": {
+    "id": 1,
+    "pilot": {
+      "id": 1,
+      "firstName": "Axel",
+      "lastName": "Sanchez",
+      "address": "3500 24 Ave NW",
+      "serviceYears": 12,
+      "createdAt": "2023-11-27T16:47:12.186001",
+      "updatedAt": "2023-11-27T16:47:12.186026"
+    },
+    "copilot": {
+      "id": 1,
+      "firstName": "Anahita",
+      "lastName": "Akbari",
+      "address": "3500 24 Ave NW",
+      "serviceYears": 12,
+      "createdAt": "2023-11-27T16:47:12.182618",
+      "updatedAt": "2023-11-27T16:47:12.182637"
+    },
+    "flightAttendants": [],
+    "airlineId": 1,
+    "createdAt": "2023-11-27T16:47:12.188495",
+    "updatedAt": "2023-11-27T16:47:12.188518"
+  },
+  "airlineId": 1,
+  "createdAt": "2023-11-27T16:47:12.194624",
+  "updatedAt": "2023-11-27T16:47:12.194653"
+}
+```

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,11 +31,13 @@ public class CrewController {
   }
 
   @PostMapping
-  public ResponseEntity<Crew> postCrew(Crew newCrew) {
+  public ResponseEntity<Crew> postCrew(@RequestBody Crew newCrew) {
     try {
+      System.out.println("newCrew: " + newCrew);
       Crew createdCrew = crewService.createNewCrew(newCrew);
       return new ResponseEntity<>(createdCrew, HttpStatus.CREATED);
     } catch (Exception e) {
+      System.out.println(e);
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
