@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './Layout.js';
-import Login from './components/login/Login.js';
-import Landing from './components/login/Landing.js';
-import Account from './components/login/Account.js';
+import Login from './components/Login/Login.js';
+import Landing from './components/Login/Landing.js';
+import Account from './components/Login/Account.js';
 import Book from './components/bookings/Book.js';
 import AdminLanding from './components/admin/AdminLanding.js';
 import AdminEdit from './components/flights/EditFlight.js';
@@ -16,7 +16,7 @@ import FlightDetails from './components/flights/FlightDetails.js';
 import SeatSelection from './components/seats/SeatSelection.js';
 import SelectInsurance from './components/bookings/SelectInsurance.js';
 import PaymentForm from './components/payment/PaymentForm.js';
-import Register from './components/login/Register.js';
+import Register from './components/Login/Register.js';
 
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
