@@ -1,49 +1,61 @@
 // FlightList.js
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getAllFlights, getFlightsByCriteria } from '../../Api.js';
+import FlightShow from './FlightShow';
 
 const FlightList = () => {
   const location = useLocation();
   const [flights, setFlights] = useState([]);
   const criteria = location.state && location.state.criteria;
 
-  useEffect(() => {
-    const fetchFlights = async () => {
-      try {
-        // Assuming there's an API function in api.js to fetch flights based on criteria
-        const response = await getAllFlights();
+  // useEffect(()=>{
+  //   const fetchFlights = async () => {
+  //     const res = await fetch(`http://localhost:8080/api/v1/flight`);
 
-        // Assuming the response contains a data property with the actual flights
-        const fetchedFlights = response.data;
 
-        // Handle the fetched flights data as needed
-        setFlights(fetchedFlights);
-      } catch (error) {
-        // Handle errors, such as displaying an error message to the user
-        console.error('Error fetching flights:', error);
-      }
-    };
+  //     setFlights(await res.json());
+  //   };
+  //   fetchFlights();
+  // },[]);
 
-    if (criteria) {
-      fetchFlights();
-    }
-  }, [criteria]);
+const fetchFlights = async ()=> {
+  await fetch("http://localhost:8080/api/v1/flight", {
+
+  })
+  .then((response ) => response.json())
+  .then((data) => setFlights(data))
+  .catch((error) => console.log(error))
+};
+
+useEffect(()=> {
+  fetchFlights();
+}, []);
+
 
   return (
     <div>
-      <h2>Flight List!</h2>
-      {flights.map((flight) => (
-        <div key={flight.id}>
-          <p>Flight Number: {flight.number}</p>
-          <p>Origin: {flight.origin}</p>
-          <p>Destination: {flight.destination}</p>
-          {/* Display other flight information as needed */}
+
+      <h2>Flight List</h2>
+
+      {flights.length > 0 ? (
+        <div>
+
+          {flights.map((flight) => (
+            <FlightShow key={flight.id}  flight = {flight}/>
+          ))}
+
+
         </div>
-      ))}
+
+      ):(<p>No flights availalble</p>)
+      
+      
+      }
+
+
+     
     </div>
   );
 };
 
 export default FlightList;
-
