@@ -1,5 +1,11 @@
 package com.ensf480.backend.models;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,32 +28,41 @@ public class Flight {
   private String departureTime;
   private String arrivalTime;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "aircraft_id", referencedColumnName = "id")
   private Aircraft aircraft;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "crew_id", referencedColumnName = "id")
   private Crew crew;
 
   @Column(name = "airline_id")
   private long airlineId;
 
+  @CreationTimestamp
+  private LocalDateTime createdAt;
+
+  @UpdateTimestamp
+  private LocalDateTime updatedAt;
+
   public Flight() {
   }
 
   public Flight(String number, String destination, String origin, String departureTime, String arrivalTime,
-      long airlineId) {
+      Aircraft aircraft, Crew crew, long airlineId) {
     this.number = number;
     this.destination = destination;
     this.origin = origin;
     this.departureTime = departureTime;
     this.arrivalTime = arrivalTime;
+    this.aircraft = aircraft;
+    this.crew = crew;
     this.airlineId = airlineId;
   }
 
   public Flight(long id, String number, String destination, String origin, String departureTime, String arrivalTime,
-      Aircraft aircraft, Crew crew, long airlineId) {
+      Aircraft aircraft, Crew crew, long airlineId, LocalDateTime createdAt,
+      LocalDateTime updatedAt) {
     this.id = id;
     this.number = number;
     this.destination = destination;
@@ -57,6 +72,8 @@ public class Flight {
     this.aircraft = aircraft;
     this.crew = crew;
     this.airlineId = airlineId;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   public long getId() {
@@ -131,12 +148,28 @@ public class Flight {
     this.airlineId = airlineId;
   }
 
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
     result = prime * result + (int) (id ^ (id >>> 32));
-    result = prime * result + number.hashCode();
+    result = prime * result + ((number == null) ? 0 : number.hashCode());
     result = prime * result + ((destination == null) ? 0 : destination.hashCode());
     result = prime * result + ((origin == null) ? 0 : origin.hashCode());
     result = prime * result + ((departureTime == null) ? 0 : departureTime.hashCode());
@@ -144,6 +177,8 @@ public class Flight {
     result = prime * result + ((aircraft == null) ? 0 : aircraft.hashCode());
     result = prime * result + ((crew == null) ? 0 : crew.hashCode());
     result = prime * result + (int) (airlineId ^ (airlineId >>> 32));
+    result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+    result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
     return result;
   }
 
@@ -158,7 +193,10 @@ public class Flight {
     Flight other = (Flight) obj;
     if (id != other.id)
       return false;
-    if (number != other.number)
+    if (number == null) {
+      if (other.number != null)
+        return false;
+    } else if (!number.equals(other.number))
       return false;
     if (destination == null) {
       if (other.destination != null)
@@ -192,6 +230,16 @@ public class Flight {
       return false;
     if (airlineId != other.airlineId)
       return false;
+    if (createdAt == null) {
+      if (other.createdAt != null)
+        return false;
+    } else if (!createdAt.equals(other.createdAt))
+      return false;
+    if (updatedAt == null) {
+      if (other.updatedAt != null)
+        return false;
+    } else if (!updatedAt.equals(other.updatedAt))
+      return false;
     return true;
   }
 
@@ -199,7 +247,8 @@ public class Flight {
   public String toString() {
     return "Flight [id=" + id + ", number=" + number + ", destination=" + destination + ", origin=" + origin
         + ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", aircraft=" + aircraft + ", crew="
-        + crew + ", airlineId=" + airlineId + "]";
+        + crew + ", airlineId=" + airlineId + ", createdAt=" + createdAt + ", updatedAt="
+        + updatedAt + "]";
   }
 
 }

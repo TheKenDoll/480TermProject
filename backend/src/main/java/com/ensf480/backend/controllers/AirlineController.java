@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,12 +34,32 @@ public class AirlineController {
   }
 
   @PostMapping
-  public ResponseEntity<Airline> postAirline(@RequestBody Airline newAirline) {
+  public ResponseEntity<HttpStatus> postAirline(@RequestBody Airline newAirline) {
     try {
-      Airline createdAirline = airlineService.createNewAirline(newAirline);
-      return new ResponseEntity<>(createdAirline, HttpStatus.CREATED);
+      airlineService.createNewAirline(newAirline);
+      return new ResponseEntity<>(HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Airline> getAirlineByName(@PathVariable("id") long id) {
+    try {
+      Airline airline = airlineService.getAirlineById(id);
+      return new ResponseEntity<>(airline, HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<HttpStatus> deleteAirline(@PathVariable("id") long airlineId) {
+    try {
+      airlineService.deleteAirlineById(airlineId);
+      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    } catch (Exception e) {
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
