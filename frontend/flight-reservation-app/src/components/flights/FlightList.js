@@ -1,33 +1,61 @@
 // FlightList.js
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import FlightShow from './FlightShow';
 
 const FlightList = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-
-  // Accessing the criteria from the state
+  const [flights, setFlights] = useState([]);
   const criteria = location.state && location.state.criteria;
 
-  const handleSelectFlight = () => {
-    // Assume you have a fake flight ID here
-    const fakeFlightId = '123';
+  // useEffect(()=>{
+  //   const fetchFlights = async () => {
+  //     const res = await fetch(`http://localhost:8080/api/v1/flight`);
 
-    // Navigate to the FlightDetails page with the selected flight ID
-    navigate(`/flight-details/${fakeFlightId}`);
-  };
+
+  //     setFlights(await res.json());
+  //   };
+  //   fetchFlights();
+  // },[]);
+
+const fetchFlights = async ()=> {
+  await fetch("http://localhost:8080/api/v1/flight", {
+
+  })
+  .then((response ) => response.json())
+  .then((data) => setFlights(data))
+  .catch((error) => console.log(error))
+};
+
+useEffect(()=> {
+  fetchFlights();
+}, []);
+
 
   return (
     <div>
-      {/* Display the flights based on the criteria */}
-      <h2>Flight List</h2>
-      <p>Displaying flights based on criteria: {JSON.stringify(criteria)}</p>
 
-      {/* Fake button to simulate selecting a flight */}
-      <button onClick={handleSelectFlight}>Select a Fake Flight</button>
+      <h2>Flight List</h2>
+
+      {flights.length > 0 ? (
+        <div>
+
+          {flights.map((flight) => (
+            <FlightShow key={flight.id}  flight = {flight}/>
+          ))}
+
+
+        </div>
+
+      ):(<p>No flights availalble</p>)
+      
+      
+      }
+
+
+     
     </div>
   );
 };
 
 export default FlightList;
-

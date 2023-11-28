@@ -4,16 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 const Book = () => {
   const navigate = useNavigate();
-
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [date, setDate] = useState('');
 
   const handleBookFlight = () => {
-    // Add your logic for booking the flight here
-
-    // After booking, navigate to the flight list page
-    navigate('/flights');
+    navigate('/flights', { state: { criteria: { origin, destination, date } } });
   };
 
   return (
