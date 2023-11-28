@@ -346,3 +346,437 @@ Delete a flight by id.
 Sample Response Status Code:
 
 `No Content 204`
+
+#### - GET `/api/v1/flight/origin/{origin}`
+
+Return all flights by origin.
+
+Sample Response Status Code:
+
+`Ok 200`
+
+Sample Response Body:
+
+```json
+[
+  {
+    "id": 1,
+    "number": "AC101",
+    "destination": "Vancouver",
+    "origin": "Calgary",
+    "departureTime": "2023-11-29",
+    "arrivalTime": "2023-11-29",
+    "aircraft": {
+      "id": 1,
+      "model": "Boeing 737",
+      "manufactureYear": 2010,
+      "capacity": 200,
+      "seats": [
+        {
+          "id": 1,
+          "seatNumber": "1A",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.210241",
+          "updatedAt": "2023-11-27T21:20:14.210262",
+          "available": false
+        },
+        {
+          "id": 2,
+          "seatNumber": "1B",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.2137",
+          "updatedAt": "2023-11-27T21:20:14.213717",
+          "available": false
+        },
+        {
+          "id": 3,
+          "seatNumber": "1C",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.215478",
+          "updatedAt": "2023-11-27T21:20:14.215491",
+          "available": false
+        },
+        {
+          "id": 4,
+          "seatNumber": "1D",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.22143",
+          "updatedAt": "2023-11-27T21:20:14.221452",
+          "available": false
+        },
+        {
+          "id": 5,
+          "seatNumber": "1E",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.223299",
+          "updatedAt": "2023-11-27T21:20:14.223314",
+          "available": false
+        },
+        {
+          "id": 6,
+          "seatNumber": "1F",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.224583",
+          "updatedAt": "2023-11-27T21:20:14.224596",
+          "available": false
+        }
+      ],
+      "airlineId": 1,
+      "createdAt": "2023-11-27T21:20:14.196198",
+      "updatedAt": "2023-11-27T21:20:14.196356"
+    },
+    "crew": {
+      "id": 1,
+      "pilot": {
+        "id": 1,
+        "firstName": "Axel",
+        "lastName": "Sanchez",
+        "address": "3500 24 Ave NW",
+        "serviceYears": 12,
+        "createdAt": "2023-11-27T21:20:14.23292",
+        "updatedAt": "2023-11-27T21:20:14.232947"
+      },
+      "copilot": {
+        "id": 1,
+        "firstName": "Anahita",
+        "lastName": "Akbari",
+        "address": "3500 24 Ave NW",
+        "serviceYears": 12,
+        "createdAt": "2023-11-27T21:20:14.226148",
+        "updatedAt": "2023-11-27T21:20:14.226168"
+      },
+      "flightAttendants": [],
+      "airlineId": 1,
+      "createdAt": "2023-11-27T21:20:14.250589",
+      "updatedAt": "2023-11-27T21:20:14.250689"
+    },
+    "airlineId": 1,
+    "createdAt": "2023-11-27T21:20:14.259514",
+    "updatedAt": "2023-11-27T21:20:14.259574"
+  },
+  {
+    "id": 3,
+    "number": "AC101",
+    "destination": "Toronto",
+    "origin": "Calgary",
+    "departureTime": "2023-11-29",
+    "arrivalTime": "2023-11-29",
+    "aircraft": {
+      "id": 3,
+      "model": "Boeing 737",
+      "manufactureYear": 2010,
+      "capacity": 200,
+      "seats": [
+        {
+          "id": 13,
+          "seatNumber": "1A",
+          "price": 200.0,
+          "aircraftId": 3,
+          "createdAt": "2023-11-27T22:53:30.836115",
+          "updatedAt": "2023-11-27T22:53:30.836129",
+          "available": false
+        },
+        {
+          "id": 14,
+          "seatNumber": "1B",
+          "price": 200.0,
+          "aircraftId": 3,
+          "createdAt": "2023-11-27T22:53:30.839758",
+          "updatedAt": "2023-11-27T22:53:30.839766",
+          "available": false
+        },
+        {
+          "id": 15,
+          "seatNumber": "1C",
+          "price": 200.0,
+          "aircraftId": 3,
+          "createdAt": "2023-11-27T22:53:30.841575",
+          "updatedAt": "2023-11-27T22:53:30.841583",
+          "available": false
+        },
+        {
+          "id": 16,
+          "seatNumber": "1D",
+          "price": 200.0,
+          "aircraftId": 3,
+          "createdAt": "2023-11-27T22:53:30.843706",
+          "updatedAt": "2023-11-27T22:53:30.843712",
+          "available": false
+        },
+        {
+          "id": 17,
+          "seatNumber": "1E",
+          "price": 200.0,
+          "aircraftId": 3,
+          "createdAt": "2023-11-27T22:53:30.845089",
+          "updatedAt": "2023-11-27T22:53:30.845098",
+          "available": false
+        },
+        {
+          "id": 18,
+          "seatNumber": "1F",
+          "price": 200.0,
+          "aircraftId": 3,
+          "createdAt": "2023-11-27T22:53:30.846686",
+          "updatedAt": "2023-11-27T22:53:30.846693",
+          "available": false
+        }
+      ],
+      "airlineId": 1,
+      "createdAt": "2023-11-27T22:53:30.800557",
+      "updatedAt": "2023-11-27T22:53:30.800661"
+    },
+    "crew": {
+      "id": 3,
+      "pilot": {
+        "id": 3,
+        "firstName": "Axel",
+        "lastName": "Sanchez",
+        "address": "3500 24 Ave NW",
+        "serviceYears": 12,
+        "createdAt": "2023-11-27T22:53:30.849163",
+        "updatedAt": "2023-11-27T22:53:30.849175"
+      },
+      "copilot": {
+        "id": 3,
+        "firstName": "Anahita",
+        "lastName": "Akbari",
+        "address": "3500 24 Ave NW",
+        "serviceYears": 12,
+        "createdAt": "2023-11-27T22:53:30.847641",
+        "updatedAt": "2023-11-27T22:53:30.847648"
+      },
+      "flightAttendants": [],
+      "airlineId": 1,
+      "createdAt": "2023-11-27T22:53:30.851216",
+      "updatedAt": "2023-11-27T22:53:30.851229"
+    },
+    "airlineId": 1,
+    "createdAt": "2023-11-27T22:53:30.853032",
+    "updatedAt": "2023-11-27T22:53:30.853046"
+  }
+]
+```
+
+#### - GET `/api/v1/flight/destination/{destination}`
+
+Return all flights by destination.
+
+Sample Response Status Code:
+
+`Ok 200`
+
+Sample Response Body
+
+```json
+[
+  {
+    "id": 1,
+    "number": "AC101",
+    "destination": "Vancouver",
+    "origin": "Calgary",
+    "departureTime": "2023-11-29",
+    "arrivalTime": "2023-11-29",
+    "aircraft": {
+      "id": 1,
+      "model": "Boeing 737",
+      "manufactureYear": 2010,
+      "capacity": 200,
+      "seats": [
+        {
+          "id": 1,
+          "seatNumber": "1A",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.210241",
+          "updatedAt": "2023-11-27T21:20:14.210262",
+          "available": false
+        },
+        {
+          "id": 2,
+          "seatNumber": "1B",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.2137",
+          "updatedAt": "2023-11-27T21:20:14.213717",
+          "available": false
+        },
+        {
+          "id": 3,
+          "seatNumber": "1C",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.215478",
+          "updatedAt": "2023-11-27T21:20:14.215491",
+          "available": false
+        },
+        {
+          "id": 4,
+          "seatNumber": "1D",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.22143",
+          "updatedAt": "2023-11-27T21:20:14.221452",
+          "available": false
+        },
+        {
+          "id": 5,
+          "seatNumber": "1E",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.223299",
+          "updatedAt": "2023-11-27T21:20:14.223314",
+          "available": false
+        },
+        {
+          "id": 6,
+          "seatNumber": "1F",
+          "price": 200.0,
+          "aircraftId": 1,
+          "createdAt": "2023-11-27T21:20:14.224583",
+          "updatedAt": "2023-11-27T21:20:14.224596",
+          "available": false
+        }
+      ],
+      "airlineId": 1,
+      "createdAt": "2023-11-27T21:20:14.196198",
+      "updatedAt": "2023-11-27T21:20:14.196356"
+    },
+    "crew": {
+      "id": 1,
+      "pilot": {
+        "id": 1,
+        "firstName": "Axel",
+        "lastName": "Sanchez",
+        "address": "3500 24 Ave NW",
+        "serviceYears": 12,
+        "createdAt": "2023-11-27T21:20:14.23292",
+        "updatedAt": "2023-11-27T21:20:14.232947"
+      },
+      "copilot": {
+        "id": 1,
+        "firstName": "Anahita",
+        "lastName": "Akbari",
+        "address": "3500 24 Ave NW",
+        "serviceYears": 12,
+        "createdAt": "2023-11-27T21:20:14.226148",
+        "updatedAt": "2023-11-27T21:20:14.226168"
+      },
+      "flightAttendants": [],
+      "airlineId": 1,
+      "createdAt": "2023-11-27T21:20:14.250589",
+      "updatedAt": "2023-11-27T21:20:14.250689"
+    },
+    "airlineId": 1,
+    "createdAt": "2023-11-27T21:20:14.259514",
+    "updatedAt": "2023-11-27T21:20:14.259574"
+  },
+  {
+    "id": 6,
+    "number": "AC101",
+    "destination": "Vancouver",
+    "origin": "Toronto",
+    "departureTime": "2023-11-29",
+    "arrivalTime": "2023-11-29",
+    "aircraft": {
+      "id": 6,
+      "model": "Boeing 737",
+      "manufactureYear": 2010,
+      "capacity": 200,
+      "seats": [
+        {
+          "id": 31,
+          "seatNumber": "1A",
+          "price": 200.0,
+          "aircraftId": 6,
+          "createdAt": "2023-11-27T23:02:53.582226",
+          "updatedAt": "2023-11-27T23:02:53.582243",
+          "available": false
+        },
+        {
+          "id": 32,
+          "seatNumber": "1B",
+          "price": 200.0,
+          "aircraftId": 6,
+          "createdAt": "2023-11-27T23:02:53.584513",
+          "updatedAt": "2023-11-27T23:02:53.584522",
+          "available": false
+        },
+        {
+          "id": 33,
+          "seatNumber": "1C",
+          "price": 200.0,
+          "aircraftId": 6,
+          "createdAt": "2023-11-27T23:02:53.585687",
+          "updatedAt": "2023-11-27T23:02:53.585696",
+          "available": false
+        },
+        {
+          "id": 34,
+          "seatNumber": "1D",
+          "price": 200.0,
+          "aircraftId": 6,
+          "createdAt": "2023-11-27T23:02:53.590494",
+          "updatedAt": "2023-11-27T23:02:53.590533",
+          "available": false
+        },
+        {
+          "id": 35,
+          "seatNumber": "1E",
+          "price": 200.0,
+          "aircraftId": 6,
+          "createdAt": "2023-11-27T23:02:53.593622",
+          "updatedAt": "2023-11-27T23:02:53.59364",
+          "available": false
+        },
+        {
+          "id": 36,
+          "seatNumber": "1F",
+          "price": 200.0,
+          "aircraftId": 6,
+          "createdAt": "2023-11-27T23:02:53.597556",
+          "updatedAt": "2023-11-27T23:02:53.597572",
+          "available": false
+        }
+      ],
+      "airlineId": 1,
+      "createdAt": "2023-11-27T23:02:53.553053",
+      "updatedAt": "2023-11-27T23:02:53.55341"
+    },
+    "crew": {
+      "id": 6,
+      "pilot": {
+        "id": 6,
+        "firstName": "Axel",
+        "lastName": "Sanchez",
+        "address": "3500 24 Ave NW",
+        "serviceYears": 12,
+        "createdAt": "2023-11-27T23:02:53.604747",
+        "updatedAt": "2023-11-27T23:02:53.604763"
+      },
+      "copilot": {
+        "id": 6,
+        "firstName": "Anahita",
+        "lastName": "Akbari",
+        "address": "3500 24 Ave NW",
+        "serviceYears": 12,
+        "createdAt": "2023-11-27T23:02:53.601847",
+        "updatedAt": "2023-11-27T23:02:53.601872"
+      },
+      "flightAttendants": [],
+      "airlineId": 1,
+      "createdAt": "2023-11-27T23:02:53.609365",
+      "updatedAt": "2023-11-27T23:02:53.609395"
+    },
+    "airlineId": 1,
+    "createdAt": "2023-11-27T23:02:53.614279",
+    "updatedAt": "2023-11-27T23:02:53.614294"
+  }
+]
+```
