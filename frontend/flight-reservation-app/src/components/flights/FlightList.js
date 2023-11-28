@@ -1,30 +1,46 @@
 // FlightList.js
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { getAllFlights, getFlightsByCriteria } from '../../Api.js';
 
 const FlightList = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-
-  // Accessing the criteria from the state
+  const [flights, setFlights] = useState([]);
   const criteria = location.state && location.state.criteria;
 
-  const handleSelectFlight = () => {
-    // Assume you have a fake flight ID here
-    const fakeFlightId = '123';
+  useEffect(() => {
+    const fetchFlights = async () => {
+      try {
+        // Assuming there's an API function in api.js to fetch flights based on criteria
+        const response = await getAllFlights();
 
-    // Navigate to the FlightDetails page with the selected flight ID
-    navigate(`/flight-details/${fakeFlightId}`);
-  };
+        // Assuming the response contains a data property with the actual flights
+        const fetchedFlights = response.data;
+
+        // Handle the fetched flights data as needed
+        setFlights(fetchedFlights);
+      } catch (error) {
+        // Handle errors, such as displaying an error message to the user
+        console.error('Error fetching flights:', error);
+      }
+    };
+
+    if (criteria) {
+      fetchFlights();
+    }
+  }, [criteria]);
 
   return (
     <div>
-      {/* Display the flights based on the criteria */}
-      <h2>Flight List</h2>
-      <p>Displaying flights based on criteria: {JSON.stringify(criteria)}</p>
-
-      {/* Fake button to simulate selecting a flight */}
-      <button onClick={handleSelectFlight}>Select a Fake Flight</button>
+      <h2>Flight List!</h2>
+      {flights.map((flight) => (
+        <div key={flight.id}>
+          <p>Flight Number: {flight.number}</p>
+          <p>Origin: {flight.origin}</p>
+          <p>Destination: {flight.destination}</p>
+          {/* Display other flight information as needed */}
+        </div>
+      ))}
     </div>
   );
 };
