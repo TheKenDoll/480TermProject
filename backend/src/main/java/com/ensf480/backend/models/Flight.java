@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 @Table
 public class Flight {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   private String number;

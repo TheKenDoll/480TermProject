@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
 @Table
 public class Aircraft {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   private String model;

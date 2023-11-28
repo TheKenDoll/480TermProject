@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 @Table
 public class Seat {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   private String seatNumber;
