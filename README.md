@@ -138,7 +138,58 @@ mvn -v
 
 ## 🌐 Endpoints
 
-### 🛩️ Flight Endpoints
+### Airline Endpoints
+
+#### GET `/api/v1/airline`
+
+Return all airlines.
+
+Sample Response Body:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Air Canada",
+    "country": "Canada",
+    "crews": [],
+    "aircrafts": [],
+    "flights": [],
+    "createdAt": "2023-11-27T17:39:24.881032",
+    "updatedAt": "2023-11-27T17:39:24.881088"
+  }
+]
+```
+
+#### POST `/api/v1/airline`
+
+Create a new airline.
+
+Sample Request Body:
+
+```json
+{
+  "name": "Air Canada",
+  "country": "Canada"
+}
+```
+
+Sample Response Body:
+
+```json
+{
+  "id": 1,
+  "name": "Air Canada",
+  "country": "Canada",
+  "crews": [],
+  "aircrafts": [],
+  "flights": [],
+  "createdAt": "2023-11-27T17:39:24.881032",
+  "updatedAt": "2023-11-27T17:39:24.881088"
+}
+```
+
+### Flight Endpoints
 
 #### GET `/api/v1/flight`
 
