@@ -3,6 +3,7 @@ import SearchFlights from "../flights/SearchFlightsParameters.js";
 import FlightDisplay from "../flights/FlightDisplay.js";
 import CrewInfoDisplay from "../employee/CrewInfoDisplay.js";
 import AircraftInfoDisplay from "../flights/AircraftInfoDisplay.js";
+import './AdminLanding.css';
 
 function AdminLanding() {
     let flights = [
@@ -216,6 +217,7 @@ function AdminLanding() {
     const [dispAircrafts, setdispAircrafts] = useState(false);
     const [dispCrews, setdispCrews] = useState(false);
     const [dispUsers, setdispUsers] = useState(false);
+    const [dispTest, setdispTest] = useState(false);
 
     const handleViewFlights = () => {
         if (dispFlights) {
@@ -245,20 +247,25 @@ function AdminLanding() {
         setdispUsers(!dispUsers);
     }
 
+    const handleTest = () => {
+        console.log('test');
+        setdispTest(!dispTest);
+    }
+
     return (
-        <div>
+        <div className="admin-container">
             <h1>Logged in as Admin</h1>
-            <button onClick={handleViewFlights}>{showSearch ? 'Hide Search' : 'View Flights'}</button>
+            <button className="button" onClick={handleViewFlights}>{showSearch ? 'Hide Search' : 'View Flights'}</button>
             {showSearch && <SearchFlights onSearch={handleSerachFlights} />}
             {dispFlights && <FlightDisplay data={flights} />}
-            <button onClick={handleDispAircraft}>{dispAircrafts ? 'Hide Aircrafts' : 'View Aircrafts'}</button>
+            <button className="button" onClick={handleDispAircraft}>{dispAircrafts ? 'Hide Aircrafts' : 'View Aircrafts'}</button>
             {dispAircrafts && <AircraftInfoDisplay aircraftInfo={aircrafts} />}
-            <button onClick={handleDispCrews}>{dispCrews ? 'Hide Crews' : 'View Crews'}</button>
+            <button className="button" onClick={handleDispCrews}>{dispCrews ? 'Hide Crews' : 'View Crews'}</button>
             {dispCrews && <CrewInfoDisplay crewInfo={crews} />}
-            <button onClick={handleDispUsers}>{dispUsers ? 'Hide Users' : 'View Users'}</button>
-            <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
+            <button className="button" onClick={handleDispUsers}>{dispUsers ? 'Hide Users' : 'View Users'}</button>
+            <div className="scrollable">
                 {dispUsers && users.map((user, index) => (
-                    <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '20px' }}>
+                    <div key={index} className="user-info">
                         <h3>User Information</h3>
                         <div>
                             <strong>Name:</strong> {user.name}
@@ -272,6 +279,8 @@ function AdminLanding() {
                     </div>
                 ))}
             </div>
+            <button className="button" onClick={handleTest}>test</button>
+            {dispTest && <div>test</div>}
         </div>
     )
 }

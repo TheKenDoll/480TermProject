@@ -1,0 +1,25 @@
+/* CrewInfoDisplay.css */
+
+.crew-container {
+    max-height: '400px';
+    overflow-y: 'scroll';
+  }
+  
+  .crew-info {
+    border: '1px solid #ccc';
+    padding: '10px';
+    margin: '20px';
+  }
+  
+  .button {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }

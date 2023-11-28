@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import './CrewInfoDisplay.css';
 
 const CrewInfoDisplay = ({ crewInfo }) => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const CrewInfoDisplay = ({ crewInfo }) => {
 
   return (
     <>
-        <button onClick={() => navigate('/crewedit')}>Add Crew</button>
+        <button className="button" onClick={() => navigate('/crewedit')}>Add Crew</button>
         <div style={{ maxHeight: '400px', overflowY: 'scroll' }}>
         {crewInfo.map((crew, index) => (
             <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '20px' }}>

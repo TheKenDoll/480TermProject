@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './FlightDisplay.css';
 
 const FlightDisplay = ({ data }) => {
   const [editMode, setEditMode] = useState(null);
@@ -18,9 +19,9 @@ const FlightDisplay = ({ data }) => {
   };
 
   return (
-    <div style={{ overflowY: 'scroll', maxHeight: '400px', border: '1px solid #ccc', padding: '10px' }}>
+    <div className='flight-container'>
       {data.map((flight, index) => (
-        <div key={index} style={{ border: '1px solid #ddd', marginBottom: '20px', padding: '20px' }}>
+        <div key={index} className='flight-info'>
           <h2>{`Flight ${flight.flightNumber}`}</h2>
           <div>
             <strong>Origin:</strong> {flight.origin}
@@ -40,15 +41,15 @@ const FlightDisplay = ({ data }) => {
           {showCrew && (
             <div>
               <h3>Crew Members</h3>
-              <ul>
+              <div className='crew-members'>
                 {flight.crew.map((member, index) => (
-                  <li key={index}>{`${member.name} - ${member.role}`}</li>
+                  <div key={index} className='crew-member'>{`${member.name} - ${member.role}`}</div>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
-          <button onClick={() => handleEdit(flight)}>Edit</button>
-          <button onClick={() => handleViewCrew(flight)}>{showCrew ? 'Hide Crew' : 'Show Crew'}</button>
+          <button className='button' onClick={() => handleEdit(flight)}>Edit</button>
+          <button className='button' onClick={() => handleViewCrew(flight)}>{showCrew ? 'Hide Crew' : 'Show Crew'}</button>
         </div>
       ))}
     </div>

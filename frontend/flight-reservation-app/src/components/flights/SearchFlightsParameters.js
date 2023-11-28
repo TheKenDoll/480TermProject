@@ -1,6 +1,7 @@
 // FlightSearchForm.js
 
 import React, { useState } from 'react';
+import './SearchFlightsParameters.css';
 
 const FlightSearchForm = ({ onSearch }) => {
   const [origin, setOrigin] = useState('Any');
