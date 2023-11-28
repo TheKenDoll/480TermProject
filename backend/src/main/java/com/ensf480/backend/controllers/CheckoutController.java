@@ -1,19 +1,23 @@
 package com.ensf480.backend.controllers;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ensf480.backend.models.ChargeRequest;
+import io.github.cdimascio.dotenv.Dotenv;
 
 @RestController
 @RequestMapping("/checkout")
 public class CheckoutController {
 
-  @Value("${STRIPE_PUBLIC_KEY}")
   private String stripePublicKey;
+
+  public CheckoutController() {
+    Dotenv dotenv = Dotenv.load();
+    stripePublicKey = dotenv.get("STRIPE_PUBLIC_KEY");
+  }
 
   @PostMapping
   public String checkout(Model model) {
