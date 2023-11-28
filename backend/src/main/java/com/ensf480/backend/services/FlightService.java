@@ -1,6 +1,7 @@
 package com.ensf480.backend.services;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,19 @@ public class FlightService {
 
   public List<Flight> getFlightByDestination(String destination) {
     return flightRepository.findByDestination(destination);
+  }
+
+  public List<Flight> getFlightByOriginDestinationDate(String destination, String origin, String departureTime) {
+    System.out.println("getFlightByOriginDestinationDate");
+    List<Flight> filteredFlights = new ArrayList<Flight>();
+    List<Flight> flights = flightRepository.findAll();
+    for (Flight flight : flights) {
+      if (flight.getDestination().equals(destination) && flight.getOrigin().equals(origin)
+          && flight.getDepartureTime().equals(departureTime)) {
+        filteredFlights.add(flight);
+      }
+    }
+    return filteredFlights;
   }
 
   public void deleteFlightById(long flightId) {
