@@ -492,58 +492,7 @@ Sample Response Body
       "capacity": 200,
       "seats": [
         {
-          "id": 1,
-          "seatNumber": "1A",
-          "price": 200.0,
-          "aircraftId": 1,
-          "createdAt": "2023-11-27T21:20:14.210241",
-          "updatedAt": "2023-11-27T21:20:14.210262",
-          "available": false
-        },
-        {
-          "id": 2,
-          "seatNumber": "1B",
-          "price": 200.0,
-          "aircraftId": 1,
-          "createdAt": "2023-11-27T21:20:14.2137",
-          "updatedAt": "2023-11-27T21:20:14.213717",
-          "available": false
-        },
-        {
-          "id": 3,
-          "seatNumber": "1C",
-          "price": 200.0,
-          "aircraftId": 1,
-          "createdAt": "2023-11-27T21:20:14.215478",
-          "updatedAt": "2023-11-27T21:20:14.215491",
-          "available": false
-        },
-        {
-          "id": 4,
-          "seatNumber": "1D",
-          "price": 200.0,
-          "aircraftId": 1,
-          "createdAt": "2023-11-27T21:20:14.22143",
-          "updatedAt": "2023-11-27T21:20:14.221452",
-          "available": false
-        },
-        {
-          "id": 5,
-          "seatNumber": "1E",
-          "price": 200.0,
-          "aircraftId": 1,
-          "createdAt": "2023-11-27T21:20:14.223299",
-          "updatedAt": "2023-11-27T21:20:14.223314",
-          "available": false
-        },
-        {
-          "id": 6,
-          "seatNumber": "1F",
-          "price": 200.0,
-          "aircraftId": 1,
-          "createdAt": "2023-11-27T21:20:14.224583",
-          "updatedAt": "2023-11-27T21:20:14.224596",
-          "available": false
+          ...
         }
       ],
       "airlineId": 1,
@@ -553,22 +502,10 @@ Sample Response Body
     "crew": {
       "id": 1,
       "pilot": {
-        "id": 1,
-        "firstName": "Axel",
-        "lastName": "Sanchez",
-        "address": "3500 24 Ave NW",
-        "serviceYears": 12,
-        "createdAt": "2023-11-27T21:20:14.23292",
-        "updatedAt": "2023-11-27T21:20:14.232947"
+        ...
       },
       "copilot": {
-        "id": 1,
-        "firstName": "Anahita",
-        "lastName": "Akbari",
-        "address": "3500 24 Ave NW",
-        "serviceYears": 12,
-        "createdAt": "2023-11-27T21:20:14.226148",
-        "updatedAt": "2023-11-27T21:20:14.226168"
+        ...
       },
       "flightAttendants": [],
       "airlineId": 1,
@@ -593,58 +530,7 @@ Sample Response Body
       "capacity": 200,
       "seats": [
         {
-          "id": 31,
-          "seatNumber": "1A",
-          "price": 200.0,
-          "aircraftId": 6,
-          "createdAt": "2023-11-27T23:02:53.582226",
-          "updatedAt": "2023-11-27T23:02:53.582243",
-          "available": false
-        },
-        {
-          "id": 32,
-          "seatNumber": "1B",
-          "price": 200.0,
-          "aircraftId": 6,
-          "createdAt": "2023-11-27T23:02:53.584513",
-          "updatedAt": "2023-11-27T23:02:53.584522",
-          "available": false
-        },
-        {
-          "id": 33,
-          "seatNumber": "1C",
-          "price": 200.0,
-          "aircraftId": 6,
-          "createdAt": "2023-11-27T23:02:53.585687",
-          "updatedAt": "2023-11-27T23:02:53.585696",
-          "available": false
-        },
-        {
-          "id": 34,
-          "seatNumber": "1D",
-          "price": 200.0,
-          "aircraftId": 6,
-          "createdAt": "2023-11-27T23:02:53.590494",
-          "updatedAt": "2023-11-27T23:02:53.590533",
-          "available": false
-        },
-        {
-          "id": 35,
-          "seatNumber": "1E",
-          "price": 200.0,
-          "aircraftId": 6,
-          "createdAt": "2023-11-27T23:02:53.593622",
-          "updatedAt": "2023-11-27T23:02:53.59364",
-          "available": false
-        },
-        {
-          "id": 36,
-          "seatNumber": "1F",
-          "price": 200.0,
-          "aircraftId": 6,
-          "createdAt": "2023-11-27T23:02:53.597556",
-          "updatedAt": "2023-11-27T23:02:53.597572",
-          "available": false
+          ...
         }
       ],
       "airlineId": 1,
@@ -654,22 +540,10 @@ Sample Response Body
     "crew": {
       "id": 6,
       "pilot": {
-        "id": 6,
-        "firstName": "Axel",
-        "lastName": "Sanchez",
-        "address": "3500 24 Ave NW",
-        "serviceYears": 12,
-        "createdAt": "2023-11-27T23:02:53.604747",
-        "updatedAt": "2023-11-27T23:02:53.604763"
+        ...
       },
       "copilot": {
-        "id": 6,
-        "firstName": "Anahita",
-        "lastName": "Akbari",
-        "address": "3500 24 Ave NW",
-        "serviceYears": 12,
-        "createdAt": "2023-11-27T23:02:53.601847",
-        "updatedAt": "2023-11-27T23:02:53.601872"
+        ...
       },
       "flightAttendants": [],
       "airlineId": 1,
