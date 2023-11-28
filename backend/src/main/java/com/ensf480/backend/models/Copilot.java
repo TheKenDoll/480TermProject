@@ -1,12 +1,14 @@
 package com.ensf480.backend.models;
 
 import com.ensf480.backend.abstracts.Person;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,9 +17,11 @@ public class Copilot extends Person {
 
   private int serviceYears;
 
-  @JsonIgnore
-  @OneToOne(mappedBy = "copilot")
-  private Crew crew;
+  @CreationTimestamp
+  private LocalDateTime createdAt;
+
+  @UpdateTimestamp
+  private LocalDateTime updatedAt;
 
   public Copilot() {
   }
@@ -27,10 +31,12 @@ public class Copilot extends Person {
     this.serviceYears = serviceYears;
   }
 
-  public Copilot(long id, String firstName, String lastName, String address, int serviceYears, Crew crew) {
+  public Copilot(long id, String firstName, String lastName, String address, int serviceYears, LocalDateTime createdAt,
+      LocalDateTime updatedAt) {
     super(id, firstName, lastName, address);
     this.serviceYears = serviceYears;
-    this.crew = crew;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   public int getServiceYears() {
@@ -41,12 +47,20 @@ public class Copilot extends Person {
     this.serviceYears = serviceYears;
   }
 
-  public Crew getCrew() {
-    return crew;
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
   }
 
-  public void setCrew(Crew crew) {
-    this.crew = crew;
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
   }
 
   @Override
@@ -69,7 +83,7 @@ public class Copilot extends Person {
   @Override
   public String toString() {
     return "Copilot [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-        + ", serviceYears=" + serviceYears + "]";
+        + ", serviceYears=" + serviceYears + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
   }
 
 }

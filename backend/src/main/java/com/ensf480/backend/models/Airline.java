@@ -3,6 +3,9 @@ package com.ensf480.backend.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,6 +15,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -35,6 +40,12 @@ public class Airline {
   @JoinColumn(name = "airline_id", referencedColumnName = "id")
   private List<Flight> flights = new ArrayList<>();
 
+  @CreationTimestamp
+  private LocalDateTime createdAt;
+
+  @UpdateTimestamp
+  private LocalDateTime updatedAt;
+
   public Airline() {
   }
 
@@ -43,14 +54,16 @@ public class Airline {
     this.country = country;
   }
 
-  public Airline(long id, String name, String country, List<Crew> crews, List<Aircraft> aircrafts,
-      List<Flight> flights) {
+  public Airline(long id, String name, String country, List<Crew> crews, List<Aircraft> aircrafts, List<Flight> flights,
+      LocalDateTime createdAt, LocalDateTime updatedAt) {
     this.id = id;
     this.name = name;
     this.country = country;
     this.crews = crews;
     this.aircrafts = aircrafts;
     this.flights = flights;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   public long getId() {
@@ -81,7 +94,7 @@ public class Airline {
     return crews;
   }
 
-  public void setCrews(ArrayList<Crew> crews) {
+  public void setCrews(List<Crew> crews) {
     this.crews = crews;
   }
 
@@ -101,6 +114,22 @@ public class Airline {
     this.flights = flights;
   }
 
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -111,6 +140,8 @@ public class Airline {
     result = prime * result + ((crews == null) ? 0 : crews.hashCode());
     result = prime * result + ((aircrafts == null) ? 0 : aircrafts.hashCode());
     result = prime * result + ((flights == null) ? 0 : flights.hashCode());
+    result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+    result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
     return result;
   }
 
@@ -150,13 +181,23 @@ public class Airline {
         return false;
     } else if (!flights.equals(other.flights))
       return false;
+    if (createdAt == null) {
+      if (other.createdAt != null)
+        return false;
+    } else if (!createdAt.equals(other.createdAt))
+      return false;
+    if (updatedAt == null) {
+      if (other.updatedAt != null)
+        return false;
+    } else if (!updatedAt.equals(other.updatedAt))
+      return false;
     return true;
   }
 
   @Override
   public String toString() {
     return "Airline [id=" + id + ", name=" + name + ", country=" + country + ", crews=" + crews + ", aircrafts="
-        + aircrafts + ", flights=" + flights + "]";
+        + aircrafts + ", flights=" + flights + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
   }
 
 }

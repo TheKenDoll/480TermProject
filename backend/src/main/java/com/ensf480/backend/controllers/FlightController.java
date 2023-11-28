@@ -37,6 +37,7 @@ public class FlightController {
       Flight createdFlight = flightService.createNewFlight(newFlight);
       return new ResponseEntity<>(createdFlight, HttpStatus.CREATED);
     } catch (Exception e) {
+      System.out.println(e);
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

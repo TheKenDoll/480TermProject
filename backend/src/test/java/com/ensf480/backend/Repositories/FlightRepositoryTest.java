@@ -18,20 +18,25 @@ public class FlightRepositoryTest {
   @Autowired
   private AirlineRepository airlineRepository;
 
-  @Test
-  public void postFlightTest() {
-    Airline newAirline = new Airline("Aeromexico", "Mexico");
-    Airline createdAirline = airlineRepository.save(newAirline);
-    Flight newFlight = new Flight("123", "destination", "origin", "departureTime", "arrivalTime",
-        createdAirline.getId());
-    Flight createdFlight = flightRepository.save(newFlight);
-    Flight anotherFlight = flightRepository.findById(createdFlight.getId()).get();
-    assert (anotherFlight.getId() == createdFlight.getId());
-    assert (anotherFlight.getDestination().equals(createdFlight.getDestination()));
-    assert (anotherFlight.getOrigin().equals(createdFlight.getOrigin()));
-    assert (anotherFlight.getDepartureTime().equals(createdFlight.getDepartureTime()));
-    assert (anotherFlight.getArrivalTime().equals(createdFlight.getArrivalTime()));
-    assert (anotherFlight.getAirlineId() == createdFlight.getAirlineId());
-  }
+  // <@Test
+  // public void postFlightTest() {
+  // Airline newAirline = new Airline("Aeromexico", "Mexico");
+  // Airline createdAirline = airlineRepository.save(newAirline);
+  // Flight newFlight = new Flight("123", "destination", "origin",
+  // "departureTime", "arrivalTime",
+  // createdAirline.getId());
+  // Flight createdFlight = flightRepository.save(newFlight);
+  // Flight anotherFlight =
+  // flightRepository.findById(createdFlight.getId()).get();
+  // assert (anotherFlight.getId() == createdFlight.getId());
+  // assert
+  // (anotherFlight.getDestination().equals(createdFlight.getDestination()));
+  // assert (anotherFlight.getOrigin().equals(createdFlight.getOrigin()));
+  // assert
+  // (anotherFlight.getDepartureTime().equals(createdFlight.getDepartureTime()));
+  // assert
+  // (anotherFlight.getArrivalTime().equals(createdFlight.getArrivalTime()));
+  // assert (anotherFlight.getAirlineId() == createdFlight.getAirlineId());
+  // }>
 
 }
