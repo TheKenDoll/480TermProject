@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import './EditFlight.css';
 
 const EditFlight = () => {
   //const flightNumberParam = match.params.flightNumber;
@@ -31,7 +32,7 @@ const EditFlight = () => {
   };
 
   return (
-    <div>
+    <div className='edit-flight-form'>
       <h2>Edit Flight {editedFlight.flightNumber}</h2>
       <form>
         <label>

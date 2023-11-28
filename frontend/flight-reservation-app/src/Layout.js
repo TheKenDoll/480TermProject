@@ -24,6 +24,9 @@ function Layout() {
           <li className="nav-item">
             <Link to="/agent">AgentLanding</Link>
           </li>
+          <li className="nav-item">
+            <Link to="/register">Register</Link>
+          </li>
         </ul>
       </nav>
 

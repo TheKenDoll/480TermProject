@@ -12,6 +12,7 @@ import CrewEdit from './components/employee/EditCrew.js';
 import AircraftEdit from './components/flights/EditAircraft.js';
 import AgentLanding from './components/agent/AgentLanding.js';
 import FlightList from './components/flights/FlightList.js';
+import Register from './components/login/Register.js';
 
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/crewedit" element={<CrewEdit />} />
           <Route path="/aircraftedit" element={<AircraftEdit />} />
           <Route path="/agent" element={<AgentLanding />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </div>

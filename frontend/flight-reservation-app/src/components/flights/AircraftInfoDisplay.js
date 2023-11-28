@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import './AircraftInfoDisplay.css';
 
 const AircraftInfoDisplay = ({ aircraftInfo }) => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const AircraftInfoDisplay = ({ aircraftInfo }) => {
 
   return (
     <>
-        <button onClick={() => navigate('/aircraftedit')}>Add Aircraft</button>
+        <button className='button' onClick={() => navigate('/aircraftedit')}>Add Aircraft</button>
         <div style={{ maxHeight: '400px', overflowY: 'scroll' }}>
         {aircraftInfo.map((aircraft, index) => (
             <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '20px' }}>

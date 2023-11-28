@@ -1,0 +1,27 @@
+
+/* EditFlight.css */
+
+.edit-flight-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    margin: auto;
+  }
+  
+  .edit-flight-form label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .edit-flight-form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .edit-flight-form button:hover {
+    background-color: #0056b3;
+  }
