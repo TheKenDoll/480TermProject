@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ensf480.backend.models.Flight;
 import com.ensf480.backend.services.FlightService;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v1/flight")
 public class FlightController {
@@ -26,64 +26,65 @@ public class FlightController {
   private FlightService flightService;
 
   @GetMapping
-  public ResponseEntity<List<Flight>> getFlight() {
+  public ResponseEntity<?> getFlight() {
     try {
       List<Flight> flights = flightService.getAllFlights();
-      return new ResponseEntity<>(flights, HttpStatus.OK);
+      return ResponseEntity.status(HttpStatus.OK).body(flights);
     } catch (Exception e) {
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get all flights.");
     }
   }
 
   @PostMapping
-  public ResponseEntity<HttpStatus> postFlight(@RequestBody Flight newFlight) {
+  public ResponseEntity<?> postFlight(@RequestBody Flight newFlight) {
     try {
       flightService.createNewFlight(newFlight);
-      return new ResponseEntity<>(HttpStatus.CREATED);
+      return ResponseEntity.status(HttpStatus.CREATED).body(HttpStatus.CREATED);
     } catch (Exception e) {
       System.out.println(e);
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create new flight.");
     }
   }
 
   @GetMapping("/origin/{origin}")
-  public ResponseEntity<List<Flight>> getFlightByOrigin(@PathVariable("origin") String origin) {
+  public ResponseEntity<?> getFlightByOrigin(@PathVariable("origin") String origin) {
     try {
       List<Flight> flights = flightService.getFlightByOrigin(origin);
-      return new ResponseEntity<>(flights, HttpStatus.OK);
+      return ResponseEntity.status(HttpStatus.OK).body(flights);
     } catch (Exception e) {
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get flight by origin.");
     }
   }
 
   @GetMapping("/destination/{destination}")
-  public ResponseEntity<List<Flight>> getFlightByDestination(@PathVariable("destination") String destination) {
+  public ResponseEntity<?> getFlightByDestination(@PathVariable("destination") String destination) {
     try {
       List<Flight> flights = flightService.getFlightByDestination(destination);
-      return new ResponseEntity<>(flights, HttpStatus.OK);
+      return ResponseEntity.status(HttpStatus.OK).body(flights);
     } catch (Exception e) {
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get flight by destination.");
     }
   }
 
   @GetMapping("/origin/{origin}/destination/{destination}/date/{date}")
-  public ResponseEntity<List<Flight>> getFlightByOriginDestinationDate(@PathVariable("origin") String origin,
+  public ResponseEntity<?> getFlightByOriginDestinationDate(@PathVariable("origin") String origin,
       @PathVariable("destination") String destination, @PathVariable("date") String date) {
     try {
       List<Flight> flights = flightService.getFlightByOriginDestinationDate(destination, origin, date);
-      return new ResponseEntity<>(flights, HttpStatus.OK);
+      return ResponseEntity.status(HttpStatus.OK).body(flights);
     } catch (Exception e) {
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body("Failed to get flight by origin, destination, and date.");
     }
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<HttpStatus> deleteFlight(@PathVariable("id") long flightId) {
+  public ResponseEntity<?> deleteFlight(@PathVariable("id") long flightId) {
     try {
       flightService.deleteFlightById(flightId);
-      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+      return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.OK);
     } catch (Exception e) {
-      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete flight by id.");
     }
   }
 }
