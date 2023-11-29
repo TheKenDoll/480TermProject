@@ -1,36 +1,54 @@
 // FlightDetails.js
-import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const FlightDetails = () => {
-  // Accessing the flight ID from the route parameters
   const { flightId } = useParams();
+  const [flightDetails, setFlightDetails] = useState(null);
   const navigate = useNavigate();
 
-  // Fetch flight details based on the flightId (this is a placeholder, replace it with your actual logic)
-  const flightDetails = {
-    origin: 'City A',
-    destination: 'City B',
-    departureDateTime: '2023-12-01T08:00:00',
-    arrivalDateTime: '2023-12-01T10:00:00',
-    aircraftType: 'Boeing 737',
-    // add other details...
-  };
+  useEffect(() => {
+    const fetchFlightDetails = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/v1/flight');
+        const data = await response.json();
+
+        // Find the flight with the correct ID
+        const selectedFlight = data.find((flight) => flight.id === parseInt(flightId));
+
+        if (selectedFlight) {
+          setFlightDetails(selectedFlight);
+        } else {
+          console.log(`Flight with ID ${flightId} not found`);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchFlightDetails();
+  }, [flightId]);
+
+  if (!flightDetails) {
+    return <p>Loading...</p>;
+  }
 
   const handleSelectSeats = () => {
     // Navigate to the Select Seats page with the flight ID
-    navigate(`/select-seats/${flightId}`);
+    navigate(`/select-seats/${flightDetails.id}`);
   };
 
   return (
     <div>
       {/* Display flight details */}
       <h2>Flight Details</h2>
+      <p>Flight ID: {flightDetails.id}</p>
+      <p>Flight Number: {flightDetails.number}</p>
       <p>Origin: {flightDetails.origin}</p>
       <p>Destination: {flightDetails.destination}</p>
-      <p>Departure Time: {new Date(flightDetails.departureDateTime).toLocaleString()}</p>
-      <p>Arrival Time: {new Date(flightDetails.arrivalDateTime).toLocaleString()}</p>
-      <p>Aircraft Type: {flightDetails.aircraftType}</p>
+      <p>Departure Time: {new Date(flightDetails.departureTime).toLocaleString()}</p>
+      <p>Arrival Time: {new Date(flightDetails.arrivalTime).toLocaleString()}</p>
+      <p>Aircraft Type: {flightDetails.aircraft.model}</p>
 
       {/* Button to navigate to the Select Seats page */}
       <button onClick={handleSelectSeats}>Select Seats</button>
