@@ -1,10 +1,11 @@
 // InsuranceSelection.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const SelectInsurance = () => {
   const navigate = useNavigate();
   const [selectedInsurance, setSelectedInsurance] = useState('');
+
 
   const handleInsuranceSelection = (insurance) => {
     // Handle insurance selection logic
