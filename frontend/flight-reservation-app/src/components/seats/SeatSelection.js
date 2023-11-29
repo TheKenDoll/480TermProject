@@ -1,36 +1,62 @@
-// SelectSeats.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// SeatSelection.js
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import SeatMap from './SeatMap';
+import { Link } from 'react-router-dom';
 
-const SelectSeats = () => {
-  const navigate = useNavigate();
-  const [selectedSeat, setSelectedSeat] = useState('');
+const SeatSelection = () => {
+  const { flightId } = useParams();
+  const [seats, setSeats] = useState([]);
+  const [selectedSeat, setSelectedSeat] = useState(null);
 
-  const handleSeatSelection = (seat) => {
-    // Handle seat selection logic
+  const handleSeatSelected = (seat) => {
     setSelectedSeat(seat);
   };
 
-  const handleProceedToInsurance = () => {
-    // Add logic to proceed to insurance selection page
-    navigate('/select-insurance');
-  };
+  // Assuming you have a route to the insurance page
+  const insuranceRoute = `/select-insurance/${flightId}`;
+
+
+  useEffect(() => {
+    const fetchFlightDetails = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/v1/flight`);
+        const data = await response.json();
+
+        // Find the flight with the correct ID
+        const selectedFlight = data.find((flight) => flight.id === parseInt(flightId));
+
+        if (selectedFlight) {
+          setSeats(selectedFlight);
+        } else {
+          console.log(`Flight with ID ${flightId} not found`);
+        }
+      } catch (error) {
+        console.error('Error fetching flight details:', error);
+      }
+    };
+    
+
+    fetchFlightDetails();
+  }, [flightId]);
+
+
 
   return (
     <div>
       <h2>Select Seats</h2>
-      <p>Selected Seat: {selectedSeat}</p>
+      <SeatMap seats={seats} onSeatSelected={handleSeatSelected} />
 
-      {/* Fake seat selection buttons */}
-      <button onClick={() => handleSeatSelection('A1')}>Select Seat A1</button>
-      <button onClick={() => handleSeatSelection('B2')}>Select Seat B2</button>
-
-      {/* Button to proceed to insurance selection */}
       {selectedSeat && (
-        <button onClick={handleProceedToInsurance}>Proceed to Insurance</button>
+        <div>
+          <p>Selected Seat: {selectedSeat.seatNumber}</p>
+          <Link to={insuranceRoute}>
+            <button>Proceed to Insurance</button>
+          </Link>
+        </div>
       )}
     </div>
   );
 };
 
-export default SelectSeats;
+export default SeatSelection;
