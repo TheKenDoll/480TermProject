@@ -16,7 +16,7 @@ import com.stripe.model.PaymentIntent;
 import com.ensf480.backend.services.StripeService;
 import com.stripe.exception.StripeException;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v1/payment")
 public class PaymentController {
