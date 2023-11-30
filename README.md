@@ -164,7 +164,7 @@ mvn -v
 
 ### Airline Endpoints
 
-#### - GET `/api/v1/airline`
+#### GET `/api/v1/airline`
 
 Return all airlines.
 
