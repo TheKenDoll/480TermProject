@@ -39,6 +39,10 @@ public class Client extends Person {
   public Client() {
   }
 
+  public Client(String email) {
+    this.email = email;
+  }
+
   public Client(String firstName, String lastName, String address, String email, String password, Set<Role> roles) {
     super(firstName, lastName, address);
     this.email = email;
