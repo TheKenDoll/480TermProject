@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class FlightController {
       List<Flight> flights = flightService.getAllFlights();
       return ResponseEntity.status(HttpStatus.OK).body(flights);
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get all flights.");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
 
@@ -42,7 +43,27 @@ public class FlightController {
       return ResponseEntity.status(HttpStatus.CREATED).body(HttpStatus.CREATED);
     } catch (Exception e) {
       System.out.println(e);
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create new flight.");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    }
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<?> updateFlight(@PathVariable("id") long flightId, @RequestBody Flight flight) {
+    try {
+      Flight updatedFlight = flightService.updateFlight(flightId, flight);
+      return ResponseEntity.status(HttpStatus.OK).body(updatedFlight);
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    }
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<?> deleteFlight(@PathVariable("id") long flightId) {
+    try {
+      flightService.deleteFlightById(flightId);
+      return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.OK);
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
 
@@ -52,7 +73,7 @@ public class FlightController {
       List<Flight> flights = flightService.getFlightByOrigin(origin);
       return ResponseEntity.status(HttpStatus.OK).body(flights);
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get flight by origin.");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
 
@@ -62,7 +83,7 @@ public class FlightController {
       List<Flight> flights = flightService.getFlightByDestination(destination);
       return ResponseEntity.status(HttpStatus.OK).body(flights);
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get flight by destination.");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
 
@@ -74,17 +95,7 @@ public class FlightController {
       return ResponseEntity.status(HttpStatus.OK).body(flights);
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-          .body("Failed to get flight by origin, destination, and date.");
-    }
-  }
-
-  @DeleteMapping("/{id}")
-  public ResponseEntity<?> deleteFlight(@PathVariable("id") long flightId) {
-    try {
-      flightService.deleteFlightById(flightId);
-      return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.OK);
-    } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete flight by id.");
+          .body(e.getMessage());
     }
   }
 }
