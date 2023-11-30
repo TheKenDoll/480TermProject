@@ -18,6 +18,7 @@
   - [🌐 Endpoints](#-endpoints)
     - [Airline Endpoints](#airline-endpoints)
     - [Flight Endpoints](#flight-endpoints)
+    - [Seat Endpoints](#seat-endpoints)
 
 ## 🔎 Overview
 
@@ -308,37 +309,43 @@ Sample Request Body:
       {
         "seatNumber": "1A",
         "price": 200.0,
-        "isAvailable": true,
+        "available": true,
+        "seatClass": "Bussiness"
         "aircraftId": 1
       },
       {
         "seatNumber": "1B",
         "price": 200.0,
-        "isAvailable": true,
+        "available": true,
+        "seatClass": "Bussiness"
         "aircraftId": 1
       },
       {
         "seatNumber": "1C",
         "price": 200.0,
-        "isAvailable": true,
+        "available": true,
+        "seatClass": "Bussiness"
         "aircraftId": 1
       },
       {
         "seatNumber": "1D",
         "price": 200.0,
-        "isAvailable": true,
+        "available": true,
+        "seatClass": "Bussiness"
         "aircraftId": 1
       },
       {
         "seatNumber": "1E",
         "price": 200.0,
-        "isAvailable": true,
+        "available": true,
+        "seatClass": "Bussiness"
         "aircraftId": 1
       },
       {
         "seatNumber": "1F",
         "price": 200.0,
-        "isAvailable": true,
+        "available": true,
+        "seatClass": "Bussiness"
         "aircraftId": 1
       }
     ],
@@ -606,4 +613,37 @@ Sample Response Status Code:
         "updatedAt": "2023-11-27T21:20:14.259574"
     }
 ]
+```
+
+### Seat Endpoints
+
+#### - PUT `/api/v1/seat/{id}`
+
+Update a seat by id.
+
+Sample Request Body:
+
+```json
+{
+  "available": false
+}
+```
+
+Sample Response Status Code:
+
+`Ok 200`
+
+Sample Response Body:
+
+```json
+{
+  "id": 1,
+  "seatNumber": "1A",
+  "price": 200.0,
+  "available": false,
+  "seatClass": "Bussiness",
+  "aircraftId": 1,
+  "createdAt": "2023-11-27T21:20:14.196198",
+  "updatedAt": "2023-11-27T21:20:14.196356"
+}
 ```

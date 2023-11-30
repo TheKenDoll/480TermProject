@@ -1,14 +1,11 @@
 package com.ensf480.backend.models;
 
-import java.util.Set;
-
 import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,16 +33,16 @@ public class Role implements GrantedAuthority {
     }
 
     private String name;
-    @ManyToMany(mappedBy = "roles")
-    private Set<Client> clients;
+    // @ManyToMany(mappedBy = "roles")
+    // private Set<Client> clients;
 
-    public Set<Client> getUsers() {
-        return clients;
-    }
+    // public Set<Client> getUsers() {
+    // return clients;
+    // }
 
-    public void setUsers(Set<Client> clients) {
-        this.clients = clients;
-    }
+    // public void setUsers(Set<Client> clients) {
+    // this.clients = clients;
+    // }
 
     @Override
     public String getAuthority() {
