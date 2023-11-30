@@ -83,24 +83,24 @@ public class ClientController {
 
 
 
-  @PostMapping("/login1")
-    public ResponseEntity<String> loginUser1(@RequestBody Map<String, String> loginRequest, ModelMap modelMap) {
-        String email = loginRequest.get("email");
-        String password = loginRequest.get("password");
+//   @PostMapping("/login1")
+//     public ResponseEntity<String> loginUser1(@RequestBody Map<String, String> loginRequest, ModelMap modelMap) {
+//         String email = loginRequest.get("email");
+//         String password = loginRequest.get("password");
 
-        // Rest of your code...
+//         // Rest of your code...
 
 
 
-        boolean loginSuccessful = clientService.login1(email, password);
+//         boolean loginSuccessful = clientService.login1(email, password);
 
-        if (loginSuccessful) {
-          return new ResponseEntity<>("Client logged in successfully", HttpStatus.OK);
-        } else {
-          modelMap.addAttribute("msg", "Invalid username or password. Please try again.");
-          return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
-        }
+//         if (loginSuccessful) {
+//           return new ResponseEntity<>("Client logged in successfully", HttpStatus.OK);
+//         } else {
+//           modelMap.addAttribute("msg", "Invalid username or password. Please try again.");
+//           return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
+//         }
 
-}
+// }
 
 }
