@@ -1,58 +1,69 @@
-// InsuranceSelection.js
+// CancellationInsurance.js
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const SelectInsurance = () => {
+const CancellationInsurance = () => {
+  const [selectedOption, setSelectedOption] = useState(null);
   const navigate = useNavigate();
-  const [selectedInsurance, setSelectedInsurance] = useState('');
 
-
-  const handleInsuranceSelection = (insurance) => {
-    // Handle insurance selection logic
-    setSelectedInsurance(insurance);
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
   };
 
   const handleProceedToPayment = () => {
-    // Add logic to proceed to payment screen
-    navigate('/payment');
+    // Navigate to "/checkout"
+    navigate('/checkout');
   };
 
   return (
     <div>
-      <h2>Insurance Selection</h2>
-      <p>Selected Insurance: {selectedInsurance}</p>
+      <h1>Cancellation Insurance</h1>
+      <p>Please choose a cancellation insurance option:</p>
 
-      {/* Fake insurance options */}
       <div>
         <label>
           <input
             type="radio"
-            value="basic"
-            checked={selectedInsurance === 'basic'}
-            onChange={() => handleInsuranceSelection('basic')}
+            value="noInsurance"
+            checked={selectedOption === 'noInsurance'}
+            onChange={() => handleOptionChange('noInsurance')}
           />
-          Basic Insurance
+          No Insurance (Free)
         </label>
+        <p>Provides no cancellations or refunds.</p>
       </div>
 
       <div>
         <label>
           <input
             type="radio"
-            value="premium"
-            checked={selectedInsurance === 'premium'}
-            onChange={() => handleInsuranceSelection('premium')}
+            value="basicInsurance"
+            checked={selectedOption === 'basicInsurance'}
+            onChange={() => handleOptionChange('basicInsurance')}
           />
-          Premium Insurance
+          Basic Insurance ($20)
         </label>
+        <p>Provides an 80% refund on cancellations.</p>
       </div>
 
-      {/* Button to proceed to payment screen */}
-      {selectedInsurance && (
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="premiumInsurance"
+            checked={selectedOption === 'premiumInsurance'}
+            onChange={() => handleOptionChange('premiumInsurance')}
+          />
+          Premium Insurance ($50)
+        </label>
+        <p>Provides a full refund on cancellations.</p>
+      </div>
+
+      {selectedOption && (
         <button onClick={handleProceedToPayment}>Proceed to Payment</button>
       )}
     </div>
   );
 };
 
-export default SelectInsurance;
+export default CancellationInsurance;
