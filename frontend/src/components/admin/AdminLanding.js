@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchFlights from "../flights/SearchFlightsParameters.js";
 import FlightDisplay from "../flights/FlightDisplay.js";
 import CrewInfoDisplay from "../employee/CrewInfoDisplay.js";
@@ -6,146 +6,6 @@ import AircraftInfoDisplay from "../flights/AircraftInfoDisplay.js";
 import './AdminLanding.css';
 
 function AdminLanding() {
-    let flights = [
-        {
-          "flightNumber": "AB123",
-          "destination": "Sydney",
-          "origin": "Melbourne",
-          "aircraftType": "Boeing 737",
-          "crew": [
-            {
-              "name": "John Smith",
-              "role": "Pilot"
-            },
-            {
-              "name": "Jane Doe",
-              "role": "Flight Attendant"
-            }
-          ],
-          "seatList": [
-            {
-              "seatNumber": "1A",
-              "seatType": "Economy",
-              "seatAvailability": "Available"
-            },
-            {
-              "seatNumber": "1B",
-              "seatType": "Economy",
-              "seatAvailability": "Available"
-            },
-            {
-              "seatNumber": "2A",
-              "seatType": "Economy",
-              "seatAvailability": "Available"
-            },
-            {
-              "seatNumber": "2B",
-              "seatType": "Economy",
-              "seatAvailability": "Available"
-            }
-          ],
-          "departureTime": "2021-09-01T12:00:00.000Z",
-          "arrivalTime": "2021-09-01T14:00:00.000Z"
-        },
-        {
-          "flightNumber": "CD456",
-          "destination": "Tokyo",
-          "origin": "Seoul",
-          "aircraftType": "Airbus A380",
-          "crew": [
-            {
-              "name": "Emily Kim",
-              "role": "Pilot"
-            },
-            {
-              "name": "David Lee",
-              "role": "Flight Attendant"
-            }
-          ],
-          "seatList": [
-            {
-              "seatNumber": "3A",
-              "seatType": "Business",
-              "seatAvailability": "Occupied"
-            },
-            {
-              "seatNumber": "3B",
-              "seatType": "Business",
-              "seatAvailability": "Available"
-            },
-            {
-              "seatNumber": "4A",
-              "seatType": "Economy",
-              "seatAvailability": "Available"
-            },
-            {
-              "seatNumber": "4B",
-              "seatType": "Economy",
-              "seatAvailability": "Available"
-            }
-          ],
-          "departureTime": "2021-09-02T09:30:00.000Z",
-          "arrivalTime": "2021-09-02T13:00:00.000Z"
-        },
-        {
-          "flightNumber": "EF789",
-          "destination": "Paris",
-          "origin": "London",
-          "aircraftType": "Boeing 777",
-          "crew": [
-            {
-              "name": "Sophie Miller",
-              "role": "Pilot"
-            },
-            {
-              "name": "Oliver Turner",
-              "role": "Flight Attendant"
-            }
-          ],
-          "seatList": [
-            {
-              "seatNumber": "5A",
-              "seatType": "First Class",
-              "seatAvailability": "Available"
-            },
-            {
-              "seatNumber": "5B",
-              "seatType": "First Class",
-              "seatAvailability": "Available"
-            },
-            {
-              "seatNumber": "6A",
-              "seatType": "Business",
-              "seatAvailability": "Available"
-            },
-            {
-              "seatNumber": "6B",
-              "seatType": "Business",
-              "seatAvailability": "Available"
-            }
-          ],
-          "departureTime": "2021-09-03T15:45:00.000Z",
-          "arrivalTime": "2021-09-03T18:30:00.000Z"
-        }
-      ]
-
-    let aircrafts = [
-        {
-            "aircraftType": "Boeing 737",
-            "aircraftCapacity": 150,
-            "available" : true
-        },
-        {
-            "aircraftType": "Airbus A380",
-            "aircraftCapacity": 300,
-            "available" : true
-        },
-        {
-            "aircraftType": "Boeing 777",
-            "aircraftCapacity": 250,
-            "available" : true
-        }
-    ]
 
     let crews = [
         {   
@@ -251,6 +111,36 @@ function AdminLanding() {
         console.log('test');
         setdispTest(!dispTest);
     }
+
+    // api calls
+    const [flights, setFlights] = useState([]);
+    const [aircrafts, setAircrafts] = useState([]);
+
+    const fetchFlights = async ()=> {
+      await fetch("http://localhost:8080/api/v1/flight", {
+    
+      })
+      .then((response ) => response.json())
+      .then((data) => setFlights(data))
+      .catch((error) => console.log(error))
+    };
+    
+    useEffect(()=> {
+      fetchFlights();
+    }, []);
+
+    const fetchAircrafts = async ()=> {
+      await fetch("http://localhost:8080/api/v1/aircraft", {
+    
+      })
+      .then((response ) => response.json())
+      .then((data) => setAircrafts(data))
+      .catch((error) => console.log(error))
+    };
+    
+    useEffect(()=> {
+      fetchAircrafts();
+    }, []);
 
     return (
         <div className="admin-container">

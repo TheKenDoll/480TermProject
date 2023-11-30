@@ -22,7 +22,7 @@ const FlightDisplay = ({ data }) => {
     <div className='flight-container'>
       {data.map((flight, index) => (
         <div key={index} className='flight-info'>
-          <h2>{`Flight ${flight.flightNumber}`}</h2>
+          <h2>{`Flight ${flight.number}`}</h2>
           <div>
             <strong>Origin:</strong> {flight.origin}
           </div>
