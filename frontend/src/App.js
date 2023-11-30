@@ -20,7 +20,8 @@ import FlightDetails from "./components/flights/FlightDetails.js";
 import SeatSelection from "./components/seats/SeatSelection.js";
 import SelectInsurance from "./components/bookings/SelectInsurance.js";
 import Register from "./components/login/Register.js";
-import Stripe from "./pages/Stripe.jsx";
+import Stripe from "./pages/stripe/Stripe.jsx";
+import "./index.css";
 
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);

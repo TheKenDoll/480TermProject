@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ensf480.backend.models.Airline;
 import com.ensf480.backend.services.AirlineService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/airline")
 public class AirlineController {

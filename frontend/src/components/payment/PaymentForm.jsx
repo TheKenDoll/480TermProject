@@ -6,6 +6,8 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../loader/Loader";
+import { CustomAlert } from "../../utils/Alert";
+import "./PaymentForm.css";
 
 function PaymentForm() {
   const navigator = useNavigate();
@@ -13,6 +15,16 @@ function PaymentForm() {
   const elements = useElements();
 
   const [loading, setLoading] = useState(false);
+
+  const sendEmail = async () => {
+    const res = await fetch(`${process.env.REACT_APP_URL}/api/v1/email`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: "anahita.akbari312@gmail.com" }),
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,9 +39,11 @@ function PaymentForm() {
       redirect: "if_required",
     });
     if (!error) {
+      await sendEmail();
+      CustomAlert.showAlert("Purchase Completed");
       navigator("/book");
     } else if (error.message) {
-      console.error(error.message);
+      CustomAlert.showPaymentError(error.message);
       setLoading(false);
     } else {
       console.log(error);
@@ -38,13 +52,18 @@ function PaymentForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="payment-container">
+      <h1 className="title">Payment</h1>
       <PaymentElement />
       {loading ? (
-        <Loader></Loader>
+        <div className="pay-btn-container">
+          <Loader></Loader>
+        </div>
       ) : (
-        <div>
-          <button type="submit">Pay</button>
+        <div className="pay-btn-container">
+          <button type="submit" className="pay-btn">
+            Pay
+          </button>
         </div>
       )}
     </form>
