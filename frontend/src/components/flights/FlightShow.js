@@ -1,6 +1,8 @@
-import React from 'react'
 
-const FlightShow = ({flight}) => {
+// FlightShow.js
+import React from 'react';
+
+const FlightShow = ({flight, onSelect}) => {
   return (
     <div>
 
@@ -8,6 +10,7 @@ const FlightShow = ({flight}) => {
         <p>{flight.destination}</p>
         <p>{flight.origin}</p>
         <p>{flight.departureTime}</p>
+        <button onClick={onSelect}>Select Flight</button>
 
 
 

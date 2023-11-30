@@ -9,7 +9,7 @@ const Book = () => {
   const [date, setDate] = useState('');
 
   const handleBookFlight = () => {
-    navigate('/flights', { state: { criteria: { origin, destination, date } } });
+    navigate('/flights', { state: { origin, destination, date } });
   };
 
   return (
