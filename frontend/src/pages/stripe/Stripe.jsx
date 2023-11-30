@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import Loader from "../components/loader/Loader";
-import PaymentForm from "../components/payment/PaymentForm";
+import Loader from "../../components/loader/Loader";
+import PaymentForm from "../../components/payment/PaymentForm";
+import "./Stripe.css";
+import Foot from "../../components/foot/Foot";
 
 function Stripe() {
   const total = "100";
@@ -32,23 +34,26 @@ function Stripe() {
   }, []);
 
   return (
-    <main>
-      <div>
-        <h1>Payment</h1>
-      </div>
-      {loading ? (
-        <div>
-          <Loader key="loader" />
-        </div>
-      ) : (
-        <Elements
-          stripe={stripePromise}
-          options={{ clientSecret: clientSecret }}
-        >
-          <PaymentForm></PaymentForm>
-        </Elements>
-      )}
-    </main>
+    <>
+      <main className="main-container">
+        {loading ? (
+          <div className="loader">
+            <Loader key="loader" />
+          </div>
+        ) : (
+          <section className="stripe-container">
+            <Elements
+              stripe={stripePromise}
+              options={{ clientSecret: clientSecret }}
+            >
+              <PaymentForm></PaymentForm>
+            </Elements>
+          </section>
+        )}
+      </main>
+      <div className="blank-container"></div>
+      <Foot></Foot>
+    </>
   );
 }
 
