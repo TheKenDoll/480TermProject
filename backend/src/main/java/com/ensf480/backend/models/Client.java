@@ -26,9 +26,9 @@ public class Client extends Person {
   private String email;
   private String password;
 
-  @ManyToMany
-  @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-  private Set<Role> roles;
+  // @ManyToMany
+  // @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+  // private Set<Role> roles;
 
   @CreationTimestamp
   private LocalDateTime createdAt;
@@ -39,28 +39,31 @@ public class Client extends Person {
   public Client() {
   }
 
-  public Client(String firstName, String lastName, String address, String email, String password, Set<Role> roles) {
+  public Client(String firstName, String lastName, String address, String email, String password
+  //Set<Role> roles
+  ) {
     super(firstName, lastName, address);
     this.email = email;
     this.password = password;
-    this.roles = roles;
+    //this.roles = roles;
   }
 
   public Client(long id, String firstName, String lastName, String address, String email, String password,
-      Set<Role> roles, LocalDateTime createdAt, LocalDateTime updatedAt) {
+      //Set<Role> roles,
+      LocalDateTime createdAt, LocalDateTime updatedAt) {
     super(id, firstName, lastName, address);
     this.email = email;
     this.password = password;
-    this.roles = roles;
+    //this.roles = roles;
   }
 
-  public Set<Role> getRoles() {
-    return roles;
-  }
+  // public Set<Role> getRoles() {
+  //   return roles;
+  // }
 
-  public void setRoles(Set<Role> roles) {
-    this.roles = roles;
-  }
+  // public void setRoles(Set<Role> roles) {
+  //   this.roles = roles;
+  // }
 
   public String getEmail() {
     return email;
@@ -96,7 +99,7 @@ public class Client extends Person {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), email, password, roles);
+    return Objects.hash(super.hashCode(), email, password);
   }
 
   @Override
@@ -109,14 +112,14 @@ public class Client extends Person {
       return false;
     Client other = (Client) obj;
     return Objects.equals(email, other.email)
-        && Objects.equals(password, other.password)
-        && Objects.equals(roles, other.roles);
+        && Objects.equals(password, other.password);
+        //&& Objects.equals(roles, other.roles);
   }
 
   @Override
   public String toString() {
     return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-        + ", email=" + email + ", password=" + password + ", roles=" + roles + ", createdAt=" + createdAt
+        + ", email=" + email + ", password=" + password + ", roles=" + address + ", createdAt=" + createdAt
         + ", updatedAt=" + updatedAt + "]";
   }
 }
