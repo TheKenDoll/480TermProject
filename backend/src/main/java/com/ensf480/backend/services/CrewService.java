@@ -29,4 +29,11 @@ public class CrewService {
     }
     return crewRepository.save(newCrew);
   }
+
+  public void deleteCrewById(long id) {
+    if (!crewRepository.existsById(id)) {
+      throw new IllegalArgumentException("Crew with id " + id + " does not exist");
+    }
+    crewRepository.deleteById(id);
+  }
 }
