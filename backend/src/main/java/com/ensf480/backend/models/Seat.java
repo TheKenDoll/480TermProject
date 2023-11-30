@@ -21,7 +21,8 @@ public class Seat {
 
   private String seatNumber;
   private double price;
-  private boolean isAvailable;
+  private boolean available;
+  private String seatClass;
 
   @Column(name = "aircraft_id")
   private long aircraftId;
@@ -35,19 +36,24 @@ public class Seat {
   public Seat() {
   }
 
-  public Seat(String seatNumber, double price, boolean isAvailable, long aircraftId) {
+  public Seat(boolean available) {
+    this.available = available;
+  }
+
+  public Seat(String seatNumber, double price, boolean available, String seatClass, long aircraftId) {
     this.seatNumber = seatNumber;
     this.price = price;
-    this.isAvailable = isAvailable;
+    this.available = available;
     this.aircraftId = aircraftId;
   }
 
-  public Seat(long id, String seatNumber, double price, boolean isAvailable, long aircraftId, LocalDateTime createdAt,
+  public Seat(long id, String seatNumber, double price, boolean available, String seatClass, long aircraftId,
+      LocalDateTime createdAt,
       LocalDateTime updatedAt) {
     this.id = id;
     this.seatNumber = seatNumber;
     this.price = price;
-    this.isAvailable = isAvailable;
+    this.available = available;
     this.aircraftId = aircraftId;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
@@ -77,12 +83,12 @@ public class Seat {
     this.price = price;
   }
 
-  public boolean isAvailable() {
-    return isAvailable;
+  public boolean getAvailable() {
+    return available;
   }
 
-  public void setAvailable(boolean isAvailable) {
-    this.isAvailable = isAvailable;
+  public void setAvailable(boolean available) {
+    this.available = available;
   }
 
   public long getAircraftId() {
@@ -118,7 +124,8 @@ public class Seat {
     long temp;
     temp = Double.doubleToLongBits(price);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    result = prime * result + (isAvailable ? 1231 : 1237);
+    result = prime * result + (available ? 1231 : 1237);
+    result = prime * result + ((seatClass == null) ? 0 : seatClass.hashCode());
     result = prime * result + (int) (aircraftId ^ (aircraftId >>> 32));
     result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
     result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
@@ -143,7 +150,12 @@ public class Seat {
       return false;
     if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
       return false;
-    if (isAvailable != other.isAvailable)
+    if (available != other.available)
+      return false;
+    if (seatClass == null) {
+      if (other.seatClass != null)
+        return false;
+    } else if (!seatClass.equals(other.seatClass))
       return false;
     if (aircraftId != other.aircraftId)
       return false;
@@ -162,8 +174,8 @@ public class Seat {
 
   @Override
   public String toString() {
-    return "Seat [id=" + id + ", seatNumber=" + seatNumber + ", price=" + price + ", isAvailable=" + isAvailable
-        + ", aircraftId=" + aircraftId + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+    return "Seat [id=" + id + ", seatNumber=" + seatNumber + ", price=" + price + ", available=" + available
+        + ", seatClass=" + seatClass + ", aircraftId=" + aircraftId + ", createdAt=" + createdAt + ", updatedAt="
+        + updatedAt + "]";
   }
-
 }

@@ -51,6 +51,20 @@ public class FlightService {
     return filteredFlights;
   }
 
+  public Flight updateFlight(long id, Flight flight) {
+    if (!flightRepository.existsById(id)) {
+      throw new RuntimeException("Flight with id " + id + " does not exist");
+    }
+    Flight existingFlight = flightRepository.findById(id).get();
+    existingFlight.setNumber(flight.getNumber());
+    existingFlight.setDestination(flight.getDestination());
+    existingFlight.setOrigin(flight.getOrigin());
+    existingFlight.setDepartureTime(flight.getDepartureTime());
+    existingFlight.setArrivalTime(flight.getArrivalTime());
+    existingFlight.setAircraft(flight.getAircraft());
+    return flightRepository.save(existingFlight);
+  }
+
   public void deleteFlightById(long flightId) {
     if (!flightRepository.existsById(flightId)) {
       throw new RuntimeException("Flight with id " + flightId + " does not exist");
