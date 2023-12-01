@@ -22,7 +22,7 @@ function PaymentForm() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: "anahita.akbari312@gmail.com" }),
+      body: JSON.stringify({ email: "k.c.fjestad@gmail.com" }),
     });
   };
 

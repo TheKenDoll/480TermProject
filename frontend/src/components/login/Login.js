@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './Login.css'; // Create this file for styling
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   // State to manage form input values
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,6 +19,10 @@ const Login = () => {
     setEmail('');
     setPassword('');
   };
+
+  const handleRegister = () => {
+    navigate('/register')
+  }
 
   return (
     <div className="login-container">
@@ -38,6 +44,9 @@ const Login = () => {
         />
         <button type="submit">Login</button>
       </form>
+      <div>
+        <button className="button" onClick={handleRegister}>Register</button>
+      </div>
     </div>
   );
 };

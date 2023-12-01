@@ -6,78 +6,12 @@ import AircraftInfoDisplay from "../flights/AircraftInfoDisplay.js";
 import './AdminLanding.css';
 
 function AdminLanding() {
-
-    let crews = [
-        {   
-            'crewId': 1,
-            'available': true,
-            'flightNumber': 'AB123',
-            'crew' :
-            [
-                {
-                    "name": "John Smith",
-                    "role": "Pilot"
-                },
-                {
-                    "name": "Jane Doe",
-                    "role": "Flight Attendant"
-                }
-            ]
-        },
-        {
-            'crewId': 2,
-            'available': true,
-            'flightNumber': 'CD456',
-            'crew' :
-            [
-                {
-                    "name": "Emily Kim",
-                    "role": "Pilot"
-                },
-                {
-                    "name": "David Lee",
-                    "role": "Flight Attendant"
-                }
-            ]
-        },
-        {
-            'crewId': 3,
-            'available': false,
-            'flightNumber': 'EF789',
-            'crew' :
-            [
-                {
-                    "name": "Sophie Miller",
-                    "role": "Pilot"
-                },
-                {
-                    "name": "Oliver Turner",
-                    "role": "Flight Attendant"
-                }
-            ]
-        }
-    ]
-
-    let users = [
-        {
-            'name': 'John Smith',
-            'email': 'example@gmail.com',
-            'password': 'password'
-        },
-        {
-            'name': 'Jane Doe',
-            'email': 'example@gmail.com',
-            'password': 'password'
-        }
-    ]
       
-
     const [showSearch, setShowSearch] = useState(false);
     const [dispFlights, setdispFlights] = useState(false);
     const [dispAircrafts, setdispAircrafts] = useState(false);
     const [dispCrews, setdispCrews] = useState(false);
     const [dispUsers, setdispUsers] = useState(false);
-    const [dispTest, setdispTest] = useState(false);
 
     const handleViewFlights = () => {
         if (dispFlights) {
@@ -92,6 +26,7 @@ function AdminLanding() {
 
     const handleSerachFlights = (searchParams) => {
         console.log(searchParams);
+        fetchFlights(searchParams);
         handleDispFlights();
     }
 
@@ -107,27 +42,21 @@ function AdminLanding() {
         setdispUsers(!dispUsers);
     }
 
-    const handleTest = () => {
-        console.log('test');
-        setdispTest(!dispTest);
-    }
-
     // api calls
     const [flights, setFlights] = useState([]);
     const [aircrafts, setAircrafts] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [crews, setCrews] = useState([]);
 
-    const fetchFlights = async ()=> {
-      await fetch("http://localhost:8080/api/v1/flight", {
+    const fetchFlights = async (searchParams)=> {
+        console.log(searchParams['origin'], searchParams['destination'], searchParams['date'])
+      await fetch(`http://localhost:8080/api/v1/flight/origin/${searchParams['origin']}/destination/${searchParams['destination']}/date/${searchParams['date']}`, {
     
       })
       .then((response ) => response.json())
       .then((data) => setFlights(data))
       .catch((error) => console.log(error))
     };
-    
-    useEffect(()=> {
-      fetchFlights();
-    }, []);
 
     const fetchAircrafts = async ()=> {
       await fetch("http://localhost:8080/api/v1/aircraft", {
@@ -141,6 +70,32 @@ function AdminLanding() {
     useEffect(()=> {
       fetchAircrafts();
     }, []);
+
+    const fetchUsers = async ()=> {
+        await fetch("http://localhost:8080/api/v1/Client", {
+      
+        })
+        .then((response ) => response.json())
+        .then((data) => setUsers(data))
+        .catch((error) => console.log(error))
+      };
+      
+      useEffect(()=> {
+        fetchUsers();
+      }, []);
+
+      const fetchCrews = async ()=> {
+        await fetch("http://localhost:8080/api/v1/crew", {
+      
+        })
+        .then((response ) => response.json())
+        .then((data) => setCrews(data))
+        .catch((error) => console.log(error))
+      };
+      
+      useEffect(()=> {
+        fetchCrews();
+      }, []);
 
     return (
         <div className="admin-container">
@@ -158,7 +113,7 @@ function AdminLanding() {
                     <div key={index} className="user-info">
                         <h3>User Information</h3>
                         <div>
-                            <strong>Name:</strong> {user.name}
+                            <strong>Name:</strong> {user.firstName} {user.lastName}
                         </div>
                         <div>
                             <strong>Email:</strong> {user.email}
@@ -169,8 +124,6 @@ function AdminLanding() {
                     </div>
                 ))}
             </div>
-            <button className="button" onClick={handleTest}>test</button>
-            {dispTest && <div>test</div>}
         </div>
     )
 }

@@ -21,6 +21,7 @@ import SeatSelection from "./components/seats/SeatSelection.js";
 import SelectInsurance from "./components/bookings/SelectInsurance.js";
 import Register from "./components/login/Register.js";
 import Stripe from "./pages/stripe/Stripe.jsx";
+import ViewPassengers from './components/passengers/ViewPassengers.js';
 import "./index.css";
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
           <Route path="/agent" element={<AgentLanding />} />
           <Route path="/register" element={<Register />} />
           <Route path="/checkout" element={<Stripe />} />
+          <Route path="/passengers" element={<ViewPassengers />} />
         </Routes>
       </Router>
     </div>

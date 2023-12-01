@@ -24,9 +24,6 @@ function Layout() {
           <li>
             <Link to="/agent">AgentLanding</Link>
           </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
         </ul>
       </nav>
 

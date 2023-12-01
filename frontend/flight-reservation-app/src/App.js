@@ -17,6 +17,7 @@ import SeatSelection from './components/seats/SeatSelection.js';
 import SelectInsurance from './components/bookings/SelectInsurance.js';
 import PaymentForm from './components/payment/PaymentForm.js';
 import Register from './components/login/Register.js';
+import ViewPassengers from './components/passengers/ViewPassengers.js';
 
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/aircraftedit" element={<AircraftEdit />} />
           <Route path="/agent" element={<AgentLanding />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/passengers" element={<ViewPassengers />} />
         </Routes>
       </Router>
     </div>
