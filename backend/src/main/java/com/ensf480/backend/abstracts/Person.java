@@ -18,13 +18,20 @@ public abstract class Person {
   public Person() {
   }
 
-  public Person(String firstName, String lastName, String address) {
+  public Person(
+      String firstName,
+      String lastName,
+      String address) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.address = address;
   }
 
-  public Person(long id, String firstName, String lastName, String address) {
+  public Person(
+      long id,
+      String firstName,
+      String lastName,
+      String address) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;

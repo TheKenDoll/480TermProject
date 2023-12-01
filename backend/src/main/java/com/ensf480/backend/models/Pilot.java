@@ -81,5 +81,4 @@ public class Pilot extends Person {
     return "Pilot [id = " + id + ", firstName = " + firstName + ", lastName = " + lastName + ", address = " + address
         + ", serviceYears = " + serviceYears + ", createdAt = " + createdAt + ", updatedAt = " + updatedAt + "]";
   }
-
 }
