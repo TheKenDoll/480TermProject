@@ -46,7 +46,7 @@ public class ClientService {
    */
 
   public void registerClient(Client client) {
-    validateClientForRegistration(client);
+    //validateClientForRegistration(client);
 
     boolean clientExists = clientRepository.findByEmail(client.getEmail()).isPresent();
 
