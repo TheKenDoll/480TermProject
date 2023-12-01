@@ -30,7 +30,7 @@ const FlightList = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: '100px', padding: '20px' }}>
       <h2>Flight List</h2>
 
       {flights.length > 0 ? (

@@ -39,7 +39,7 @@ const FlightDetails = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: '100px', padding: '20px' }}>
       {/* Display flight details */}
       <h2>Flight Details</h2>
       <p>Flight ID: {flightDetails.id}</p>

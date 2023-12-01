@@ -16,7 +16,7 @@ const CancellationInsurance = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: '100px', padding: '20px' }}>
       <h1>Cancellation Insurance</h1>
       <p>Please choose a cancellation insurance option:</p>
 

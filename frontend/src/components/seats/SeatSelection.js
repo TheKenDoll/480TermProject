@@ -45,10 +45,32 @@ const SeatSelection = () => {
   };
 
   // Function to handle seat confirmation
-  const handleSeatConfirmation = () => {
+  const handleSeatConfirmation = async () => {
     if (selectedSeat) {
-      // Navigate to "/select-insurance/:seatnumber"
-      navigate('/select-insurance');
+      try {
+        const response = await fetch(`http://localhost:8080/api/v1/seat/${selectedSeat.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            available: true,
+          }),
+        });
+
+        if (response.ok) {
+          // Successfully updated seat availability
+          console.log(`Seat ${selectedSeat.seatNumber} marked as unavailable.`);
+          // Navigate to the next page ("/select-insurance" or any other destination)
+          navigate('/select-insurance');
+        } else {
+          console.error('Failed to update seat availability:', response.status, response.statusText);
+          // Handle the error as needed
+        }
+      } catch (error) {
+        console.error('Error updating seat availability:', error);
+        // Handle the error as needed
+      }
     }
   };
 
@@ -85,7 +107,7 @@ const SeatSelection = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: '100px', padding: '20px' }}>
       <h1>Flight Details</h1>
       {/* Display other flight details as needed */}
 
