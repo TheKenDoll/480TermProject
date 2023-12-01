@@ -31,7 +31,7 @@ public class AirlineController {
       List<Airline> airlines = airlineService.getAllAirlines();
       return ResponseEntity.status(HttpStatus.OK).body(airlines);
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get all airlines.");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
 
@@ -41,7 +41,7 @@ public class AirlineController {
       airlineService.createNewAirline(newAirline);
       return ResponseEntity.status(HttpStatus.CREATED).body(HttpStatus.CREATED);
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create new airline.");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
 
@@ -51,7 +51,7 @@ public class AirlineController {
       Airline airline = airlineService.getAirlineById(id);
       return ResponseEntity.status(HttpStatus.OK).body(airline);
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get airline by id.");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
 
@@ -61,7 +61,7 @@ public class AirlineController {
       airlineService.deleteAirlineById(airlineId);
       return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.OK);
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete airline by id.");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
 

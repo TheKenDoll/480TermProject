@@ -17,8 +17,24 @@
   - [🛠️ Installation](#️-installation)
   - [🌐 Endpoints](#-endpoints)
     - [Airline Endpoints](#airline-endpoints)
+      - [GET `/api/v1/airline`](#---apiv1airline)
+      - [POST `/api/v1/airline`](#---apiv1airline-1)
+      - [GET `/api/v1/airline/{id}`](#---apiv1airlineid)
+      - [DELETE `/api/v1/airline/{id}`](#---apiv1airlineid-1)
     - [Flight Endpoints](#flight-endpoints)
+      - [GET `/api/v1/flight`](#---apiv1flight)
+      - [POST `/api/v1/flight`](#---apiv1flight-1)
+      - [PUT `/api/v1/flight/{id}`](#---apiv1flightid)
+      - [DELETE `/api/v1/flight/{id}`](#---apiv1flightid-1)
+      - [GET `/api/v1/flight/origin/{origin}`](#---apiv1flightoriginorigin)
+      - [GET `/api/v1/flight/destination/{destination}`](#---apiv1flightdestinationdestination)
+      - [GET `/api/v1/flight/origin/{origin}/destination/{destination}/date/{date}`](#---apiv1flightoriginorigindestinationdestinationdatedate)
     - [Seat Endpoints](#seat-endpoints)
+      - [PUT `/api/v1/seat/{id}`](#---apiv1seatid)
+    - [Crew Endpoints](#crew-endpoints)
+      - [GET `/api/v1/crew`](#---apiv1crew)
+      - [POST `/api/v1/crew`](#---apiv1crew-1)
+      - [DELETE `/api/v1/crew/{id}`](#---apiv1crewid)
 
 ## 🔎 Overview
 
@@ -231,7 +247,7 @@ Delete an airline by id.
 
 Sample Response Status Code:
 
-`No Content 204`
+`Ok 200`
 
 ### Flight Endpoints
 
@@ -374,13 +390,66 @@ Sample Response Status Code:
 
 `Created 201`
 
+#### - PUT `/api/v1/flight/{id}`
+
+Update a flight by id.
+
+Sample Request Body:
+
+```json
+{
+  "number": "AC102",
+  "destination": "Mexico City",
+  "origin": "Calgary",
+  "departureTime": "2023-12-29",
+  "arrivalTime": "2023-12-29"
+}
+```
+
+Sample Response Status Code:
+
+`Ok 200`
+
+Sample Response Body:
+
+```json
+{
+  "number": "AC102",
+  "destination": "Mexico City",
+  "origin": "Calgary",
+  "departureTime": "2023-12-29",
+  "arrivalTime": "2023-12-29",
+  "aircraft": {
+    "model": "Boeing 737",
+    "manufactureYear": 2010,
+    "capacity": 200,
+    "seats": [
+      {
+        ...
+      }
+    ],
+    "airlineId": 1
+  },
+  "crew": {
+    "pilot": {
+      ...
+    },
+    "copilot": {
+      ...
+    },
+    "airlineId": 1
+  },
+  "airlineId": 1
+}
+```
+
 #### - DELETE `/api/v1/flight/{id}`
 
 Delete a flight by id.
 
 Sample Response Status Code:
 
-`No Content 204`
+`Ok 200`
 
 #### - GET `/api/v1/flight/origin/{origin}`
 
@@ -647,3 +716,69 @@ Sample Response Body:
   "updatedAt": "2023-11-27T21:20:14.196356"
 }
 ```
+
+### Crew Endpoints
+
+#### - GET `/api/v1/crew`
+
+Return all crews.
+
+Sample Response Status Code:
+
+`Ok 200`
+
+Sample Response Body:
+
+```json
+[
+  {
+    "id": 1,
+    "pilot": {
+      "id": 1,
+      "firstName": "Axel",
+      "lastName": "Sanchez",
+      "address": "3500 24 Ave NW",
+      "serviceYears": 12,
+      "createdAt": "2023-11-30T14:07:32.779914",
+      "updatedAt": "2023-11-30T14:07:32.779926"
+    },
+    "copilot": {
+      "id": 1,
+      "firstName": "Anahita",
+      "lastName": "Akbari",
+      "address": "3500 24 Ave NW",
+      "serviceYears": 12,
+      "createdAt": "2023-11-30T14:07:32.777381",
+      "updatedAt": "2023-11-30T14:07:32.777405"
+    },
+    "flightAttendants": [],
+    "airlineId": 1,
+    "createdAt": "2023-11-30T14:07:32.782011",
+    "updatedAt": "2023-11-30T14:07:32.782024"
+  }
+]
+```
+
+#### - POST `/api/v1/crew`
+
+Sample Request Body:
+
+```json
+{
+  "pilotId": 1,
+  "copilotId": 1,
+  "airlineId": 1
+}
+```
+
+Sample Response Status Code:
+
+`Created 201`
+
+#### - DELETE `/api/v1/crew/{id}`
+
+Delete a crew by id.
+
+Sample Response Status Code:
+
+`Ok 200`

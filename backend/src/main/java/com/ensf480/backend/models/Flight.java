@@ -48,6 +48,14 @@ public class Flight {
   public Flight() {
   }
 
+  public Flight(String number, String destination, String origin, String departureTime, String arrivalTime) {
+    this.number = number;
+    this.destination = destination;
+    this.origin = origin;
+    this.departureTime = departureTime;
+    this.arrivalTime = arrivalTime;
+  }
+
   public Flight(String number, String destination, String origin, String departureTime, String arrivalTime,
       Aircraft aircraft, Crew crew, long airlineId) {
     this.number = number;
