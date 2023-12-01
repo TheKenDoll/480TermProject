@@ -13,7 +13,7 @@ const Book = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: '100px', padding: '20px' }}>
       <h2>Book a Flight</h2>
       <form>
         <label>
