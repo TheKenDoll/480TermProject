@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ensf480.backend.models.Client;
+import com.ensf480.backend.models.UserApp;
 import com.ensf480.backend.services.EmailService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -20,14 +20,13 @@ public class EmailController {
   private EmailService emailService;
 
   @PostMapping
-  public ResponseEntity<?> createNewFlightAttendant(@RequestBody Client client) {
+  public ResponseEntity<?> createNewFlightAttendant(@RequestBody UserApp client) {
     try {
       emailService.sendHtmlEmail(client.getEmail());
-      return ResponseEntity.status(HttpStatus.CREATED).body("Email sent");
+      return ResponseEntity.status(HttpStatus.CREATED).body(HttpStatus.CREATED);
     } catch (Exception e) {
       System.out.println(e);
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Email not sent");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
-
 }
