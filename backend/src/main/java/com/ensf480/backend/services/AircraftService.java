@@ -30,4 +30,10 @@ public class AircraftService {
     return aircraftRepository.save(newAircraft);
   }
 
+  public void deleteAircraftById(long id) {
+    if (!aircraftRepository.existsById(id)) {
+      throw new RuntimeException("Aircraft with id " + id + " does not exist");
+    }
+    aircraftRepository.deleteById(id);
+  }
 }
