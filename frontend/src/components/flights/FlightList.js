@@ -1,59 +1,47 @@
 // FlightList.js
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import FlightShow from './FlightShow';
 
 const FlightList = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [flights, setFlights] = useState([]);
-  const criteria = location.state && location.state.criteria;
 
-  // useEffect(()=>{
-  //   const fetchFlights = async () => {
-  //     const res = await fetch(`http://localhost:8080/api/v1/flight`);
+  const criteria = location.state || {};
+  const { origin, destination, date } = criteria;
 
+  const fetchFlights = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/flight/origin/${origin}/destination/${destination}/date/${date}`);
+      const data = await response.json();
+      setFlights(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //     setFlights(await res.json());
-  //   };
-  //   fetchFlights();
-  // },[]);
+  useEffect(() => {
+    fetchFlights();
+  }, [origin, destination, date]);
 
-const fetchFlights = async ()=> {
-  await fetch("http://localhost:8080/api/v1/flight", {
-
-  })
-  .then((response ) => response.json())
-  .then((data) => setFlights(data))
-  .catch((error) => console.log(error))
-};
-
-useEffect(()=> {
-  fetchFlights();
-}, []);
-
+  const handleFlightSelect = (flight) => {
+    navigate(`/flight-details/${flight.id}`);
+  };
 
   return (
-    <div>
-
+    <div style={{ marginTop: '100px', padding: '20px' }}>
       <h2>Flight List</h2>
 
       {flights.length > 0 ? (
         <div>
-
           {flights.map((flight) => (
-            <FlightShow key={flight.id}  flight = {flight}/>
+            <FlightShow key={flight.id} flight={flight} onSelect={() => handleFlightSelect(flight)} />
           ))}
-
-
         </div>
-
-      ):(<p>No flights availalble</p>)
-      
-      
-      }
-
-
-     
+      ) : (
+        <p>No flights available</p>
+      )}
     </div>
   );
 };
