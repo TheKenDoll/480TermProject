@@ -4,7 +4,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import Loader from "../../components/loader/Loader";
 import PaymentForm from "../../components/payment/PaymentForm";
 import "./Stripe.css";
-import Foot from "../../components/foot/Foot";
 
 function Stripe() {
   const total = "100";
@@ -19,6 +18,9 @@ function Stripe() {
         `${process.env.REACT_APP_URL}/api/v1/payment?total=${total}`,
         {
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
       const data = await res.json();
@@ -35,7 +37,10 @@ function Stripe() {
 
   return (
     <>
-      <main className="main-container">
+      <main className="stripe-main-container">
+        <div className="stripe-image-container">
+          <img src="./dubai.jpg" alt="city" className="image"></img>
+        </div>
         {loading ? (
           <div className="loader">
             <Loader key="loader" />
@@ -50,9 +55,8 @@ function Stripe() {
             </Elements>
           </section>
         )}
+        <div className="stripe-blank-container"></div>
       </main>
-      <div className="blank-container"></div>
-      <Foot></Foot>
     </>
   );
 }
