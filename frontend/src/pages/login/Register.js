@@ -6,21 +6,64 @@ function Register() {
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState("");
 
-    const handleRegister = () => {
-        // Handle registration logic here
-        console.log('Registration submitted');
-        console.log('First Name:', firstName);
-        console.log('Last Name:', lastName);
-        console.log('Email:', email);
-        console.log('Address:', address);
-        console.log('Password:', password);
-    };
+
+
+
+    const handleRoleChange = (event) => {
+        setRole(event.target.value)
+
+    }
+
+    const parseJwt = (token) => {
+        if (!token) {
+          return;
+        }
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace("-", "+").replace("_", "/");
+        return JSON.parse(window.atob(base64));
+      };
+
+
+    const handleRegister = async (event) => {
+
+        event.preventDefault()
+
+        try {
+            const res = await fetch("http://localhost:8080/api/v1/auth/register/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  firstName,
+                  lastName,
+                  email,
+                  password,
+                  role
+
+                }),
+
+            });
+            const data = await res.json();
+            const user = parseJwt(data.token);
+            const {sub} = user;
+            localStorage.setItem("token", data.token)
+            localStorage.setItem("user", JSON.stringify(sub));
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+
 
     return (
         <div>
             <h2>Registration</h2>
-            <form>
+            <form onSubmit={handleRegister}>
+
+                <br></br>
+                <br></br>
+                <br></br>
                 <label>
                     First Name:
                     <input
@@ -66,7 +109,13 @@ function Register() {
                     />
                 </label>
                 <br />
-                <button type="button" onClick={handleRegister}>
+                <label htmlFor="role-select">Choose a role:</label>
+                    <select id="role-select" value={role} onChange={handleRoleChange}>
+                        <option value="">--Please choose an option--</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                <button type="submit" /*onClick={handleRegister}*/>
                     Register
                 </button>
             </form>
