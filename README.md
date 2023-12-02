@@ -165,7 +165,7 @@ mvn -v
 
 ## 🌐 Endpoints
 
-All endpoints are protected by [JWT](https://jwt.io/). You must be authenticated to access them. To authenticate, you must first create a user by sending a `POST` request to `/api/v1/auth/register`. Then, you can authenticate by sending a `POST` request to `/api/v1/auth/authenticate`. You will receive a `JWT` token in the response body. You must include this token in the `Authorization` header type of all requests. The token must be prefixed with `Bearer`. For example, `Bearer
+All endpoints are protected by [JWT](https://jwt.io/). You must be authenticated to access them. To authenticate, you must first create a user by sending a `POST` request to `/api/v1/auth/register`. Then, you can authenticate by sending a `POST` request to `/api/v1/auth/authenticate`. You will receive a `JWT` token in the response body. You must include this token in the `Authorization` header type of all requests. The token must be prefixed with `Bearer`. For example, `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmFoaXRhQG1haWwuY29tIiwiaWF0IjoxNjM5MjIwNjQ4LCJleHAiOjE` is a valid token.
 
 ### Authentication Endpoints
 
