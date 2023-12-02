@@ -32,7 +32,6 @@ const App = () => {
     <div className="App">
       <Router>
         <Layout />
-
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route
@@ -53,8 +52,7 @@ const App = () => {
           <Route path="/aircraftedit" element={<AircraftEdit />} />
           <Route path="/agent" element={<AgentLanding />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/checkout" element={<Stripe />} />
-          <Route path="/passengers" element={<ViewPassengers />} />
+          <Route path="/payment" element={<Stripe />} />
         </Routes>
       </Router>
     </div>

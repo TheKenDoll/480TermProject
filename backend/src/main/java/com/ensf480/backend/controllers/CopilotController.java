@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ensf480.backend.models.Copilot;
 import com.ensf480.backend.services.CopilotService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/copilot")
 public class CopilotController {
@@ -21,23 +23,22 @@ public class CopilotController {
   private CopilotService copilotService;
 
   @GetMapping
-  public ResponseEntity<List<Copilot>> getAllCopilots() {
+  public ResponseEntity<?> getAllCopilots() {
     try {
       List<Copilot> copilots = copilotService.getAllCopilots();
-      return new ResponseEntity<>(copilots, HttpStatus.OK);
+      return ResponseEntity.status(HttpStatus.OK).body(copilots);
     } catch (Exception e) {
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
 
   @PostMapping
-  public ResponseEntity<Copilot> createNewCopilot(@RequestBody Copilot newCopilot) {
+  public ResponseEntity<?> createNewCopilot(@RequestBody Copilot newCopilot) {
     try {
-      Copilot createdCopilot = copilotService.createNewCopilot(newCopilot);
-      return new ResponseEntity<>(createdCopilot, HttpStatus.CREATED);
+      copilotService.createNewCopilot(newCopilot);
+      return ResponseEntity.status(HttpStatus.CREATED).body(HttpStatus.CREATED);
     } catch (Exception e) {
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
-
 }

@@ -16,6 +16,9 @@
   - [🏃 Quickstart](#-quickstart)
   - [🛠️ Installation](#️-installation)
   - [🌐 Endpoints](#-endpoints)
+    - [Authentication Endpoints](#authentication-endpoints)
+      - [POST `/api/v1/auth/register`](#---apiv1authregister)
+      - [POST `/api/v1/auth/authenticate`](#---apiv1authauthenticate)
     - [Airline Endpoints](#airline-endpoints)
       - [GET `/api/v1/airline`](#---apiv1airline)
       - [POST `/api/v1/airline`](#---apiv1airline-1)
@@ -161,6 +164,62 @@ mvn -v
 13. If you see the version number of `Maven` then you are good to go. If not, then try to reinstall `Maven`.
 
 ## 🌐 Endpoints
+
+All endpoints are protected by [JWT](https://jwt.io/). You must be authenticated to access them. To authenticate, you must first create a user by sending a `POST` request to `/api/v1/auth/register`. Then, you can authenticate by sending a `POST` request to `/api/v1/auth/authenticate`. You will receive a `JWT` token in the response body. You must include this token in the `Authorization` header type of all requests. The token must be prefixed with `Bearer`. For example, `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmFoaXRhQG1haWwuY29tIiwiaWF0IjoxNjM5MjIwNjQ4LCJleHAiOjE` is a valid token.
+
+### Authentication Endpoints
+
+#### - POST `/api/v1/auth/register`
+
+Create a new user.
+
+Sample Request Body:
+
+```json
+{
+  "firstName": "user",
+  "lastName": "user",
+  "email": "axel@mail.com",
+  "password": "1234"
+}
+```
+
+Sample Response Status Code:
+
+`Created 201`
+
+Sample Response Body:
+
+```json
+{
+  "token": "higvfiyu6hb4j35rvyuvcfiuk4v5y7k654v6kjgvcy23vlv"
+}
+```
+
+#### - POST `/api/v1/auth/authenticate`
+
+Authenticate a user.
+
+Sample Request Body:
+
+```json
+{
+  "email": "axel@mail.com",
+  "password": "1234"
+}
+```
+
+Sample Response Status Code:
+
+`Ok 200`
+
+Sample Response Body:
+
+```json
+{
+  "token": "higvfiyu6hb4j35rvyuvcfiuk4v5y7k654v6kjgvcy23vlv"
+}
+```
 
 ### Airline Endpoints
 

@@ -33,7 +33,7 @@ public class PaymentController {
       return ResponseEntity.status(HttpStatus.OK).body(response);
     } catch (StripeException e) {
       System.out.println(e);
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create payment intent.");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
   }
 }
