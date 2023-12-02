@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchFlights from "../flights/SearchFlightsParameters.js";
 import FlightDisplay from "../flights/FlightDisplay.js";
 import CrewInfoDisplay from "../employee/CrewInfoDisplay.js";
@@ -6,6 +7,7 @@ import AircraftInfoDisplay from "../flights/AircraftInfoDisplay.js";
 import './AdminLanding.css';
 
 function AdminLanding() {
+    const navigate = useNavigate();
       
     const [showSearch, setShowSearch] = useState(false);
     const [dispFlights, setdispFlights] = useState(false);
@@ -97,10 +99,15 @@ function AdminLanding() {
         fetchCrews();
       }, []);
 
+      const handleAddFlight = () => {
+        navigate('/add');
+      }
+
     return (
         <div className="admin-container">
             <h1>Logged in as Admin</h1>
             <button className="button" onClick={handleViewFlights}>{showSearch ? 'Hide Search' : 'View Flights'}</button>
+            <button className="button" onClick={handleAddFlight} >Add Flight</button>
             {showSearch && <SearchFlights onSearch={handleSerachFlights} />}
             {dispFlights && <FlightDisplay data={flights} />}
             <button className="button" onClick={handleDispAircraft}>{dispAircrafts ? 'Hide Aircrafts' : 'View Aircrafts'}</button>
