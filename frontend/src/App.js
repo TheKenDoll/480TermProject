@@ -30,7 +30,7 @@ const App = () => {
       <Router>
         <Layout />
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<Login />} />
           <Route path="/account" element={<Account />} replace={true} />
           <Route path="/login" element={<Login />} />
           <Route path="/book" element={<Book />} />
@@ -49,6 +49,7 @@ const App = () => {
           <Route path="/add" element={<AddFlight />} />
           <Route path="/payment" element={<Stripe />} />
           <Route path="/success" element={<Success/>} />
+          <Route path="/landing" element={<Landing />} />
 
         </Routes>
       </Router>

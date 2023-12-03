@@ -1,12 +1,28 @@
-import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 
 const ViewPassengers = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    //const location = useLocation();
 
-    const receivedData = location.state?.someData || [];
+    // const receivedData = location.state?.someData || [];
+
+    let passengers = [
+        {
+            "firstName": "John",
+            "lastName": "Doe",
+            "passportNumber": "123456789",
+            "seatNumber": "1A"
+        },
+        {
+            "firstName": "Jane",
+            "lastName": "Doe",
+            "passportNumber": "987654321",
+            "seatNumber": "1B"
+        }
+    ];
 
     const handleGoBack = () => {
         navigate(-1);
@@ -15,7 +31,7 @@ const ViewPassengers = () => {
     return (
         <div>
             <h1>View Passengers</h1>
-            {receivedData.passengers.map((passenger, index) => (
+            {passengers.map((passenger, index) => (
                 <div key={index}>
                     <h2>{`Passenger ${index + 1}`}</h2>
                     <div>

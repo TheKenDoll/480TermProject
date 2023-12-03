@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {  useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 function Register() {
     const [firstName, setFirstName] = useState('');
@@ -10,6 +11,8 @@ function Register() {
     const [role, setRole] = useState("");
 
     const navigate = useNavigate()
+
+    const {register} = useAuth();
 
 
 
@@ -49,36 +52,8 @@ function Register() {
             });
             const data = await res.json();
             const user = parseJwt(data.token);
-            const {sub} = user;
-            localStorage.setItem("token", data.token)
-            localStorage.setItem("user", JSON.stringify(sub));
-        }catch(error){
-            console.log(error);
-        }
-
-        const token = localStorage.getItem('token'); // Or sessionStorage, or cookies
-
-
-        if (token) {
-            const base64Url = token.split('.')[1]; // Get the payload part
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Convert Base64-url to Base64
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-
-            const details = JSON.parse(jsonPayload);
-            //console.log(details); // Log to check the structure
-
-            // Assuming the email is stored under the key 'email'
-            const email = details.sub;
-            sessionStorage.setItem("userEmail", email)
-            //console.log(email)
-
-
-            const userEmail = sessionStorage.getItem('userEmail');
-            //console.log(userEmail)
-
-
+            register(user.sub, data.token)
+            const userEmail = localStorage.getItem("uid")
             if (userEmail && userEmail.endsWith('admin.com')) {
                 navigate("/admin")
             } else if (userEmail && userEmail.endsWith('agent.com')) {
@@ -86,20 +61,9 @@ function Register() {
             }else {
                 navigate("/landing")
             }
-
-
-
+        }catch(error){
+            console.log(error);
         }
-
-
-
-
-
-
-
-
-
-
         setFirstName("")
         setLastName("")
         setEmail("")

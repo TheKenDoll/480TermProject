@@ -21,9 +21,9 @@ function PaymentForm() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authentication: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
-      body: JSON.stringify({ email: localStorage.getItem("email") }),
+      body: JSON.stringify({ email: localStorage.getItem("uid") }),
     });
   };
 

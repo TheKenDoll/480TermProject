@@ -15,7 +15,7 @@ function AdminLanding() {
     const [dispCrews, setdispCrews] = useState(false);
     const [dispUsers, setdispUsers] = useState(false);
 
-    const userEmail = sessionStorage.getItem('userEmail');
+    const userEmail = localStorage.getItem("uid")
 
     const userEmail1 = userEmail.split('@')[0].toUpperCase()
 
@@ -61,7 +61,7 @@ function AdminLanding() {
       await fetch(`http://localhost:8080/api/v1/flight/origin/${searchParams['origin']}/destination/${searchParams['destination']}/date/${searchParams['date']}`, {
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
 
 
@@ -77,7 +77,7 @@ function AdminLanding() {
 
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
 
       })
@@ -91,12 +91,20 @@ function AdminLanding() {
     }, []);
 
     const fetchUsers = async ()=> {
-        await fetch("http://localhost:8080/api/v1/auth", {
 
-        })
-        .then((response ) => response.json())
-        .then((data) => setUsers(data))
-        .catch((error) => console.log(error))
+      //   await fetch("http://localhost:8080/api/v1/auth", {
+
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      //   },
+
+
+
+      //   })
+      //   .then((response ) => response.json())
+      //   .then((data) => setUsers(data))
+      //   .catch((error) => console.log(error))
       };
 
       useEffect(()=> {
@@ -108,7 +116,7 @@ function AdminLanding() {
 
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
 
 

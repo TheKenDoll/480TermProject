@@ -13,7 +13,7 @@ const FlightDetails = () => {
         const response = await fetch('http://localhost:8080/api/v1/flight', {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         });
         const data = await response.json();

@@ -10,7 +10,7 @@ const EditFlight = () => {
 
     const recievedData = location.state?.someData || "No data";
 
-    const dataForm = 
+    const dataForm =
       {
         "number": recievedData.number,
         "destination": recievedData.destination,
@@ -41,10 +41,11 @@ const EditFlight = () => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization:`Bearer ${localStorage.getItem("jwt")}`
       },
       body: JSON.stringify(editedFlight),
     })
-    
+
     console.log('Flight saved:', editedFlight);
     navigate('/admin');
   };

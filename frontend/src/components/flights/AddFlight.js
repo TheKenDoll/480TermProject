@@ -35,6 +35,7 @@ const AddFlight = () => {
     flightTemp.arrivalTime = arrivalTime;
     flightTemp.aircraft = aircraft;
     flightTemp.crew = crew;
+    
     console.log(flightTemp);
   };
 
@@ -44,7 +45,9 @@ const AddFlight = () => {
   const fetchAircrafts = async ()=> {
     setDispAircrafts(!dispAircrafts);
     await fetch("http://localhost:8080/api/v1/aircraft", {
-  
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`
+      }
     })
     .then((response ) => response.json())
     .then((data) => setAircrafts(data))
@@ -62,7 +65,9 @@ const AddFlight = () => {
   const fetchCrews = async ()=> {
     setDispCrews(!dispCrews);
     await fetch("http://localhost:8080/api/v1/crew", {
-  
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`
+      }
     })
     .then((response ) => response.json())
     .then((data) => setCrews(data))
@@ -89,10 +94,11 @@ const AddFlight = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`
       },
       body: JSON.stringify(flightTemp),
     })
-    
+
     console.log('Flight saved:', flightTemp);
     navigate('/admin');
   };
@@ -158,7 +164,7 @@ const AddFlight = () => {
                 <div>
                     <strong>Copilot Name:</strong> {crew.copilot.firstName} {crew.copilot.lastName}
                 </div>
-        
+
                 <button onClick={() => handleSelectCrew(crew)}>Select</button>
                 </div>
             ))}

@@ -23,6 +23,9 @@ const FlightDisplay = ({ data }) => {
     console.log('Flight deleted: ', flight);
     fetch(`http://localhost:8080/api/v1/flight/${flight.id}`, {
       method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`
+      }
     });
   }
 

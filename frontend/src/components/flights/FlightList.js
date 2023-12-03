@@ -16,7 +16,7 @@ const FlightList = () => {
       const response = await fetch(`http://localhost:8080/api/v1/flight/origin/${origin}/destination/${destination}/date/${date}`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
         },
       }
 

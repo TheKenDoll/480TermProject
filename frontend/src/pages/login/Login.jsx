@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
 import { Link, useNavigate } from "react-router-dom";
 
 //import Register from "./Register";
-=======
-import { useNavigate } from "react-router-dom";
+
 import Loader from "../../components/loader/Loader";
->>>>>>> 65cbb9bd5a092414906d87c7d8783a463e2930ff
 import "./Login.css";
 import { CustomAlert } from "../../utils/Alert";
 import { useAuth } from "../../context/AuthContext";
@@ -15,7 +12,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+
   const { login } = useAuth();
 
   const navigate = useNavigate();
@@ -46,7 +43,16 @@ const Login = () => {
       const data = await res.json();
       const user = parseJwt(data.token);
       login(user.sub, data.token);
-      navigate("/book");
+
+      const email_1 = localStorage.getItem("uid")
+
+      if (email_1 && email_1.endsWith('admin.com')) {
+        navigate("/admin")
+      } else if (email_1 && email_1.endsWith("agent.com")) {
+          navigate("/agent")
+      } else {
+        navigate("/landing")
+      }
     } catch (error) {
       CustomAlert.showError("Bad credentials");
       setLoading(false);
@@ -57,37 +63,37 @@ const Login = () => {
     const token = localStorage.getItem('token'); // Or sessionStorage, or cookies
 
 
-    if (token) {
-        const base64Url = token.split('.')[1]; // Get the payload part
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Convert Base64-url to Base64
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
+    // if (token) {
+    //     const base64Url = token.split('.')[1]; // Get the payload part
+    //     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Convert Base64-url to Base64
+    //     const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+    //         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    //     }).join(''));
 
-        const details = JSON.parse(jsonPayload);
-        //console.log(details); // Log to check the structure
+    //     const details = JSON.parse(jsonPayload);
+    //     //console.log(details); // Log to check the structure
 
-        // Assuming the email is stored under the key 'email'
-        const email = details.sub;
-        sessionStorage.setItem("userEmail", email)
-        //console.log(email)
-
-
-        const userEmail = sessionStorage.getItem('userEmail');
-        //console.log(userEmail)
+    //     // Assuming the email is stored under the key 'email'
+    //     const email = details.sub;
+    //     sessionStorage.setItem("userEmail", email)
+    //     //console.log(email)
 
 
-        if (userEmail && userEmail.endsWith('admin.com')) {
-            navigate("/admin")
-        } else if (userEmail && userEmail.endsWith("agent.com")) {
-            navigate("/agent")
-        } else {
-          navigate("/landing")
-        }
+    //     const userEmail = sessionStorage.getItem('userEmail');
+    //     //console.log(userEmail)
+
+
+    //     if (userEmail && userEmail.endsWith('admin.com')) {
+    //         navigate("/admin")
+    //     } else if (userEmail && userEmail.endsWith("agent.com")) {
+    //         navigate("/agent")
+    //     } else {
+    //       navigate("/landing")
+    //     }
 
 
 
-    }
+    // }
 
 
 

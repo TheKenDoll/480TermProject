@@ -7,7 +7,7 @@ import Credit from "./Credit";
 function Landing() {
 
 
-    const userEmail = sessionStorage.getItem('userEmail');
+    const userEmail = localStorage.getItem("uid")
 
     const userEmail1 = userEmail.split('@')[0].toUpperCase()
 

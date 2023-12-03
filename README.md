@@ -385,42 +385,42 @@ Sample Request Body:
         "seatNumber": "1A",
         "price": 200.0,
         "available": true,
-        "seatClass": "Bussiness"
+        "seatClass": "Bussiness",
         "aircraftId": 1
       },
       {
         "seatNumber": "1B",
         "price": 200.0,
         "available": true,
-        "seatClass": "Bussiness"
+        "seatClass": "Bussiness",
         "aircraftId": 1
       },
       {
         "seatNumber": "1C",
         "price": 200.0,
         "available": true,
-        "seatClass": "Bussiness"
+        "seatClass": "Bussiness",
         "aircraftId": 1
       },
       {
         "seatNumber": "1D",
         "price": 200.0,
         "available": true,
-        "seatClass": "Bussiness"
+        "seatClass": "Bussiness",
         "aircraftId": 1
       },
       {
         "seatNumber": "1E",
         "price": 200.0,
         "available": true,
-        "seatClass": "Bussiness"
+        "seatClass": "Bussiness",
         "aircraftId": 1
       },
       {
         "seatNumber": "1F",
         "price": 200.0,
         "available": true,
-        "seatClass": "Bussiness"
+        "seatClass": "Bussiness",
         "aircraftId": 1
       }
     ],
