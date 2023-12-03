@@ -53,7 +53,7 @@ function PaymentForm() {
 
   return (
     <form onSubmit={handleSubmit} className="payment-container">
-      <h1 className="title">Payment</h1>
+      <h1 className="stripe-title">Payment</h1>
       <PaymentElement />
       {loading ? (
         <div className="pay-btn-container">
@@ -61,8 +61,8 @@ function PaymentForm() {
         </div>
       ) : (
         <div className="pay-btn-container">
-          <button type="submit" className="pay-btn">
-            Pay
+          <button class="button-64" role="button" type="submit">
+            <span class="text">Pay</span>
           </button>
         </div>
       )}
