@@ -1,0 +1,18 @@
+.success-container {
+    padding: 20px;
+    background-color: #dff0d8; /* Light green background for success */
+    border: 1px solid #d6e9c6;
+    border-radius: 4px;
+    color: #3c763d; /* Dark green text */
+    text-align: center; /* Center align the text */
+    width: 100%;
+    margin: 20px auto; /* Center the container */
+  }
+
+  .success-container h2 {
+    margin-bottom: 15px;
+  }
+
+  .success-container p {
+    font-size: 16px;
+  }

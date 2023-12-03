@@ -16,7 +16,11 @@ import SeatSelection from "./components/seats/SeatSelection.js";
 import SelectInsurance from "./components/bookings/SelectInsurance.js";
 import Register from "./pages/login/Register.js";
 import Stripe from "./pages/stripe/Stripe.jsx";
+import ViewPassengers from './components/passengers/ViewPassengers.js';
+import AddFlight from './components/flights/AddFlight.js';
 import "./index.css";
+import Success from "./pages/login/Success.js";
+
 
 const App = () => {
   const [flights, setFlights] = useState([]);
@@ -26,7 +30,7 @@ const App = () => {
       <Router>
         <Layout />
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<Login />} />
           <Route path="/account" element={<Account />} replace={true} />
           <Route path="/login" element={<Login />} />
           <Route path="/book" element={<Book />} />
@@ -40,7 +44,13 @@ const App = () => {
           <Route path="/aircraftedit" element={<AircraftEdit />} />
           <Route path="/agent" element={<AgentLanding />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/checkout" element={<Stripe />} />
+          <Route path="/passengers" element={<ViewPassengers />} />
+          <Route path="/add" element={<AddFlight />} />
           <Route path="/payment" element={<Stripe />} />
+          <Route path="/success" element={<Success/>} />
+          <Route path="/landing" element={<Landing />} />
+
         </Routes>
       </Router>
     </div>

@@ -1,0 +1,29 @@
+.credit1 {
+    padding: 20px;
+    /*background-color: #f5f5f5; /* Light gray background */
+    background-color: lightsalmon;
+    max-width: 800px;
+    margin: 0 auto; /* Center align */
+    border-radius: 20px;
+  }
+
+  .credit1 p {
+    font-size: 16px;
+    color: #333; /* Dark text for readability */
+    margin-bottom: 10px;
+  }
+
+  .credit1_div {
+    background-color: #fff; /* White background for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+  }
+
+  .credit1_image {
+    width: 100%; /* Responsive width */
+    max-width: 400px; /* Maximum width */
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for the image */
+  }

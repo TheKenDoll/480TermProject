@@ -1,26 +1,104 @@
 import React, { useState } from 'react';
+import {  useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 function Register() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
+    //const [address, setAddress] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState("");
 
-    const handleRegister = () => {
-        // Handle registration logic here
-        console.log('Registration submitted');
-        console.log('First Name:', firstName);
-        console.log('Last Name:', lastName);
-        console.log('Email:', email);
-        console.log('Address:', address);
-        console.log('Password:', password);
-    };
+    const navigate = useNavigate()
+
+    const {register} = useAuth();
+
+
+
+
+    const handleRoleChange = (event) => {
+        setRole(event.target.value)
+
+    }
+
+    const parseJwt = (token) => {
+        if (!token) {
+          return;
+        }
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace("-", "+").replace("_", "/");
+        return JSON.parse(window.atob(base64));
+      };
+
+
+    const handleRegister = async (event) => {
+
+        event.preventDefault()
+
+        try {
+            const res = await fetch(`${process.env.REACT_APP_URL}/api/v1/auth/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  firstName,
+                  lastName,
+                  email,
+                  password,
+                  role
+
+                }),
+
+            });
+            const data = await res.json();
+            const user = parseJwt(data.token);
+            register(user.sub, data.token)
+            const userEmail = localStorage.getItem("uid")
+            if (userEmail && userEmail.endsWith('admin.com')) {
+                navigate("/admin")
+            } else if (userEmail && userEmail.endsWith('agent.com')) {
+                navigate("/agent")
+            }else {
+                navigate("/landing")
+            }
+        }catch(error){
+            console.log(error);
+        }
+        setFirstName("")
+        setLastName("")
+        setEmail("")
+        setPassword("")
+        setRole("")
+    }
+    // const token = localStorage.getItem('token'); // Or sessionStorage, or cookies
+
+
+    // if (token) {
+    //     const base64Url = token.split('.')[1]; // Get the payload part
+    //     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Convert Base64-url to Base64
+    //     const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+    //         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    //     }).join(''));
+
+    //     const details = JSON.parse(jsonPayload);
+    //     //console.log(details); // Log to check the structure
+
+    //     // Assuming the email is stored under the key 'email'
+    //     const email = details.email;
+    //     console.log(email); // This should be your email
+    // }
+
+
+
 
     return (
         <div>
             <h2>Registration</h2>
-            <form>
+            <form onSubmit={handleRegister}>
+
+                <br></br>
+                <br></br>
+                <br></br>
                 <label>
                     First Name:
                     <input
@@ -48,14 +126,14 @@ function Register() {
                     />
                 </label>
                 <br />
-                <label>
+                {/* <label>
                     Address:
                     <input
                         type="text"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                     />
-                </label>
+                </label> */}
                 <br />
                 <label>
                     Password:
@@ -66,7 +144,13 @@ function Register() {
                     />
                 </label>
                 <br />
-                <button type="button" onClick={handleRegister}>
+                <label htmlFor="role-select">Choose a role:</label>
+                    <select id="role-select" value={role} onChange={handleRoleChange}>
+                        <option value="">--Please choose an option--</option>
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="USER">USER</option>
+                    </select>
+                <button type="submit" /*onClick={handleRegister}*/>
                     Register
                 </button>
             </form>

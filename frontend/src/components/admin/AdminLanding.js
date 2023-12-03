@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchFlights from "../flights/SearchFlightsParameters.js";
 import FlightDisplay from "../flights/FlightDisplay.js";
 import CrewInfoDisplay from "../employee/CrewInfoDisplay.js";
@@ -6,78 +7,19 @@ import AircraftInfoDisplay from "../flights/AircraftInfoDisplay.js";
 import './AdminLanding.css';
 
 function AdminLanding() {
-
-    let crews = [
-        {   
-            'crewId': 1,
-            'available': true,
-            'flightNumber': 'AB123',
-            'crew' :
-            [
-                {
-                    "name": "John Smith",
-                    "role": "Pilot"
-                },
-                {
-                    "name": "Jane Doe",
-                    "role": "Flight Attendant"
-                }
-            ]
-        },
-        {
-            'crewId': 2,
-            'available': true,
-            'flightNumber': 'CD456',
-            'crew' :
-            [
-                {
-                    "name": "Emily Kim",
-                    "role": "Pilot"
-                },
-                {
-                    "name": "David Lee",
-                    "role": "Flight Attendant"
-                }
-            ]
-        },
-        {
-            'crewId': 3,
-            'available': false,
-            'flightNumber': 'EF789',
-            'crew' :
-            [
-                {
-                    "name": "Sophie Miller",
-                    "role": "Pilot"
-                },
-                {
-                    "name": "Oliver Turner",
-                    "role": "Flight Attendant"
-                }
-            ]
-        }
-    ]
-
-    let users = [
-        {
-            'name': 'John Smith',
-            'email': 'example@gmail.com',
-            'password': 'password'
-        },
-        {
-            'name': 'Jane Doe',
-            'email': 'example@gmail.com',
-            'password': 'password'
-        }
-    ]
-      
+    const navigate = useNavigate();
 
     const [showSearch, setShowSearch] = useState(false);
     const [dispFlights, setdispFlights] = useState(false);
     const [dispAircrafts, setdispAircrafts] = useState(false);
     const [dispCrews, setdispCrews] = useState(false);
     const [dispUsers, setdispUsers] = useState(false);
-    const [dispTest, setdispTest] = useState(false);
+
+    const userEmail = localStorage.getItem("uid")
+
+    const userEmail1 = userEmail.split('@')[0].toUpperCase()
+
+
 
     const handleViewFlights = () => {
         if (dispFlights) {
@@ -91,7 +33,8 @@ function AdminLanding() {
     }
 
     const handleSerachFlights = (searchParams) => {
-        console.log(searchParams);
+        //console.log(searchParams);
+        fetchFlights(searchParams);
         handleDispFlights();
     }
 
@@ -107,45 +50,97 @@ function AdminLanding() {
         setdispUsers(!dispUsers);
     }
 
-    const handleTest = () => {
-        console.log('test');
-        setdispTest(!dispTest);
-    }
-
     // api calls
     const [flights, setFlights] = useState([]);
     const [aircrafts, setAircrafts] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [crews, setCrews] = useState([]);
 
-    const fetchFlights = async ()=> {
-      await fetch("http://localhost:8080/api/v1/flight", {
-    
+    const fetchFlights = async (searchParams)=> {
+        console.log(searchParams['origin'], searchParams['destination'], searchParams['date'])
+      await fetch(`http://localhost:8080/api/v1/flight/origin/${searchParams['origin']}/destination/${searchParams['destination']}/date/${searchParams['date']}`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+
+
+
       })
       .then((response ) => response.json())
       .then((data) => setFlights(data))
       .catch((error) => console.log(error))
     };
-    
-    useEffect(()=> {
-      fetchFlights();
-    }, []);
 
     const fetchAircrafts = async ()=> {
       await fetch("http://localhost:8080/api/v1/aircraft", {
-    
+
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+
       })
       .then((response ) => response.json())
       .then((data) => setAircrafts(data))
       .catch((error) => console.log(error))
     };
-    
+
     useEffect(()=> {
       fetchAircrafts();
     }, []);
 
+    const fetchUsers = async ()=> {
+
+      //   await fetch("http://localhost:8080/api/v1/auth", {
+
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      //   },
+
+
+
+      //   })
+      //   .then((response ) => response.json())
+      //   .then((data) => setUsers(data))
+      //   .catch((error) => console.log(error))
+      };
+
+      useEffect(()=> {
+        fetchUsers();
+      }, []);
+
+      const fetchCrews = async ()=> {
+        await fetch("http://localhost:8080/api/v1/crew", {
+
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+
+
+
+
+        })
+        .then((response ) => response.json())
+        .then((data) => setCrews(data))
+        .catch((error) => console.log(error))
+      };
+
+      useEffect(()=> {
+        fetchCrews();
+      }, []);
+
+      const handleAddFlight = () => {
+        navigate('/add');
+      }
+
     return (
         <div className="admin-container">
-            <h1>Logged in as Admin</h1>
+            <h1>{`Welcome Admin ${userEmail1}`}</h1>
             <button className="button" onClick={handleViewFlights}>{showSearch ? 'Hide Search' : 'View Flights'}</button>
+            <button className="button" onClick={handleAddFlight} >Add Flight</button>
             {showSearch && <SearchFlights onSearch={handleSerachFlights} />}
             {dispFlights && <FlightDisplay data={flights} />}
             <button className="button" onClick={handleDispAircraft}>{dispAircrafts ? 'Hide Aircrafts' : 'View Aircrafts'}</button>
@@ -158,7 +153,7 @@ function AdminLanding() {
                     <div key={index} className="user-info">
                         <h3>User Information</h3>
                         <div>
-                            <strong>Name:</strong> {user.name}
+                            <strong>Name:</strong> {user.firstName} {user.lastName}
                         </div>
                         <div>
                             <strong>Email:</strong> {user.email}
@@ -169,8 +164,6 @@ function AdminLanding() {
                     </div>
                 ))}
             </div>
-            <button className="button" onClick={handleTest}>test</button>
-            {dispTest && <div>test</div>}
         </div>
     )
 }

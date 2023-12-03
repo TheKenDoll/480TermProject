@@ -18,8 +18,20 @@ const FlightDisplay = ({ data }) => {
     setShowCrew(!showCrew);
   };
 
+  const handleDelete = (flight) => {
+    // Implement logic to delete the flight
+    console.log('Flight deleted: ', flight);
+    fetch(`http://localhost:8080/api/v1/flight/${flight.id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`
+      }
+    });
+  }
+
   return (
     <div className='flight-container'>
+      <button className='button' onClick={() => navigate('/add')}>Add Flight</button>
       {data.map((flight, index) => (
         <div key={index} className='flight-info'>
           <h2>{`Flight ${flight.number}`}</h2>
@@ -42,14 +54,17 @@ const FlightDisplay = ({ data }) => {
             <div>
               <h3>Crew Members</h3>
               <div className='crew-members'>
-                {flight.crew.map((member, index) => (
-                  <div key={index} className='crew-member'>{`${member.name} - ${member.role}`}</div>
+                <div className='crew-member'>{`Pilot: ${flight.crew.pilot.firstName} ${flight.crew.pilot.lastName}`}</div>
+                <div className='crew-member'>{`Copilot: ${flight.crew.copilot.firstName} ${flight.crew.copilot.lastName}`}</div>
+                {flight.crew.flightAttendants.map((attendant, index) => (
+                  <div key={index} className='crew-member'>{`Flight Attendent ${index}: ${attendant.firstName} ${attendant.lastName}`}</div>
                 ))}
               </div>
             </div>
           )}
           <button className='button' onClick={() => handleEdit(flight)}>Edit</button>
           <button className='button' onClick={() => handleViewCrew(flight)}>{showCrew ? 'Hide Crew' : 'Show Crew'}</button>
+          <button className='button' onClick={() => handleDelete(flight)}>Delete</button>
         </div>
       ))}
     </div>

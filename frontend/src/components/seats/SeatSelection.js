@@ -16,7 +16,14 @@ const SeatSelection = () => {
           return;
         }
 
-        const response = await fetch(`http://localhost:8080/api/v1/flight`);
+        const response = await fetch(`http://localhost:8080/api/v1/flight`, {
+
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+
+        });
         const data = await response.json();
 
         // Find the flight with the correct ID
@@ -37,7 +44,7 @@ const SeatSelection = () => {
 
   // Function to handle seat selection
   const handleSeatSelection = (seat) => {
-    if (!seat.available) {
+    if (seat.available) {
       setSelectedSeat(seat);
     } else {
       alert('Seat unavailable');
@@ -52,9 +59,11 @@ const SeatSelection = () => {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+
           },
           body: JSON.stringify({
-            available: true,
+            available: false,
           }),
         });
 
@@ -94,8 +103,8 @@ const SeatSelection = () => {
               width: '50px',
               height: '50px',
               margin: '5px',
-              backgroundColor: !seat.available ? 'green' : 'red',
-              cursor: !seat.available ? 'pointer' : 'not-allowed',
+              backgroundColor: seat.available ? 'green' : 'red',
+              cursor: seat.available ? 'pointer' : 'not-allowed',
             }}
             onClick={() => handleSeatSelection(seat)}
           >
@@ -114,7 +123,7 @@ const SeatSelection = () => {
       <h2>Select a Seat</h2>
       {renderSeatGrid()}
 
-      {selectedSeat && !selectedSeat.available && (
+      {selectedSeat && selectedSeat.available && (
         <div>
           <h3>Selected Seat: {selectedSeat.seatNumber}</h3>
           <p>Price: ${selectedSeat.price}</p>
@@ -122,7 +131,7 @@ const SeatSelection = () => {
         </div>
       )}
 
-      {selectedSeat && selectedSeat.available && (
+      {selectedSeat && !selectedSeat.available && (
         <div>
           <h3>Selected Seat: {selectedSeat.seatNumber}</h3>
           <p>Seat unavailable</p>

@@ -18,19 +18,18 @@ const AircraftInfoDisplay = ({ aircraftInfo }) => {
 
   return (
     <>
-        <button className='button' onClick={() => navigate('/aircraftedit')}>Add Aircraft</button>
         <div style={{ maxHeight: '400px', overflowY: 'scroll' }}>
         {aircraftInfo.map((aircraft, index) => (
             <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '20px' }}>
             <h3>Aircraft Information</h3>
             <div>
-                <strong>Aircraft Type:</strong> {aircraft.aircraftType}
+                <strong>Aircraft Type:</strong> {aircraft.model}
             </div>
             <div>
-                <strong>Aircraft Capacity:</strong> {aircraft.aircraftCapacity}
+                <strong>Aircraft Capacity:</strong> {aircraft.capacity}
             </div>
             <div>
-                <strong>Aircraft Availability:</strong> {aircraft.available ? 'Available' : 'Not Available'}
+                <strong>Aircraft Manufacture Year:</strong> {aircraft.manufactureYear}
             </div>
             <button onClick={() => handleEdit(aircraft)}>Edit</button>
             <button onClick={() => deleteAircraft(aircraft)}>Delete</button>
