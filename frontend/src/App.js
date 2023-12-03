@@ -22,6 +22,7 @@ import SelectInsurance from "./components/bookings/SelectInsurance.js";
 import Register from "./pages/login/Register.js";
 import Stripe from "./pages/stripe/Stripe.jsx";
 import ViewPassengers from './components/passengers/ViewPassengers.js';
+import AddFlight from './components/flights/AddFlight.js';
 import "./index.css";
 import Success from "./pages/login/Success.js";
 
@@ -54,6 +55,9 @@ const App = () => {
           <Route path="/aircraftedit" element={<AircraftEdit />} />
           <Route path="/agent" element={<AgentLanding />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/checkout" element={<Stripe />} />
+          <Route path="/passengers" element={<ViewPassengers />} />
+          <Route path="/add" element={<AddFlight />} />
           <Route path="/payment" element={<Stripe />} />
           <Route path="/success" element={<Success/>} />
         </Routes>

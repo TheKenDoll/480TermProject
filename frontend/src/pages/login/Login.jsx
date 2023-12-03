@@ -87,17 +87,18 @@ const Login = () => {
 
   return (
     <>
-      <main className="main-container">
-        <section className="image-container">
+      <div className="main-container">
+        <div className="left-container">
           <div className="title-container">
             <h2 className="title">The best airline in the world.</h2>
           </div>
           <img src="./plane.avif" alt="login" className="image" />
-        </section>
-        <section className="login-container">
+        </div>
+        <div className="login-container">
           <form onSubmit={handleSubmit} className="login-form">
             <label>Email</label>
             <input
+              className="input-field"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -105,6 +106,7 @@ const Login = () => {
             />
             <label>Password</label>
             <input
+              className="input-field"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -113,8 +115,8 @@ const Login = () => {
             <p>Don't have an account yet? <Link to="/register">Register</Link></p>
             <button type="submit">Login</button>
           </form>
-        </section>
-      </main>
+        </div>
+      </div>
     </>
   );
 };

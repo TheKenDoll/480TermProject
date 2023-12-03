@@ -18,7 +18,6 @@ const AircraftInfoDisplay = ({ aircraftInfo }) => {
 
   return (
     <>
-        <button className='button' onClick={() => navigate('/aircraftedit')}>Add Aircraft</button>
         <div style={{ maxHeight: '400px', overflowY: 'scroll' }}>
         {aircraftInfo.map((aircraft, index) => (
             <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '20px' }}>

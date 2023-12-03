@@ -12,7 +12,7 @@ const EditFlight = () => {
 
     const dataForm = 
       {
-        "number": recievedData.flightNumber,
+        "number": recievedData.number,
         "destination": recievedData.destination,
         "origin": recievedData.origin,
         "departureTime": recievedData.departureTime,
@@ -24,7 +24,7 @@ const EditFlight = () => {
   //const flightToEdit = recievedData.find((flight) => flight.flightNumber === flightNumberParam);
 
   // State to manage form inputs
-  const [editedFlight, setEditedFlight] = useState({ dataForm });
+  const [editedFlight, setEditedFlight] = useState({ ...dataForm });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +36,15 @@ const EditFlight = () => {
 
   const handleSave = () => {
     // Implement logic to save the edited flight data
+    fetch(`http://localhost:8080/api/v1/flight/${recievedData.id}`,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(editedFlight),
+    })
+    
     console.log('Flight saved:', editedFlight);
     navigate('/admin');
   };
