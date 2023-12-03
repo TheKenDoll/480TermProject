@@ -23,6 +23,7 @@ import Register from "./pages/login/Register.js";
 import Stripe from "./pages/stripe/Stripe.jsx";
 import ViewPassengers from './components/passengers/ViewPassengers.js';
 import "./index.css";
+import Success from "./pages/login/Success.js";
 
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -33,7 +34,7 @@ const App = () => {
       <Router>
         <Layout />
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<Login />} />
           <Route
             path="/account"
             element={
@@ -41,6 +42,7 @@ const App = () => {
             }
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/landing" element={<Landing />} />
           <Route path="/book" element={<Book setLoggedIn={setLoggedIn} />} />
           <Route path="/flights" element={<FlightList flights={flights} />} />
           <Route path="/flight-details/:flightId" element={<FlightDetails />} />
@@ -53,6 +55,7 @@ const App = () => {
           <Route path="/agent" element={<AgentLanding />} />
           <Route path="/register" element={<Register />} />
           <Route path="/payment" element={<Stripe />} />
+          <Route path="/success" element={<Success/>} />
         </Routes>
       </Router>
     </div>

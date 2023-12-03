@@ -1,0 +1,49 @@
+.image_container {
+    width: 100%;
+    position: relative;
+}
+
+.image_button {
+    position: absolute;
+    /* Adjust additional styles as needed */
+    top: 20%;
+    left: 20%;
+    gap: 20px;
+
+}
+.header2{
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    color: gold;
+}
+.image_button_browse{
+    position: relative;
+    top: 20%;
+    left: 30%;
+}
+.book-page {
+    position: absolute;
+    width: 20%;
+    box-sizing: border-box;
+    background-color: lightsalmon;
+    top: 30%;
+    left: 5%;
+}
+
+  .full-width-image {
+    width: 100%;
+    height: auto;
+    opacity: 0.7; /* Adjust the opacity as needed */
+  }
+  .credit_page {
+    width: 20%;
+    position: absolute;
+    background-color: antiquewhite;
+    box-sizing: border-box;
+    border-radius: 20px;
+
+    top: 30%;
+    right: 5%;
+
+  }

@@ -6,7 +6,7 @@ import AircraftInfoDisplay from "../flights/AircraftInfoDisplay.js";
 import './AdminLanding.css';
 
 function AdminLanding() {
-      
+
     const [showSearch, setShowSearch] = useState(false);
     const [dispFlights, setdispFlights] = useState(false);
     const [dispAircrafts, setdispAircrafts] = useState(false);
@@ -51,7 +51,13 @@ function AdminLanding() {
     const fetchFlights = async (searchParams)=> {
         console.log(searchParams['origin'], searchParams['destination'], searchParams['date'])
       await fetch(`http://localhost:8080/api/v1/flight/origin/${searchParams['origin']}/destination/${searchParams['destination']}/date/${searchParams['date']}`, {
-    
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+
+
+
       })
       .then((response ) => response.json())
       .then((data) => setFlights(data))
@@ -60,39 +66,52 @@ function AdminLanding() {
 
     const fetchAircrafts = async ()=> {
       await fetch("http://localhost:8080/api/v1/aircraft", {
-    
+
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+
       })
       .then((response ) => response.json())
       .then((data) => setAircrafts(data))
       .catch((error) => console.log(error))
     };
-    
+
     useEffect(()=> {
       fetchAircrafts();
     }, []);
 
     const fetchUsers = async ()=> {
-        await fetch("http://localhost:8080/api/v1/Client", {
-      
+        await fetch("http://localhost:8080/api/v1/auth", {
+
         })
         .then((response ) => response.json())
         .then((data) => setUsers(data))
         .catch((error) => console.log(error))
       };
-      
+
       useEffect(()=> {
         fetchUsers();
       }, []);
 
       const fetchCrews = async ()=> {
         await fetch("http://localhost:8080/api/v1/crew", {
-      
+
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+
+
+
+
         })
         .then((response ) => response.json())
         .then((data) => setCrews(data))
         .catch((error) => console.log(error))
       };
-      
+
       useEffect(()=> {
         fetchCrews();
       }, []);

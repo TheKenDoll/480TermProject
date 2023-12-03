@@ -18,12 +18,12 @@ function Layout() {
           <li>
             <Link to="/book">Book</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/admin">AdminLanding</Link>
           </li>
           <li>
             <Link to="/agent">AgentLanding</Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
 

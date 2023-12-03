@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import {  useNavigate } from 'react-router-dom';
 
 function Register() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
+    //const [address, setAddress] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState("");
+
+    const navigate = useNavigate()
 
 
 
@@ -31,7 +34,7 @@ function Register() {
         event.preventDefault()
 
         try {
-            const res = await fetch("http://localhost:8080/api/v1/auth/register/", {
+            const res = await fetch(`${process.env.REACT_APP_URL}/api/v1/auth/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -52,7 +55,73 @@ function Register() {
         }catch(error){
             console.log(error);
         }
+
+        const token = localStorage.getItem('token'); // Or sessionStorage, or cookies
+
+
+        if (token) {
+            const base64Url = token.split('.')[1]; // Get the payload part
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Convert Base64-url to Base64
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            const details = JSON.parse(jsonPayload);
+            //console.log(details); // Log to check the structure
+
+            // Assuming the email is stored under the key 'email'
+            const email = details.sub;
+            sessionStorage.setItem("userEmail", email)
+            //console.log(email)
+
+
+            const userEmail = sessionStorage.getItem('userEmail');
+            //console.log(userEmail)
+
+
+            if (userEmail && userEmail.endsWith('admin.com')) {
+                navigate("/admin")
+            } else {
+                navigate("/landing")
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+        setFirstName("")
+        setLastName("")
+        setEmail("")
+        setPassword("")
+        setRole("")
     }
+    // const token = localStorage.getItem('token'); // Or sessionStorage, or cookies
+
+
+    // if (token) {
+    //     const base64Url = token.split('.')[1]; // Get the payload part
+    //     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Convert Base64-url to Base64
+    //     const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+    //         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    //     }).join(''));
+
+    //     const details = JSON.parse(jsonPayload);
+    //     //console.log(details); // Log to check the structure
+
+    //     // Assuming the email is stored under the key 'email'
+    //     const email = details.email;
+    //     console.log(email); // This should be your email
+    // }
+
 
 
 
@@ -91,14 +160,14 @@ function Register() {
                     />
                 </label>
                 <br />
-                <label>
+                {/* <label>
                     Address:
                     <input
                         type="text"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                     />
-                </label>
+                </label> */}
                 <br />
                 <label>
                     Password:
@@ -112,8 +181,8 @@ function Register() {
                 <label htmlFor="role-select">Choose a role:</label>
                     <select id="role-select" value={role} onChange={handleRoleChange}>
                         <option value="">--Please choose an option--</option>
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="USER">USER</option>
                     </select>
                 <button type="submit" /*onClick={handleRegister}*/>
                     Register
