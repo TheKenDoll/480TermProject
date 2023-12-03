@@ -81,7 +81,9 @@ function Register() {
 
             if (userEmail && userEmail.endsWith('admin.com')) {
                 navigate("/admin")
-            } else {
+            } else if (userEmail && userEmail.endsWith('agent.com')) {
+                navigate("/agent")
+            }else {
                 navigate("/landing")
             }
 

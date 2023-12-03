@@ -16,7 +16,14 @@ const SeatSelection = () => {
           return;
         }
 
-        const response = await fetch(`http://localhost:8080/api/v1/flight`);
+        const response = await fetch(`http://localhost:8080/api/v1/flight`, {
+
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+
+        });
         const data = await response.json();
 
         // Find the flight with the correct ID
@@ -52,6 +59,8 @@ const SeatSelection = () => {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+
           },
           body: JSON.stringify({
             available: true,

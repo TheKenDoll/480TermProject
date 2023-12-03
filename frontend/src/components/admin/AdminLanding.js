@@ -15,6 +15,12 @@ function AdminLanding() {
     const [dispCrews, setdispCrews] = useState(false);
     const [dispUsers, setdispUsers] = useState(false);
 
+    const userEmail = sessionStorage.getItem('userEmail');
+
+    const userEmail1 = userEmail.split('@')[0].toUpperCase()
+
+
+
     const handleViewFlights = () => {
         if (dispFlights) {
             setdispFlights(!dispFlights);
@@ -27,7 +33,7 @@ function AdminLanding() {
     }
 
     const handleSerachFlights = (searchParams) => {
-        console.log(searchParams);
+        //console.log(searchParams);
         fetchFlights(searchParams);
         handleDispFlights();
     }
@@ -124,7 +130,7 @@ function AdminLanding() {
 
     return (
         <div className="admin-container">
-            <h1>Logged in as Admin</h1>
+            <h1>{`Welcome Admin ${userEmail1}`}</h1>
             <button className="button" onClick={handleViewFlights}>{showSearch ? 'Hide Search' : 'View Flights'}</button>
             <button className="button" onClick={handleAddFlight} >Add Flight</button>
             {showSearch && <SearchFlights onSearch={handleSerachFlights} />}

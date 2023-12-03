@@ -16,6 +16,11 @@ const AgentLanding = () => {
     console.log(searchParams['origin'], searchParams['destination'], searchParams['date'])
     await fetch(`http://localhost:8080/api/v1/flight/origin/${searchParams['origin']}/destination/${searchParams['destination']}/date/${searchParams['date']}`, {
 
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+
     })
     .then((response ) => response.json())
     .then((data) => setFlights(data))
@@ -29,28 +34,28 @@ const AgentLanding = () => {
   };
 
   return (
-    <div>
-      <h2>Book a Flight</h2>
-      <form>
-        <label>
+    <div className="agent-landing-container">
+      <h2 className="heading">Book a Flight</h2>
+      <form className="flight-form">
+        <label className="form-label">
           Origin:
-          <input type="text" value={origin} onChange={(e) => setOrigin(e.target.value)} />
+          <input type="text" className="input-field" value={origin} onChange={(e) => setOrigin(e.target.value)} />
         </label>
         <br />
 
-        <label>
+        <label className="form-label">
           Destination:
-          <input type="text" value={destination} onChange={(e) => setDestination(e.target.value)} />
+          <input type="text" className="input-field" value={destination} onChange={(e) => setDestination(e.target.value)} />
         </label>
         <br />
 
-        <label>
+        <label className="form-label">
           Date:
-          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <input type="date" className="input-field" value={date} onChange={(e) => setDate(e.target.value)} />
         </label>
         <br />
 
-        <button type="button" onClick={handleBookFlight}>
+        <button type="button" className="submit-button" onClick={handleBookFlight}>
           Book Flight
         </button>
 
@@ -61,4 +66,3 @@ const AgentLanding = () => {
 };
 
 export default AgentLanding;
-

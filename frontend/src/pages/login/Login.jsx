@@ -67,8 +67,10 @@ const Login = () => {
 
         if (userEmail && userEmail.endsWith('admin.com')) {
             navigate("/admin")
+        } else if (userEmail && userEmail.endsWith("agent.com")) {
+            navigate("/agent")
         } else {
-            navigate("/landing")
+          navigate("/landing")
         }
 
 

@@ -26,6 +26,7 @@ import AddFlight from './components/flights/AddFlight.js';
 import "./index.css";
 import Success from "./pages/login/Success.js";
 
+
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [flights, setFlights] = useState([]);
@@ -60,6 +61,7 @@ const App = () => {
           <Route path="/add" element={<AddFlight />} />
           <Route path="/payment" element={<Stripe />} />
           <Route path="/success" element={<Success/>} />
+
         </Routes>
       </Router>
     </div>

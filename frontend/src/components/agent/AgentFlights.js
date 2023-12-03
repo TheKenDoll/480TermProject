@@ -13,7 +13,12 @@ const AgentFlights = () => {
 
   const fetchFlights = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/flight/origin/${origin}/destination/${destination}/date/${date}`);
+      const response = await fetch(`http://localhost:8080/api/v1/flight/origin/${origin}/destination/${destination}/date/${date}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       const data = await response.json();
       setFlights(data);
     } catch (error) {
