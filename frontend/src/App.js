@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./Layout.js";
 import Login from "./pages/login/Login.jsx";
 import Landing from "./pages/login/Landing.js";
@@ -24,7 +19,6 @@ import Stripe from "./pages/stripe/Stripe.jsx";
 import "./index.css";
 
 const App = () => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const [flights, setFlights] = useState([]);
 
   return (
@@ -33,14 +27,9 @@ const App = () => {
         <Layout />
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route
-            path="/account"
-            element={
-              isLoggedIn ? <Account /> : <Navigate to="/login" replace={true} />
-            }
-          />
+          <Route path="/account" element={<Account />} replace={true} />
           <Route path="/login" element={<Login />} />
-          <Route path="/book" element={<Book setLoggedIn={setLoggedIn} />} />
+          <Route path="/book" element={<Book />} />
           <Route path="/flights" element={<FlightList flights={flights} />} />
           <Route path="/flight-details/:flightId" element={<FlightDetails />} />
           <Route path="/select-seats/:flightId" element={<SeatSelection />} />

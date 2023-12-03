@@ -1,9 +1,16 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Loader from "../../components/loader/Loader";
 import "./Login.css";
+import { CustomAlert } from "../../utils/Alert";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const parseJwt = (token) => {
     if (!token) {
@@ -17,6 +24,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const res = await fetch(
         `${process.env.REACT_APP_URL}/api/v1/auth/authenticate`,
         {
@@ -29,10 +37,11 @@ const Login = () => {
       );
       const data = await res.json();
       const user = parseJwt(data.token);
-      const { sub } = user;
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(sub));
+      login(user.sub, data.token);
+      navigate("/book");
     } catch (error) {
+      CustomAlert.showError("Bad credentials");
+      setLoading(false);
       console.log(error);
     }
   };
@@ -47,6 +56,7 @@ const Login = () => {
           <img src="./plane.avif" alt="login" className="image" />
         </div>
         <div className="login-container">
+          <h2>WELCOME!</h2>
           <form onSubmit={handleSubmit} className="login-form">
             <label>Email</label>
             <input
@@ -65,9 +75,13 @@ const Login = () => {
               required
             />
             <div className="btn-container">
-              <button class="button-64" role="button" type="submit">
-                <span class="text">Login</span>
-              </button>
+              {loading ? (
+                <Loader></Loader>
+              ) : (
+                <button class="button-64" type="submit">
+                  <span class="text">Login</span>
+                </button>
+              )}
             </div>
           </form>
         </div>
