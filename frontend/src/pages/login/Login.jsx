@@ -1,12 +1,22 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { Link, useNavigate } from "react-router-dom";
 
 //import Register from "./Register";
+=======
+import { useNavigate } from "react-router-dom";
+import Loader from "../../components/loader/Loader";
+>>>>>>> 65cbb9bd5a092414906d87c7d8783a463e2930ff
 import "./Login.css";
+import { CustomAlert } from "../../utils/Alert";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 
@@ -22,6 +32,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const res = await fetch(
         `${process.env.REACT_APP_URL}/api/v1/auth/authenticate`,
         {
@@ -34,10 +45,11 @@ const Login = () => {
       );
       const data = await res.json();
       const user = parseJwt(data.token);
-      const { sub } = user;
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(sub));
+      login(user.sub, data.token);
+      navigate("/book");
     } catch (error) {
+      CustomAlert.showError("Bad credentials");
+      setLoading(false);
       console.log(error);
     }
 
@@ -97,6 +109,7 @@ const Login = () => {
           <img src="./plane.avif" alt="login" className="image" />
         </div>
         <div className="login-container">
+          <h2>WELCOME!</h2>
           <form onSubmit={handleSubmit} className="login-form">
             <label>Email</label>
             <input
@@ -114,8 +127,20 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <p>Don't have an account yet? <Link to="/register">Register</Link></p>
-            <button type="submit">Login</button>
+            <div className="btn-container">
+              {loading ? (
+                <Loader></Loader>
+              ) : (
+                <>
+                    <p>Don't have an account yet? <Link to="/register">Register</Link></p>
+                    <button class="button-64" type="submit">
+                            <span class="text">Login</span>
+                    </button>
+
+                </>
+
+              )}
+            </div>
           </form>
         </div>
       </div>

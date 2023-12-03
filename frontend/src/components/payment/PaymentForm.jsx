@@ -21,8 +21,9 @@ function PaymentForm() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authentication: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ email: "k.c.fjestad@gmail.com" }),
+      body: JSON.stringify({ email: localStorage.getItem("email") }),
     });
   };
 
@@ -43,7 +44,7 @@ function PaymentForm() {
       CustomAlert.showAlert("Purchase Completed");
       navigator("/book");
     } else if (error.message) {
-      CustomAlert.showPaymentError(error.message);
+      CustomAlert.showError(error.message);
       setLoading(false);
     } else {
       console.log(error);

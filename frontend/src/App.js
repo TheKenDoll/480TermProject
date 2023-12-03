@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./Layout.js";
 import Login from "./pages/login/Login.jsx";
 import Landing from "./pages/login/Landing.js";
@@ -28,7 +23,6 @@ import Success from "./pages/login/Success.js";
 
 
 const App = () => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const [flights, setFlights] = useState([]);
 
   return (
@@ -36,16 +30,10 @@ const App = () => {
       <Router>
         <Layout />
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route
-            path="/account"
-            element={
-              isLoggedIn ? <Account /> : <Navigate to="/login" replace={true} />
-            }
-          />
+          <Route path="/" element={<Landing />} />
+          <Route path="/account" element={<Account />} replace={true} />
           <Route path="/login" element={<Login />} />
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/book" element={<Book setLoggedIn={setLoggedIn} />} />
+          <Route path="/book" element={<Book />} />
           <Route path="/flights" element={<FlightList flights={flights} />} />
           <Route path="/flight-details/:flightId" element={<FlightDetails />} />
           <Route path="/select-seats/:flightId" element={<SeatSelection />} />
